@@ -1,0 +1,6 @@
+.vs
+node_modules
+dist
+public/main.js
+public/main.*
+package-lock.json

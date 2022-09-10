@@ -1,0 +1,30 @@
+name: Deploy Alliance Lowa Frontend
+on:
+    pull_request:
+        branches: [production]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # Checkout from production branch
+            - name: Checkout to production
+              uses: actions/checkout@v2
+
+            - name: Use Node 14.17.6
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "14.17.6"
+            - run: npm install
+            - run: npm run build
+
+            # Build and Copying files and artifacts via SSH
+            - name: build and scp pipeline
+              uses: easingthemes/ssh-deploy@main
+              env:
+                  SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SECRET }}
+                  SOURCE: ""
+                  REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+                  REMOTE_USER: ${{ secrets.REMOTE_USER }}
+                  TARGET: ${{ secrets.REMOTE_DIR }}
+                  EXCLUDE: "/.git"
