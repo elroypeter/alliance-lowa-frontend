@@ -18,7 +18,7 @@ jobs:
             - run: npm install
             - run: npm run build
 
-            # Build and Copying files and artifacts via SSH
+            # Copying files and artifacts via SSH
             - name: build and scp pipeline
               uses: easingthemes/ssh-deploy@main
               env:
