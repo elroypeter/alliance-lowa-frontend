@@ -28,3 +28,14 @@ jobs:
                   REMOTE_USER: ${{ secrets.REMOTE_USER }}
                   TARGET: ${{ secrets.REMOTE_DIR }}
                   EXCLUDE: "/.git"
+
+            # Copy file to web folder
+            - name: docker run pipeline
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.REMOTE_HOST }}
+                  username: ${{ secrets.REMOTE_USER }}
+                  key: ${{ secrets.DEPLOY_SECRET }}
+                  script: |
+                      cd ~/frontend
+                      sudo cp public/. /var/www/html/
