@@ -1,6 +1,15 @@
 import React from "react";
+import { ApiService } from "../../../services/ApiService";
 
 export default function NewsLetter() {
+    const saveSubscriber = async () => {
+        const api = new ApiService();
+        const res = await api.apiConnect("/subscriber", "post", {
+            email: "elroypeter2@gmail.com",
+        });
+        console.warn(res);
+    };
+
     return (
         <div className="col-lg-4 col-md-6">
             <h4 className="text-light mb-4">Newsletter</h4>
@@ -16,6 +25,7 @@ export default function NewsLetter() {
                 />
                 <button
                     type="button"
+                    onClick={saveSubscriber}
                     className="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
                 >
                     SignUp

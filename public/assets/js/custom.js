@@ -33,16 +33,20 @@
             $(".back-to-top").fadeOut("slow");
         }
     });
-    $(".back-to-top").click(function () {
-        $("html, body").animate(
-            {
-                scrollTop: 0,
-            },
-            1500,
-            "easeInOutExpo"
-        );
-        return false;
-    });
+
+    window.backToTop = () => {
+        $(".back-to-top").click(function () {
+            console.warn("clicked");
+            $("html, body").animate(
+                {
+                    scrollTop: 0,
+                },
+                1500,
+                "easeInOutExpo"
+            );
+            return false;
+        });
+    };
 
     // Facts counter
     $("[data-toggle='counter-up']").counterUp({
