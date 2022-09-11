@@ -11,29 +11,96 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
     <link rel="icon" type="image/x-icon" href="favicons/favicon.ico" />
 
-    <link rel="stylesheet" href="assets/css/preloader.css">
-    <link rel="stylesheet" href="assets/lib/animate/animate.min.css">
-    <link rel="stylesheet" href="assets/lib/lightbox/css/lightbox.min.css">
-    <link rel="stylesheet" href="assets/lib/owlcarousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/preloader.css">
+    <link rel="stylesheet" href="/assets/lib/animate/animate.min.css">
+    <link rel="stylesheet" href="/assets/lib/lightbox/css/lightbox.min.css">
+    <link rel="stylesheet" href="/assets/lib/owlcarousel//assets/owl.carousel.min.css">
 </head>
 
 <body>
+    <style>
+        .goog-te-gadget-simple {
+            padding: 0px !important;
+            line-height: 1.428571429;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #fff;
+            border: 1px solid #a5a5a599;
+            border-radius: 4px;
+            width: 100%;
+            float: right;
+            margin-top: -4px;
+        }
+
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        .goog-te-gadget-simple .goog-te-menu-value {
+            color: #000;
+            font-size: 12px;
+            font-family: "Nunito", sans-serif;
+        }
+
+        .skiptranslate.goog-te-gadget {
+            color: transparent;
+        }
+
+        .skiptranslate.goog-te-gadget span {
+            display: none !important;
+        }
+
+        select.goog-te-combo {
+            width: 140px;
+            padding: 5px 10px;
+            border: 2px solid #048049;
+        }
+
+        select.goog-te-combo:focus {
+            border: 2px solid #048049;
+            outline: #048049;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RGXL041ZQ8"></script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RGXL041ZQ8');
+
+        const runGtag = () => {
+            gtag('set', 'page_path', '/contact-us');
+            gtag('event', 'page_view');
+        }
+    </script>
+
     <div id="preloader" class="preloader">
         <div class="spinner"></div>
     </div>
 
     <div id="root"></div>
-    <script src="assets/js/preloader.js"></script>
-    <script src="assets/js/jquery-3.4.1.min.js"></script>
-    <script src="assets/lib/wow/wow.min.js"></script>
-    <script src="assets/lib/easing/easing.min.js",\></script>
-    <script src="assets/lib/waypoints/waypoints.min.js"></script>
-    <script src="assets/lib/counterup/counterup.min.js"></script>
-    <script src="assets/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="assets/lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="assets/lib/lightbox/js/lightbox.min.js"></script>
-    <script src="assets/js/custom.js"></script>
-    <script src="main.js"></script>
+
+    <script src="/assets/js/preloader.js"></script>
+    <script src="/assets/js/jquery-3.4.1.min.js"></script>
+    <script src="/assets/lib/wow/wow.min.js"></script>
+    <script src="/assets/lib/easing/easing.min.js" ,\></script>
+    <script src="/assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="/assets/lib/counterup/counterup.min.js"></script>
+    <script src="/assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="/assets/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="/assets/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/main.js"></script>
 </body>
 
 </html>
