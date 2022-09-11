@@ -4,3 +4,12 @@
 body {
   font-family: "Nunito", sans-serif;
 }
+
+button {
+  outline: none !important;
+}
+
+button:focus,
+.button:focus {
+  outline: none !important;
+}

@@ -7,6 +7,7 @@ import Home from "../web-pages/Home/Home";
 
 import { Layout as AdminLayout } from "../layouts/admin/Layout";
 import Dashboard from "../admin-pages/Dashboard/Dashboard";
+import ProjectList from "../admin-pages/Project/ProjectList";
 
 export default function Router() {
     return (
@@ -16,7 +17,12 @@ export default function Router() {
             </Route>
 
             <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<Dashboard />} />
+                <Route path="home" index element={<Dashboard />} />
+                <Route path="projects" element={<ProjectList />} />
+                <Route path="news" element={<ProjectList />} />
+                <Route path="careers" element={<ProjectList />} />
+                <Route path="messages" element={<ProjectList />} />
+                <Route path="subscribers" element={<ProjectList />} />
             </Route>
 
             <Route path="*" element={<Error404 />} />
