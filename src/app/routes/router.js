@@ -8,6 +8,7 @@ import Home from "../web-pages/Home/Home";
 import { Layout as AdminLayout } from "../layouts/admin/Layout";
 import Dashboard from "../admin-pages/Dashboard/Dashboard";
 import ProjectList from "../admin-pages/Project/ProjectList";
+import Login from "../admin-pages/auth/Login";
 
 export default function Router() {
     return (
@@ -23,6 +24,10 @@ export default function Router() {
                 <Route path="careers" element={<ProjectList />} />
                 <Route path="messages" element={<ProjectList />} />
                 <Route path="subscribers" element={<ProjectList />} />
+            </Route>
+
+            <Route path="/auth">
+                <Route path="login" index element={<Login />} />
             </Route>
 
             <Route path="*" element={<Error404 />} />
