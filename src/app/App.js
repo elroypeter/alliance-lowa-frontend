@@ -6,7 +6,22 @@ export class App extends React.Component {
         super(props);
     }
 
+    state = {
+        isLoggedIn: true,
+    };
+
+    setLoginStatus(status) {
+        this.setState((state) => {
+            return { ...state, isLoggedIn: status };
+        });
+    }
+
     render() {
-        return <Router />;
+        return (
+            <Router
+                isLoggedIn={this.state.isLoggedIn}
+                setLoginStatus={this.setLogginStatus}
+            />
+        );
     }
 }
