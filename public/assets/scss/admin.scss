@@ -1,0 +1,166 @@
+@import "./variables";
+
+.admin-layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.admin-layout {
+    .sidebar {
+        background-color: $dark;
+        border-radius: 8px;
+        transition: ease 0.1s;
+        margin: 25px;
+        height: calc(100vh - 50px);
+        width: 260px;
+        flex-grow: 0;
+        order: 1;
+    }
+
+    .sidebar.open {
+        left: 0px;
+        background-color: $dark;
+        z-index: 999;
+    }
+
+    .sidebar .brand-icon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-decoration: none;
+
+        .logo-text {
+            font-weight: bold;
+            color: $white;
+            font-size: 18px;
+            display: inline-block;
+            padding-left: 15px;
+        }
+    }
+
+    .sidebar .brand-icon .logo-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            color: $white;
+        }
+    }
+
+    .sidebar .menu-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar .menu-list {
+        .m-link {
+            display: flex;
+            color: $white;
+            padding: 10px 0;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .m-link svg {
+            color: $white;
+            margin-right: 0.8rem;
+        }
+
+        .m-link.active {
+            color: $primary;
+        }
+
+        [class^="icofont-"] {
+            width: 30px;
+        }
+    }
+
+    .container-xxl {
+        max-width: 1560px;
+    }
+
+    .navbar > .container-xxl {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .avatar.lg {
+        width: 56px;
+        min-width: 56px;
+        height: 56px;
+    }
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+    .h-right .user-profile .dropdown-menu .card.w280 {
+        width: 240px;
+    }
+
+    .header .navbar-toggler {
+        .fa-x {
+            display: none;
+        }
+        &.open {
+            .fa-bars {
+                display: none;
+            }
+
+            .fa-x {
+                display: block;
+            }
+        }
+    }
+
+    .auth-h100 {
+        height: calc(100vh - 192px);
+    }
+
+    .main {
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        height: 100vh;
+        -webkit-box-ordinal-group: 4;
+        order: 3;
+        -webkit-box-flex: 1;
+        flex: 1;
+    }
+
+    @media only screen and (min-width: 1280px) {
+        .menu-toggle {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 1279px) {
+        .h-right {
+            margin-left: auto;
+            padding-right: 15px;
+        }
+    }
+
+    @media only screen and (min-width: 1279px) {
+        .sidebar {
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+    }
+
+    @media only screen and (max-width: 1279px) {
+        .sidebar {
+            position: fixed;
+            left: -400px;
+            height: 100vh;
+            margin: 0px;
+            border-radius: 0px;
+        }
+    }
+}

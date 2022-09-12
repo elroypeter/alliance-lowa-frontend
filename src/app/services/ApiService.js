@@ -2,7 +2,7 @@ import * as axios from "axios";
 
 export class ApiService {
     constructor(baseUrl) {
-        this.baseUrl = baseUrl || "http://localhost:5000";
+        this.baseUrl = baseUrl || "http://alliancelowa.org/api";
     }
 
     async apiConnect(url, method, data) {

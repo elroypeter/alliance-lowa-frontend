@@ -36,7 +36,6 @@
 
     window.backToTop = () => {
         $(".back-to-top").click(function () {
-            console.warn("clicked");
             $("html, body").animate(
                 {
                     scrollTop: 0,
@@ -45,6 +44,14 @@
                 "easeInOutExpo"
             );
             return false;
+        });
+    };
+
+    // toggle side menu
+    window.toggleNav = () => {
+        $(".navbar-toggler").click(function () {
+            $(".sidebar").toggleClass("open");
+            $(".navbar-toggler").toggleClass("open");
         });
     };
 
@@ -94,6 +101,7 @@
         itemSelector: ".portfolio-item",
         layoutMode: "fitRows",
     });
+
     $("#portfolio-flters li").on("click", function () {
         $("#portfolio-flters li").removeClass("active");
         $(this).addClass("active");
