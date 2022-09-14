@@ -7,13 +7,13 @@ export class App extends React.Component {
     }
 
     state = {
-        isLoggedIn: true,
+        isLoggedIn: false,
+        sessionToken: sessionStorage.getItem("token"),
     };
 
     setLoginStatus(status) {
-        this.setState((state) => {
-            return { ...state, isLoggedIn: status };
-        });
+        const stateChanges = { ...this.state, isLoggedIn: status };
+        this.setState(stateChanges);
     }
 
     render() {

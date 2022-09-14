@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Field from "../../components/Form/Field";
 
 export default function Login() {
+    const [loginForm, setState] = useState({
+        fields: {
+            email: "",
+            password: "",
+        },
+        errors: {},
+    });
+
+    const onInputChange = ({ name, value, errors }) => {
+        const fields = Object.assign({}, loginForm.fields);
+        const fieldErrors = Object.assign({}, loginForm.errors);
+
+        fields[name] = value;
+        fieldErrors[name] = errors;
+
+        setState({ fields, fieldErrors });
+    };
+
     return (
         <div className="admin-layout">
             <div className="main">
@@ -20,21 +39,39 @@ export default function Login() {
                                             <div className="card-body p-4">
                                                 <form>
                                                     <div className="mb-3">
-                                                        <label className="form-label fs-6">
-                                                            Email address
-                                                        </label>
-                                                        <input
-                                                            type="email"
-                                                            className="form-control"
+                                                        <Field
+                                                            name="email"
+                                                            type="text"
+                                                            label="Email"
+                                                            value={
+                                                                loginForm.email
+                                                            }
+                                                            onChange={
+                                                                onInputChange
+                                                            }
+                                                            validate={(val) =>
+                                                                val
+                                                                    ? false
+                                                                    : "Email is required"
+                                                            }
                                                         />
                                                     </div>
                                                     <div className="mb-3">
-                                                        <label className="form-label fs-6">
-                                                            Password
-                                                        </label>
-                                                        <input
+                                                        <Field
+                                                            name="password"
                                                             type="password"
-                                                            className="form-control"
+                                                            label="Password"
+                                                            value={
+                                                                loginForm.password
+                                                            }
+                                                            onChange={
+                                                                onInputChange
+                                                            }
+                                                            validate={(val) =>
+                                                                val
+                                                                    ? false
+                                                                    : "Password is required"
+                                                            }
                                                         />
                                                     </div>
                                                     <button className="btn btn-dark text-uppercase py-2 fs-5 w-100 mt-2">
