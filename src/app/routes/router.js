@@ -10,6 +10,7 @@ import { Layout as AdminLayout } from "../layouts/admin/Layout";
 import Dashboard from "../admin-pages/Dashboard/Dashboard";
 import ProjectList from "../admin-pages/Project/ProjectList";
 import Login from "../admin-pages/auth/Login";
+import { AuthContext } from "../shared/AuthContext";
 
 export default function Router(props) {
     return (
@@ -39,7 +40,16 @@ export default function Router(props) {
                 <Route
                     path="login"
                     index
-                    element={<Login setLoginStatus={props.setLoginStatus} />}
+                    element={
+                        <AuthContext.Consumer>
+                            {(context) => (
+                                <Login
+                                    context={context}
+                                    setLoginStatus={props.setLoginStatus}
+                                />
+                            )}
+                        </AuthContext.Consumer>
+                    }
                 />
             </Route>
 

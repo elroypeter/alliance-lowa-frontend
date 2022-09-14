@@ -1,24 +1,81 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Field from "../../components/Form/Field";
+import BsSpinner from "../../components/Spinner/BsSpinner";
+import { ApiService } from "../../services/ApiService";
 
-export default function Login() {
+export default function Login(props) {
     const [loginForm, setState] = useState({
         fields: {
             email: "",
             password: "",
         },
-        errors: {},
+        fieldErrors: {},
+        backendError: "",
+        logging: false,
     });
 
     const onInputChange = ({ name, value, errors }) => {
         const fields = Object.assign({}, loginForm.fields);
-        const fieldErrors = Object.assign({}, loginForm.errors);
+        const fieldErrors = Object.assign({}, loginForm.fieldErrors);
 
         fields[name] = value;
         fieldErrors[name] = errors;
 
-        setState({ fields, fieldErrors });
+        setState((state) => ({ ...state, fields, fieldErrors }));
+    };
+
+    const validate = () => {
+        const credentails = loginForm.fields;
+        const fieldErrors = loginForm.fieldErrors;
+        const errorMessages = Object.keys(fieldErrors).filter(
+            (e) => fieldErrors[e]
+        );
+
+        if (!credentails.email) return true;
+        if (!credentails.password) return true;
+        if (errorMessages.length) return true;
+        return false;
+    };
+
+    const loginSubmit = async (evt) => {
+        evt.preventDefault();
+        if (validate()) return;
+        setState((state) => ({ ...state, logging: true }));
+
+        try {
+            const api = new ApiService();
+            const response = await api.apiConnect(
+                "/login",
+                "post",
+                loginForm.fields
+            );
+
+            if (response) {
+                const { token, ...user } = response.data;
+                sessionStorage.setItem("token", token);
+                sessionStorage.setItem("user", JSON.stringify(user));
+                sessionStorage.setItem("loginStatus", true);
+
+                props.context.setLoginStatus();
+
+                setState((state) => ({
+                    ...state,
+                    fields: {
+                        email: "",
+                        password: "",
+                    },
+                    logging: false,
+                    fieldErrors: {},
+                }));
+            }
+        } catch (error) {
+            setState((state) => ({
+                ...state,
+                backendError: error,
+                logging: false,
+            }));
+        }
     };
 
     return (
@@ -44,9 +101,10 @@ export default function Login() {
                                                             type="text"
                                                             label="Email"
                                                             value={
-                                                                loginForm.email
+                                                                loginForm.fields
+                                                                    .email
                                                             }
-                                                            onChange={
+                                                            onInputChange={
                                                                 onInputChange
                                                             }
                                                             validate={(val) =>
@@ -62,9 +120,10 @@ export default function Login() {
                                                             type="password"
                                                             label="Password"
                                                             value={
-                                                                loginForm.password
+                                                                loginForm.fields
+                                                                    .password
                                                             }
-                                                            onChange={
+                                                            onInputChange={
                                                                 onInputChange
                                                             }
                                                             validate={(val) =>
@@ -74,8 +133,16 @@ export default function Login() {
                                                             }
                                                         />
                                                     </div>
-                                                    <button className="btn btn-dark text-uppercase py-2 fs-5 w-100 mt-2">
-                                                        log in
+                                                    <button
+                                                        className="btn btn-dark text-uppercase py-2 fs-5 w-100 mt-2"
+                                                        disabled={validate()}
+                                                        onClick={loginSubmit}
+                                                    >
+                                                        {loginForm.logging ? (
+                                                            <BsSpinner />
+                                                        ) : (
+                                                            "log in"
+                                                        )}
                                                     </button>
                                                 </form>
                                             </div>
