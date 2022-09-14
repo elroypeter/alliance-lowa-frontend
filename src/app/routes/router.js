@@ -24,6 +24,8 @@ export default function Router(props) {
                 element={
                     <AuthGuard
                         isLoggedIn={props.isLoggedIn}
+                        sessionToken={props.sessionToken}
+                        hasValidSession={props.hasValidSession}
                         component={() => <AdminLayout />}
                     />
                 }
@@ -42,12 +44,7 @@ export default function Router(props) {
                     index
                     element={
                         <AuthContext.Consumer>
-                            {(context) => (
-                                <Login
-                                    context={context}
-                                    setLoginStatus={props.setLoginStatus}
-                                />
-                            )}
+                            {(context) => <Login context={context} />}
                         </AuthContext.Consumer>
                     }
                 />
