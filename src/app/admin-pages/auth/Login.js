@@ -46,7 +46,7 @@ export default function Login() {
                                                             value={
                                                                 loginForm.email
                                                             }
-                                                            onChange={
+                                                            onInputChange={
                                                                 onInputChange
                                                             }
                                                             validate={(val) =>
@@ -64,7 +64,7 @@ export default function Login() {
                                                             value={
                                                                 loginForm.password
                                                             }
-                                                            onChange={
+                                                            onInputChange={
                                                                 onInputChange
                                                             }
                                                             validate={(val) =>
