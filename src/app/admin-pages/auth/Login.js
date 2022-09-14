@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Field from "../../components/Form/Field";
 import BsSpinner from "../../components/Spinner/BsSpinner";
 import { ApiService } from "../../services/ApiService";
 
 export default function Login(props) {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (props.context.hasValidSession()) navigate("/admin/home");
+    });
+
     const [loginForm, setState] = useState({
         fields: {
             email: "",
@@ -55,7 +61,7 @@ export default function Login(props) {
                 const { token, ...user } = response.data;
                 sessionStorage.setItem("token", token);
                 sessionStorage.setItem("user", JSON.stringify(user));
-                sessionStorage.setItem("loginStatus", true);
+                sessionStorage.setItem("isLoggedIn", true);
 
                 props.context.setLoginStatus();
 
