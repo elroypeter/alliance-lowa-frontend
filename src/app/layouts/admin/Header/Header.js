@@ -26,7 +26,10 @@ export default function Header(props) {
                         <FontAwesomeIcon icon={faBars} />
                         <FontAwesomeIcon icon={faX} />
                     </div>
-                    <Breadcrumb menuList={props.menuList} />
+                    <Breadcrumb
+                        locationChange={props.locationChange}
+                        menuList={props.menuList}
+                    />
                 </div>
             </nav>
         </div>
