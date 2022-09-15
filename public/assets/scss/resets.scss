@@ -22,3 +22,8 @@ button:focus,
 .border-secondary {
   border-color: $bg-secondary !important;
 }
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
