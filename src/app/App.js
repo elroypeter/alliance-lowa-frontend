@@ -14,12 +14,12 @@ export class App extends React.Component {
     };
 
     componentDidMount() {
-        this.startTimer();
+        this.startSessionTimer();
     }
 
     componentDidUpdate() {
         if (this.sessionInterval) clearInterval(this.sessionInterval);
-        this.startTimer();
+        this.startSessionTimer();
     }
 
     componentWillUnmount() {
@@ -48,20 +48,16 @@ export class App extends React.Component {
         );
 
         const dateNow = new Date();
-        const dateDif = dateNow.getTime() - parseInt(payload["date"]);
-        return dateDif >= payload["exp"] ? false : true;
+        return payload["exp"] * 1000 > dateNow.getTime() ? true : false;
     };
 
-    startTimer = () => {
+    startSessionTimer = () => {
         if (this.state.isLoggedIn) {
-            console.log("new timer");
             this.sessionInterval = setInterval(() => {
                 if (!this.hasValidSession()) {
                     sessionStorage.clear();
                     this.setLoginStatus();
-                    console.log("token expired");
                 }
-                console.log("token is valid");
             }, 5000);
         }
     };
