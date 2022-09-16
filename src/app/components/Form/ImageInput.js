@@ -11,17 +11,60 @@ export default class ImageInput extends Component {
             showZoomer: true,
             enableResize: true,
             enableOrientation: true,
+            enableZoom: true,
+            mouseWheelZoom: "ctrl",
             ...this.props.config,
         },
     };
 
     componentDidMount() {
+        this.setUpCroppie();
+    }
+
+    setUpCroppie = () => {
         this.croppieTarget = document.getElementById(this.props.id);
         this.croppieInstance = new Croppie(
             this.croppieTarget,
             this.state.config
         );
-    }
+
+        this.initCroppieData(this.croppieInstance);
+    };
+
+    initCroppieData = (croppie) => {
+        if (this.props.value) {
+            const base64Data = this.props.value;
+            const contentType = base64Data.split(";")[0].split(":")[1];
+            const base64 = base64Data.split(";")[1].split(",")[1];
+
+            const blob = this.b64toBlob(base64, contentType);
+            const preview = URL.createObjectURL(blob);
+            croppie.bind({ url: preview });
+        }
+    };
+
+    b64toBlob = (b64Data, contentType, sliceSize = 512) => {
+        const byteCharacters = atob(b64Data);
+        const byteArrays = [];
+
+        for (
+            let offset = 0;
+            offset < byteCharacters.length;
+            offset += sliceSize
+        ) {
+            const slice = byteCharacters.slice(offset, offset + sliceSize);
+            const byteNumbers = new Array(slice.length);
+            for (let i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+            byteArrays.push(byteArray);
+        }
+
+        const blob = new Blob(byteArrays, { type: contentType });
+        return blob;
+    };
 
     render() {
         return (

@@ -1,26 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Field from "../../../components/Form/Field";
 
 export default function ImageSliderForm(props) {
-    const [form, setState] = useState({
-        fields: {
-            image: "",
-            title: "",
-            description: "",
-        },
-        errors: {},
-    });
-
-    const onInputChange = ({ name, value, error }) => {
-        const fields = Object.assign({}, form.fields);
-        const errors = Object.assign({}, form.errors);
-
-        fields[name] = value;
-        errors[name] = error;
-
-        setState((state) => ({ ...state, fields, errors }));
-    };
-
     return (
         <div
             className="modal fade"
@@ -37,6 +18,7 @@ export default function ImageSliderForm(props) {
                                 : "New Image Slider"}
                         </h5>
                         <button
+                            id="closeSliderModal"
                             type="button"
                             className="btn-close"
                             data-bs-dismiss="modal"
@@ -52,25 +34,22 @@ export default function ImageSliderForm(props) {
                                         name="image"
                                         formType="image"
                                         label="Image"
-                                        value={form.fields.image}
-                                        onInputChange={onInputChange}
+                                        value={props.form.fields.image}
+                                        onInputChange={props.onInputChange}
                                         config={{
                                             viewport: {
-                                                width: 300,
-                                                height: 200,
+                                                width: 350,
+                                                height: 250,
                                             },
                                         }}
-                                        validate={(val) =>
-                                            val ? false : "Email is required"
-                                        }
                                     />
                                 </div>
                                 <div className="col-12 mb-3">
                                     <Field
                                         name="title"
                                         label="Title"
-                                        value={form.fields.title}
-                                        onInputChange={onInputChange}
+                                        value={props.form.fields.title}
+                                        onInputChange={props.onInputChange}
                                     />
                                 </div>
                                 <div className="col-12">
@@ -78,8 +57,8 @@ export default function ImageSliderForm(props) {
                                         formType="textArea"
                                         name="description"
                                         label="Description"
-                                        value={form.fields.description}
-                                        onInputChange={onInputChange}
+                                        value={props.form.fields.description}
+                                        onInputChange={props.onInputChange}
                                     />
                                 </div>
                             </div>
@@ -94,9 +73,25 @@ export default function ImageSliderForm(props) {
                         >
                             Close
                         </button>
-                        <button type="button" className="btn btn-primary">
-                            Save
-                        </button>
+                        {props.editModal ? (
+                            <button
+                                onClick={() =>
+                                    props.updateImage(props.form.fields.id)
+                                }
+                                type="button"
+                                className="btn btn-primary"
+                            >
+                                Update
+                            </button>
+                        ) : (
+                            <button
+                                onClick={props.saveImage}
+                                type="button"
+                                className="btn btn-primary"
+                            >
+                                Save
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

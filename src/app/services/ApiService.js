@@ -1,8 +1,8 @@
 import * as axios from "axios";
 
 export class ApiService {
-    constructor(baseUrl, token) {
-        this.token = token;
+    constructor(baseUrl) {
+        this.token = sessionStorage.getItem("token");
         this.baseUrl =
             baseUrl ||
             "http://localhost:5000" ||
@@ -15,6 +15,9 @@ export class ApiService {
                 url: this.baseUrl + url,
                 method,
                 data,
+                headers: {
+                    token: this.token,
+                },
             });
             return response;
         } catch (error) {
