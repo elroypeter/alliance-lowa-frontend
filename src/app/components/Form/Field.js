@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import ImageInput from "./ImageInput";
 
 export default class Field extends Component {
-    const;
-
     state = {
         value: this.props.value,
         errors: false,
@@ -55,14 +53,14 @@ export default class Field extends Component {
         );
     };
 
-    image = (props) => {
+    image = (config) => {
         const checkForFileType = (type) => {
             return ["jpg", "png", "webp", "jpeg"].find((val) => val === type)
                 ? true
                 : false;
         };
 
-        const onSelectFile = (evt, croppie) => {
+        const onSelectFile = (evt, croppie, target) => {
             const name = this.props.name;
             let value = evt.target.files[0];
             let errors = false;
@@ -79,13 +77,17 @@ export default class Field extends Component {
             const preview = URL.createObjectURL(value);
             croppie.bind({ url: preview });
 
-            croppie.result("base64").then((base64) => {
-                value = base64;
-                this.setState((state) => ({
-                    ...state,
-                    value,
-                }));
-                this.props.onInputChange({ name, value, errors });
+            target.addEventListener("update", () => {
+                croppie
+                    .result({ type: "base64", format: originalType })
+                    .then((base64) => {
+                        value = base64;
+                        this.setState((state) => ({
+                            ...state,
+                            value,
+                        }));
+                        this.props.onInputChange({ name, value, errors });
+                    });
             });
         };
 
@@ -94,7 +96,7 @@ export default class Field extends Component {
                 <ImageInput
                     id={new Date().getTime()}
                     label={this.props.label}
-                    config={props}
+                    config={config}
                     value={this.state.value}
                     onChange={onSelectFile}
                 />
