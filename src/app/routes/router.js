@@ -8,7 +8,7 @@ import Home from "../web-pages/Home/Home";
 
 import { Layout as AdminLayout } from "../layouts/admin/Layout";
 import Dashboard from "../admin-pages/Dashboard/Dashboard";
-import ProjectList from "../admin-pages/Project/ProjectList";
+import Project from "../admin-pages/Project/Project";
 import Login from "../admin-pages/auth/Login";
 import { AuthContext } from "../shared/AuthContext";
 
@@ -31,11 +31,11 @@ export default function Router(props) {
                 }
             >
                 <Route path="home" index element={<Dashboard />} />
-                <Route path="projects" element={<ProjectList />} />
-                <Route path="news" element={<ProjectList />} />
-                <Route path="careers" element={<ProjectList />} />
-                <Route path="messages" element={<ProjectList />} />
-                <Route path="subscribers" element={<ProjectList />} />
+                <Route path="projects" element={<Project />} />
+                <Route path="news" element={<Project />} />
+                <Route path="careers" element={<Project />} />
+                <Route path="messages" element={<Project />} />
+                <Route path="subscribers" element={<Project />} />
             </Route>
 
             <Route path="/auth">

@@ -74,6 +74,28 @@
         });
     };
 
+    // dataTables
+    window.loadDataTable = (tableId) => {
+        $(`#${tableId}`).DataTable();
+    };
+
+    window.destroyDataTable = (tableId) => {
+        $(`#${tableId}`).DataTable().destroy();
+    };
+
+    // tinymce editor
+    window.loadTinymceEditor = (editorId, config, initData, onChange) => {
+        return tinymce.init({
+            selector: `#${editorId}`,
+            setup: (editor) => {
+                editor.on("keyup", (evt) => {
+                    onChange({ target: { value: editor.getContent() } });
+                });
+            },
+            ...config,
+        });
+    };
+
     // Testimonials carousel
     $(".testimonial-carousel").owlCarousel({
         autoplay: true,
