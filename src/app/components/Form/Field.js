@@ -1,6 +1,7 @@
 /* eslint-disable indent */
 import React, { Component } from "react";
 import ImageInput from "./ImageInput";
+import Editor from "./Editor";
 
 export default class Field extends Component {
     state = {
@@ -53,6 +54,22 @@ export default class Field extends Component {
         );
     };
 
+    editor = (config) => {
+        return (
+            <>
+                <label className="form-label fs-6">{this.props.label}</label>
+                <Editor
+                    name={this.props.name}
+                    value={this.state.value}
+                    id={`editor${new Date().getTime()}`}
+                    config={config}
+                    onChange={this.onChange}
+                />
+                <small className="text-danger">{this.state.errors}</small>
+            </>
+        );
+    };
+
     image = (config) => {
         const checkForFileType = (type) => {
             return ["jpg", "png", "webp", "jpeg"].find((val) => val === type)
@@ -94,7 +111,7 @@ export default class Field extends Component {
         return (
             <>
                 <ImageInput
-                    id={new Date().getTime()}
+                    id={`imageInput${new Date().getTime()}`}
                     label={this.props.label}
                     config={config}
                     value={this.state.value}
@@ -113,6 +130,8 @@ export default class Field extends Component {
                 return this.image(this.props.config);
             case "textArea":
                 return this.textArea();
+            case "editor":
+                return this.editor(this.props.config);
             default:
                 return this.input();
         }
