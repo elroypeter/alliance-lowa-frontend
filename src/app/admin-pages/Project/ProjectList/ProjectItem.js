@@ -6,8 +6,15 @@ import {
     faEye,
     faBullhorn,
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function ProjectItem(props) {
+    const navigate = useNavigate();
+
+    const gotoPage = (path) => {
+        navigate(path);
+    };
+
     return (
         <tr>
             <td>{parseInt(props.index) + 1}</td>
@@ -28,7 +35,15 @@ export default function ProjectItem(props) {
                     role="group"
                     aria-label="Basic outlined example"
                 >
-                    <button type="button" className="btn btn-outline-light">
+                    <button
+                        onClick={() =>
+                            gotoPage(
+                                `/admin/projects/${props.project.id}/${props.project.slug}`
+                            )
+                        }
+                        type="button"
+                        className="btn btn-outline-light"
+                    >
                         <FontAwesomeIcon
                             icon={faEye}
                             className="text-primary"
