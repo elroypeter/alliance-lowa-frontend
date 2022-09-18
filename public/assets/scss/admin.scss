@@ -135,6 +135,16 @@
         flex: 1;
     }
 
+    .screen-card .top-right-corner {
+        display: none;
+        right: -10px;
+        top: -10px;
+    }
+
+    .screen-card:hover .top-right-corner {
+        display: block;
+    }
+
     @media only screen and (min-width: 1280px) {
         .menu-toggle {
             display: none;

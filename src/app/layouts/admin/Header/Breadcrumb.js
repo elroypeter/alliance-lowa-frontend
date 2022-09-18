@@ -7,7 +7,7 @@ export default function Breadcrumb(props) {
 
     props.locationChange((path) => {
         const page = props.menuList.find((menu) => menu.link === path);
-        setState(page);
+        if (page) setState(page);
     });
 
     return (
