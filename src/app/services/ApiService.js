@@ -2,7 +2,11 @@ import * as axios from "axios";
 
 export class ApiService {
     constructor(baseUrl) {
-        this.baseUrl = baseUrl || "http://alliancelowa.org/api";
+        this.token = sessionStorage.getItem("token");
+        this.baseUrl =
+            baseUrl ||
+            "http://localhost:5000" ||
+            "https://www.alliancelowa.org/api";
     }
 
     async apiConnect(url, method, data) {
@@ -11,6 +15,9 @@ export class ApiService {
                 url: this.baseUrl + url,
                 method,
                 data,
+                headers: {
+                    token: this.token,
+                },
             });
             return response;
         } catch (error) {
