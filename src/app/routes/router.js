@@ -11,6 +11,7 @@ import Dashboard from "../admin-pages/Dashboard/Dashboard";
 import Project from "../admin-pages/Project/Project";
 import Login from "../admin-pages/auth/Login";
 import { AuthContext } from "../shared/AuthContext";
+import ProjectDetails from "../admin-pages/Project/ProjectDetails/ProjectDetails";
 
 export default function Router(props) {
     return (
@@ -31,7 +32,16 @@ export default function Router(props) {
                 }
             >
                 <Route path="home" index element={<Dashboard />} />
-                <Route path="projects" element={<Project />} />
+
+                <Route path="projects">
+                    <Route path="" index element={<Project />} />
+                    <Route
+                        path=":id/:title"
+                        index
+                        element={<ProjectDetails />}
+                    />
+                </Route>
+
                 <Route path="news" element={<Project />} />
                 <Route path="careers" element={<Project />} />
                 <Route path="messages" element={<Project />} />

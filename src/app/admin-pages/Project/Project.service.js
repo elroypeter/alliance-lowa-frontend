@@ -5,6 +5,11 @@ const getProjectsApi = async () => {
     return await apiService.apiConnect("/project", "get", {});
 };
 
+const getProjectDetailsApi = async (id) => {
+    const apiService = new ApiService();
+    return await apiService.apiConnect(`/project/${id}`, "get", {});
+};
+
 const saveProjectApi = async (data) => {
     const apiService = new ApiService();
     return await apiService.apiConnect("/project", "post", data);
@@ -49,4 +54,5 @@ export {
     addProjectImageApi,
     removeProjectImageApi,
     publishProjectApi,
+    getProjectDetailsApi,
 };
