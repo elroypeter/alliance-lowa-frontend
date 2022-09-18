@@ -21,12 +21,13 @@ export default function ImageSlider(props) {
     };
 
     return (
-        <div className="col-lg-4 mb-2">
+        <div className="col-md-4 col-xxl-3 mb-2">
             <div className="screen-card shadow-sm p-2">
                 <a>
                     <img
                         className="img-fluid img-thumbnail w-100"
                         src={props.image.image}
+                        style={{ height: "200px" }}
                     />
                 </a>
                 <div className="user-profile d-flex align-items-center mt-3">
