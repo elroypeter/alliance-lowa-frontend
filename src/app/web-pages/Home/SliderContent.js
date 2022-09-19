@@ -1,7 +1,7 @@
 export const sliderContent = [
     {
         imgURL: "assets/images/slider/slider1.png",
-        title: "WHO WE ARE",
+        title: "Who we are",
         description: `
       Alliance Lowa is a non-profit association under Congolese law created in Walikale on November 29,
       2016, between the Company Alphamin

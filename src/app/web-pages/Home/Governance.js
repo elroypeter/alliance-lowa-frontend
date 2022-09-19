@@ -129,7 +129,7 @@ export default function Governance() {
                         <div className="position-relative h-100">
                             <img
                                 className="position-absolute img-fluid w-100 h-100"
-                                src="assets/images/development/governace.jpg"
+                                src="assets/images/development/allowa2.JPG"
                                 style={{ objectFit: "cover" }}
                                 alt=""
                             />
