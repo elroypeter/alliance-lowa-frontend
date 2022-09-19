@@ -12,7 +12,7 @@ export default function Mission() {
                         <div className="position-relative h-100">
                             <img
                                 className="position-absolute img-fluid w-100 h-100"
-                                src="assets/images/development/vision.jpeg"
+                                src="assets/images/development/allowa4.jpg"
                                 style={{ objectFit: "cover" }}
                                 alt=""
                             />
@@ -45,9 +45,6 @@ export default function Mission() {
                                 the sectors of agriculture, education; economic
                                 growth and social cohesion.
                             </p>
-                            <a href="" className="btn btn-primary py-3 px-5">
-                                Explore More
-                            </a>
                         </div>
                     </div>
                 </div>

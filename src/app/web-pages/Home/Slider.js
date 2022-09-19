@@ -1,35 +1,41 @@
 import React, { useEffect } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { sliderContent } from "./SliderContent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faChevronLeft,
     faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Slider() {
+export default function Slider(props) {
     useEffect(() => {
-        window?.headerCarousel(
-            [faChevronLeft, faChevronRight].map((arrow, index) =>
-                renderToStaticMarkup(
-                    <FontAwesomeIcon key={index} icon={arrow}></FontAwesomeIcon>
+        if (props.slides.length) {
+            window?.headerCarousel(
+                [faChevronLeft, faChevronRight].map((arrow, index) =>
+                    renderToStaticMarkup(
+                        <FontAwesomeIcon
+                            key={index}
+                            icon={arrow}
+                        ></FontAwesomeIcon>
+                    )
                 )
-            )
-        );
+            );
+        }
     });
 
     return (
         <div className="container-fluid p-0 mb-5">
             <div className="owl-carousel header-carousel position-relative">
-                {sliderContent.map((slide, index) => (
+                {props.slides.map((slide, index) => (
                     <div
                         key={index}
                         className="owl-carousel-item position-relative"
                     >
-                        <img className="img-fluid" src={slide.imgURL} alt="" />
+                        <img className="img-fluid" src={slide.image} alt="" />
                         <div
                             className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                            style={{ background: "rgb(53 53 53 / 22%)" }}
+                            style={{
+                                background: "rgb(53 53 53 / 22%)",
+                            }}
                         >
                             <div className="container">
                                 <div className="row justify-content-center">
