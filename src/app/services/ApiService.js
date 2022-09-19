@@ -6,7 +6,7 @@ export class ApiService {
         this.baseUrl =
             baseUrl ||
             // "http://localhost:5000" ||
-            "https://www.alliancelowa.org/api";
+            `https://${window.location.hostname}/api`;
     }
 
     async apiConnect(url, method, data) {
