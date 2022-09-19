@@ -1,12 +1,14 @@
 import * as axios from "axios";
 
 export class ApiService {
-    constructor(baseUrl) {
+    constructor() {
         this.token = sessionStorage.getItem("token");
-        this.baseUrl =
-            baseUrl ||
-            // "http://localhost:5000" ||
-            "https://www.alliancelowa.org/api";
+
+        if (window.location.hostname === "localhost") {
+            this.baseUrl = `http://${window.location.hostname}:5000`;
+        } else {
+            this.baseUrl = `https://${window.location.hostname}/api`;
+        }
     }
 
     async apiConnect(url, method, data) {
