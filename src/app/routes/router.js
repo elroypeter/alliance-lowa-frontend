@@ -12,6 +12,7 @@ import Project from "../admin-pages/Project/Project";
 import Login from "../admin-pages/auth/Login";
 import { AuthContext } from "../shared/AuthContext";
 import ProjectDetails from "../admin-pages/Project/ProjectDetails/ProjectDetails";
+import Subscriber from "../admin-pages/Subscribers/Subscriber";
 
 export default function Router(props) {
     return (
@@ -45,7 +46,7 @@ export default function Router(props) {
                 <Route path="news" element={<Project />} />
                 <Route path="careers" element={<Project />} />
                 <Route path="messages" element={<Project />} />
-                <Route path="subscribers" element={<Project />} />
+                <Route path="subscribers" element={<Subscriber />} />
             </Route>
 
             <Route path="/auth">
