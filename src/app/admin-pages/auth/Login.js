@@ -54,7 +54,7 @@ export default function Login(props) {
             const response = await api.apiConnect(
                 "/login",
                 "post",
-                Json.stringify(loginForm.fields)
+                loginForm.fields
             );
 
             if (response) {
