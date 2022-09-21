@@ -244,6 +244,12 @@
   }
 }
 
+@media (min-width: 1335px) {
+  .owl-stage-outer {
+    height: auto;
+  }
+}
+
 .page-header {
   background: linear-gradient(rgba(53, 53, 53, 0.7), rgba(53, 53, 53, 0.7)),
     url(../images/development/allowa6.jpg) center center no-repeat;

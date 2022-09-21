@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
-import ProjectItem from "./ProjectItem";
+import MessageItem from "./MessageItem";
 
-export default function ProjectList(props) {
+export default function MessageList(props) {
     useEffect(() => {
-        if (props.projects.length > 0) {
-            window?.loadDataTable("projectsTable");
+        if (props.messages.length > 0) {
+            window?.loadDataTable("messageTable");
         }
     });
 
@@ -21,20 +21,19 @@ export default function ProjectList(props) {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Title</th>
-                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Mobile</th>
                                     <th className="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {props.projects.map((project, index) => (
-                                    <ProjectItem
+                                {props.messages.map((message, index) => (
+                                    <MessageItem
                                         key={index}
                                         index={index}
-                                        project={project}
-                                        editProject={props.editProject}
-                                        deleteProject={props.deleteProject}
-                                        publishProject={props.publishProject}
+                                        message={message}
+                                        deleteProject={props.deleteMessage}
                                     />
                                 ))}
                             </tbody>
