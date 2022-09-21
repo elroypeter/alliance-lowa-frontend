@@ -13,12 +13,21 @@ import Login from "../admin-pages/auth/Login";
 import { AuthContext } from "../shared/AuthContext";
 import ProjectDetails from "../admin-pages/Project/ProjectDetails/ProjectDetails";
 import Subscriber from "../admin-pages/Subscribers/Subscriber";
+import Message from "../admin-pages/Messages/Message";
 
 export default function Router(props) {
     return (
         <Routes>
             <Route path="/" element={<WebsiteLayout />}>
-                <Route index element={<Home />} />
+                <Route
+                    index
+                    element={
+                        <Home
+                            getImageSlides={props.getImageSlides}
+                            imageSlides={props.imageSlides}
+                        />
+                    }
+                />
             </Route>
 
             <Route
@@ -45,7 +54,9 @@ export default function Router(props) {
 
                 <Route path="news" element={<Project />} />
                 <Route path="careers" element={<Project />} />
-                <Route path="messages" element={<Project />} />
+                <Route path="messages">
+                    <Route path="" index element={<Message />} />
+                </Route>
                 <Route path="subscribers" element={<Subscriber />} />
             </Route>
 

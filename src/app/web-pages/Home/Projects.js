@@ -9,13 +9,13 @@ export default function Projects() {
                 <div className="row g-0 mx-lg-0">
                     <div
                         className="col-lg-6 ps-lg-0"
-                        style={{ "min-height": "400px" }}
+                        style={{ minHeight: "400px" }}
                     >
                         <div className="position-relative h-100">
                             <img
                                 className="position-absolute img-fluid w-100 h-100"
                                 src="/assets/images/development/allowa1.JPG"
-                                style={{ "object-fit": "cover" }}
+                                style={{ objectFit: "cover" }}
                                 alt=""
                             />
                         </div>
