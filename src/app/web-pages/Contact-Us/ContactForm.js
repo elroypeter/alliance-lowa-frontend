@@ -36,7 +36,7 @@ export default function ContactForm() {
                                 style={{ objectFit: "cover" }}
                                 src="https://maps.google.com/maps?q=logu%20DRC&t=&z=9&ie=UTF8&iwloc=&output=embed"
                                 frameBorder="0"
-                                allowfullscreen=""
+                                allowFullScreen=""
                                 aria-hidden="false"
                                 tabIndex="0"
                             ></iframe>
