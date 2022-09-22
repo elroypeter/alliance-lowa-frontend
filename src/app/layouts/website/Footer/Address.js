@@ -53,7 +53,7 @@ export default function Address() {
                     icon={faPhone}
                     className="fa fa-phone-alt me-3"
                 ></FontAwesomeIcon>
-                +000 000 0000
+                +243 8184 83709
             </p>
             <p className="mb-2">
                 <FontAwesomeIcon

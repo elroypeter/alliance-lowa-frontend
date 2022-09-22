@@ -14,6 +14,7 @@ import { AuthContext } from "../shared/AuthContext";
 import ProjectDetails from "../admin-pages/Project/ProjectDetails/ProjectDetails";
 import Subscriber from "../admin-pages/Subscribers/Subscriber";
 import Message from "../admin-pages/Messages/Message";
+import ContactUs from "../web-pages/Contact-Us/ContactUs";
 
 export default function Router(props) {
     return (
@@ -28,6 +29,7 @@ export default function Router(props) {
                         />
                     }
                 />
+                <Route path="contact-us" element={<ContactUs />} />
             </Route>
 
             <Route

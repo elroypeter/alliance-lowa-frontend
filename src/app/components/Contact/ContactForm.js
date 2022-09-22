@@ -2,7 +2,7 @@ import React from "react";
 import { ApiService } from "../../services/ApiService";
 import BsSpinner from "../Spinner/BsSpinner";
 
-export default class ContactForm extends React.Component {
+export class ContactForm extends React.Component {
     state = {
         fields: {
             name: "",
