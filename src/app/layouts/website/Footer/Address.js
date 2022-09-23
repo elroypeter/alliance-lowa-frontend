@@ -39,21 +39,14 @@ export default function Address() {
                     icon={faMapMarkerAlt}
                     className="me-3"
                 ></FontAwesomeIcon>
-                Sis Avenue Bamwisho, Province of North Kivu, Congo DRC
-            </p>
-            <p className="mb-2">
-                <FontAwesomeIcon
-                    icon={faMapMarkerAlt}
-                    className="me-3"
-                ></FontAwesomeIcon>
-                {"Logu (ABM camp), Road leading to Bisie - Walikale, Congo DRC"}
+                {"Logu (ABM camp), Bisie - Walikale road, DRC"}
             </p>
             <p className="mb-2">
                 <FontAwesomeIcon
                     icon={faPhone}
                     className="fa fa-phone-alt me-3"
                 ></FontAwesomeIcon>
-                +000 000 0000
+                +243 8184 83709
             </p>
             <p className="mb-2">
                 <FontAwesomeIcon

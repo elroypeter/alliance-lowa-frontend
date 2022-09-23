@@ -14,6 +14,10 @@ import { AuthContext } from "../shared/AuthContext";
 import ProjectDetails from "../admin-pages/Project/ProjectDetails/ProjectDetails";
 import Subscriber from "../admin-pages/Subscribers/Subscriber";
 import Message from "../admin-pages/Messages/Message";
+import ContactUs from "../web-pages/Contact-Us/ContactUs";
+import WhoWeAre from "../web-pages/Who-We-Are/WhoWeAre";
+import WhatWeDo from "../web-pages/What-We-Do/WhatWeDo";
+import NewsCareer from "../web-pages/News-Careers/NewsCareers";
 
 export default function Router(props) {
     return (
@@ -28,6 +32,10 @@ export default function Router(props) {
                         />
                     }
                 />
+                <Route path="who-we-are" element={<WhoWeAre />} />
+                <Route path="what-we-do" element={<WhatWeDo />} />
+                <Route path="new-and-careers" element={<NewsCareer />} />
+                <Route path="contact-us" element={<ContactUs />} />
             </Route>
 
             <Route
