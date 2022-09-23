@@ -12,9 +12,6 @@ export default function WebBreadCrumb(props) {
                         <li className="breadcrumb-item">
                             <a className="text-white">Home</a>
                         </li>
-                        <li className="breadcrumb-item">
-                            <a className="text-white">Pages</a>
-                        </li>
                         <li
                             className="breadcrumb-item text-white active"
                             aria-current="page"

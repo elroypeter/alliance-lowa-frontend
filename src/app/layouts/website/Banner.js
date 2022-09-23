@@ -14,7 +14,9 @@ export default function Banner() {
                             className="text-primary me-2"
                         ></FontAwesomeIcon>
                         <small>
-                            Sis Avenue Bamwisho, North Kivu, Congo DRC
+                            {
+                                "Logu (ABM camp), Bisie - Walikale road, Congo DRC"
+                            }
                         </small>
                     </div>
                     <div className="h-100 d-inline-flex align-items-center py-3">

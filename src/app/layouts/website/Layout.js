@@ -6,11 +6,11 @@ import Header from "./Header";
 
 export function Layout() {
     return (
-        <>
+        <div className="website-layout">
             <Banner></Banner>
             <Header></Header>
             <Outlet></Outlet>
             <Footer></Footer>
-        </>
+        </div>
     );
 }
