@@ -14,7 +14,9 @@ export default function Banner() {
                             className="text-primary me-2"
                         ></FontAwesomeIcon>
                         <small>
-                            Sis Avenue Bamwisho, North Kivu, Congo DRC
+                            {
+                                "Logu (ABM camp), Bisie - Walikale road, Congo DRC"
+                            }
                         </small>
                     </div>
                     <div className="h-100 d-inline-flex align-items-center py-3">
@@ -31,7 +33,7 @@ export default function Banner() {
                             icon={faPhone}
                             className="text-primary me-2"
                         ></FontAwesomeIcon>
-                        <small>+000 000 0000</small>
+                        <small>+243 8184 83709</small>
                     </div>
                     <div className="h-100 d-inline-flex align-items-center translate">
                         <div id="google_translate_element"></div>

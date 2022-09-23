@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { ApiService } from "../../../services/ApiService";
+import BsSpinner from "../../../components/Spinner/BsSpinner";
 
 export default function NewsLetter() {
+    const [form, setState] = useState({
+        email: "",
+        saving: false,
+    });
+
+    const onFormChange = (evt) => {
+        if (evt.target.value) {
+            setState((state) => ({ ...state, email: evt.target.value }));
+        }
+    };
+
+    const validate = () => {
+        return form.email !== "" ? true : false;
+    };
+
     const saveSubscriber = async () => {
-        const api = new ApiService();
-        const res = await api.apiConnect("/subscriber", "post", {
-            email: "elroypeter2@gmail.com",
-        });
-        console.warn(res);
+        try {
+            setState((state) => ({ ...state, saving: true }));
+            const api = new ApiService();
+            const res = await api.apiConnect("/subscriber", "post", {
+                email: form.email,
+            });
+
+            if (res) {
+                setState({ email: "", saving: false });
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -22,13 +46,16 @@ export default function NewsLetter() {
                     className="form-control border-0 w-100 py-3 ps-4 pe-5"
                     type="text"
                     placeholder="Your email"
+                    onChange={onFormChange}
                 />
                 <button
+                    disabled={!validate()}
                     type="button"
+                    value={form.email}
                     onClick={saveSubscriber}
                     className="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"
                 >
-                    SignUp
+                    {form.saving ? <BsSpinner /> : "SignUp"}
                 </button>
             </div>
         </div>

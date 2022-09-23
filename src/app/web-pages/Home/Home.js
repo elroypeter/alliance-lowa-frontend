@@ -4,30 +4,20 @@ import Contact from "./Contact";
 import Governance from "./Governance";
 import Mission from "./Mission";
 import Slider from "./Slider";
-import { getImageSlider } from "../website.service";
+
 import Projects from "./Projects";
 
 export default class Home extends Component {
-    state = {
-        slides: [],
-    };
-
     componentDidMount() {
-        this.getImageSlides();
+        if (this.props.imageSlides.length <= 0) {
+            this.props.getImageSlides();
+        }
     }
-
-    getImageSlides = () => {
-        getImageSlider()
-            .then((res) => {
-                this.setState({ slides: res.data });
-            })
-            .catch(console.error);
-    };
 
     render() {
         return (
             <>
-                <Slider slides={this.state.slides}></Slider>
+                <Slider slides={this.props.imageSlides}></Slider>
                 <Mission></Mission>
                 <Governance></Governance>
                 <Projects></Projects>

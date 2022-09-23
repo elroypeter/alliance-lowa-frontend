@@ -13,12 +13,29 @@ import Login from "../admin-pages/auth/Login";
 import { AuthContext } from "../shared/AuthContext";
 import ProjectDetails from "../admin-pages/Project/ProjectDetails/ProjectDetails";
 import Subscriber from "../admin-pages/Subscribers/Subscriber";
+import Message from "../admin-pages/Messages/Message";
+import ContactUs from "../web-pages/Contact-Us/ContactUs";
+import WhoWeAre from "../web-pages/Who-We-Are/WhoWeAre";
+import WhatWeDo from "../web-pages/What-We-Do/WhatWeDo";
+import NewsCareer from "../web-pages/News-Careers/NewsCareers";
 
 export default function Router(props) {
     return (
         <Routes>
             <Route path="/" element={<WebsiteLayout />}>
-                <Route index element={<Home />} />
+                <Route
+                    index
+                    element={
+                        <Home
+                            getImageSlides={props.getImageSlides}
+                            imageSlides={props.imageSlides}
+                        />
+                    }
+                />
+                <Route path="who-we-are" element={<WhoWeAre />} />
+                <Route path="what-we-do" element={<WhatWeDo />} />
+                <Route path="new-and-careers" element={<NewsCareer />} />
+                <Route path="contact-us" element={<ContactUs />} />
             </Route>
 
             <Route
@@ -45,7 +62,9 @@ export default function Router(props) {
 
                 <Route path="news" element={<Project />} />
                 <Route path="careers" element={<Project />} />
-                <Route path="messages" element={<Project />} />
+                <Route path="messages">
+                    <Route path="" index element={<Message />} />
+                </Route>
                 <Route path="subscribers" element={<Subscriber />} />
             </Route>
 

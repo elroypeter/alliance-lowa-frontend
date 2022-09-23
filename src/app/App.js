@@ -1,6 +1,7 @@
 import React from "react";
 import Router from "./routes/router";
 import { AuthContext } from "./shared/AuthContext";
+import { getImageSlider } from "./web-pages/website.service";
 
 export class App extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ export class App extends React.Component {
         isLoggedIn: !!sessionStorage.getItem("isLoggedIn"),
         sessionToken: sessionStorage.getItem("token"),
         loggedInUser: sessionStorage.getItem("user"),
+        imageSlides: [],
     };
 
     componentDidMount() {
@@ -66,6 +68,14 @@ export class App extends React.Component {
         return this.state.loggedInUser;
     };
 
+    getImageSlides = () => {
+        getImageSlider()
+            .then((res) => {
+                this.setState({ imageSlides: res.data });
+            })
+            .catch(console.error);
+    };
+
     render() {
         return (
             <AuthContext.Provider
@@ -79,6 +89,8 @@ export class App extends React.Component {
                     isLoggedIn={this.state.isLoggedIn}
                     sessionToken={this.state.sessionToken}
                     hasValidSession={this.hasValidSession}
+                    imageSlides={this.state.imageSlides}
+                    getImageSlides={this.getImageSlides}
                 />
             </AuthContext.Provider>
         );
