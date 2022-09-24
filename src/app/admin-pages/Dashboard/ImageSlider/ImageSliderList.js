@@ -26,6 +26,7 @@ export default class ImageSliderList extends Component {
                 description: "",
             },
             errors: {},
+            saving: false,
         },
     };
 
@@ -43,6 +44,10 @@ export default class ImageSliderList extends Component {
     };
 
     saveImage = () => {
+        this.setState((state) => ({
+            ...state,
+            form: { ...state.form, saving: true },
+        }));
         saveImageSlider(this.state.form.fields)
             .then(() => {
                 this.getImages();
@@ -104,6 +109,7 @@ export default class ImageSliderList extends Component {
                 description: "",
             },
             errors: {},
+            saving: false,
         };
     };
 
@@ -151,6 +157,7 @@ export default class ImageSliderList extends Component {
                                     saveImage={this.saveImage}
                                     updateImage={this.updateImage}
                                     closeModal={this.closeModal}
+                                    savingStatus={this.state.form.saving}
                                 />
                             </div>
                         </div>
