@@ -1,5 +1,6 @@
 import React from "react";
 import Field from "../../../components/Form/Field";
+import BsSpinner from "../../../components/Spinner/BsSpinner";
 
 export default function ImageSliderForm(props) {
     return (
@@ -81,7 +82,7 @@ export default function ImageSliderForm(props) {
                                 type="button"
                                 className="btn btn-primary"
                             >
-                                Update
+                                {props.savingStatus ? <BsSpinner /> : "Update"}
                             </button>
                         ) : (
                             <button
@@ -89,7 +90,7 @@ export default function ImageSliderForm(props) {
                                 type="button"
                                 className="btn btn-primary"
                             >
-                                Save
+                                {props.savingStatus ? <BsSpinner /> : "Save"}
                             </button>
                         )}
                     </div>
