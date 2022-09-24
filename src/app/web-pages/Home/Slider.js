@@ -5,6 +5,7 @@ import {
     faChevronLeft,
     faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { baseUrl } from "../../services/ApiService";
 
 export default function Slider(props) {
     useEffect(() => {
@@ -30,7 +31,11 @@ export default function Slider(props) {
                         key={index}
                         className="owl-carousel-item position-relative"
                     >
-                        <img className="img-fluid" src={slide.image} alt="" />
+                        <img
+                            className="img-fluid"
+                            src={baseUrl() + "/images/" + slide.image}
+                            alt=""
+                        />
                         <div
                             className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                             style={{

@@ -3,7 +3,7 @@ import * as Croppie from "croppie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUpload } from "@fortawesome/free-solid-svg-icons";
 
-export default class ImageInput extends Component {
+export default class ImageCropperInput extends Component {
     state = {
         config: {
             viewport: { width: 100, height: 100 },

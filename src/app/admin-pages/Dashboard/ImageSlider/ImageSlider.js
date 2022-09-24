@@ -6,6 +6,7 @@ import {
     faTrash,
     faBullhorn,
 } from "@fortawesome/free-solid-svg-icons";
+import { baseUrl } from "../../../services/ApiService";
 
 export default function ImageSlider(props) {
     const deleteImage = (id) => {
@@ -26,7 +27,7 @@ export default function ImageSlider(props) {
                 <a>
                     <img
                         className="img-fluid img-thumbnail w-100"
-                        src={props.image.image}
+                        src={baseUrl() + "/images/" + props.image.image}
                         style={{ height: "200px" }}
                     />
                 </a>
