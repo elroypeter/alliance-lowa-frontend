@@ -32,7 +32,7 @@ export default function ImageSliderForm(props) {
                                 <div className="col-12 mb-3">
                                     <Field
                                         name="image"
-                                        formType="image"
+                                        formType="file"
                                         label="Image"
                                         value={props.form.fields.image}
                                         onInputChange={props.onInputChange}

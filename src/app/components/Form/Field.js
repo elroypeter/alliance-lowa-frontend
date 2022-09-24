@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import React, { Component } from "react";
-import ImageInput from "./ImageInput";
+import ImageCropperInput from "./ImageCropperInput";
 import Editor from "./Editor";
 
 export default class Field extends Component {
@@ -20,6 +20,12 @@ export default class Field extends Component {
 
     static getDerivedStateFromProps = (nextProps) => {
         return { value: nextProps.value };
+    };
+
+    checkForFileType = (type) => {
+        return ["jpg", "png", "webp", "jpeg"].find((val) => val === type)
+            ? true
+            : false;
     };
 
     input = () => {
@@ -70,20 +76,70 @@ export default class Field extends Component {
         );
     };
 
-    image = (config) => {
-        const checkForFileType = (type) => {
-            return ["jpg", "png", "webp", "jpeg"].find((val) => val === type)
-                ? true
-                : false;
+    fileInput = () => {
+        const fileToB64 = (file) =>
+            new Promise((res, rej) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => res(reader.result);
+                reader.onerror = (error) => rej(error);
+            });
+
+        const onSelectFile = async (evt) => {
+            const name = this.props.name;
+            let value = evt.target.files[0];
+            let errors = false;
+            const originalType = value.type.split("/")[1];
+
+            if (!this.checkForFileType(originalType)) {
+                errors = "Invalid file format";
+                this.setState((state) => ({
+                    ...state,
+                    errors,
+                }));
+            }
+
+            try {
+                const result = await fileToB64(evt.target.files[0]);
+                this.setState((state) => ({
+                    ...state,
+                    value: result,
+                }));
+                this.props.onInputChange({ name, value: result, errors });
+            } catch (error) {
+                errors = "Invalid file format";
+                this.setState((state) => ({
+                    ...state,
+                    errors: error,
+                }));
+            }
         };
 
+        return (
+            <>
+                <label htmlFor="formFile" className="form-label fs-6">
+                    {this.props.label}
+                </label>
+                <input
+                    name={this.props.name}
+                    className="form-control"
+                    onChange={onSelectFile}
+                    type="file"
+                    id="formFile"
+                />
+                <small className="text-danger">{this.state.errors}</small>
+            </>
+        );
+    };
+
+    image = (config) => {
         const onSelectFile = (evt, croppie, target) => {
             const name = this.props.name;
             let value = evt.target.files[0];
             let errors = false;
             const originalType = value.type.split("/")[1];
 
-            if (!checkForFileType(originalType)) {
+            if (!this.checkForFileType(originalType)) {
                 errors = "Invalid file format";
                 this.setState((state) => ({
                     ...state,
@@ -110,7 +166,7 @@ export default class Field extends Component {
 
         return (
             <>
-                <ImageInput
+                <ImageCropperInput
                     id={`imageInput${new Date().getTime()}`}
                     label={this.props.label}
                     config={config}
@@ -128,6 +184,8 @@ export default class Field extends Component {
                 return this.input();
             case "image":
                 return this.image(this.props.config);
+            case "file":
+                return this.fileInput();
             case "textArea":
                 return this.textArea();
             case "editor":
