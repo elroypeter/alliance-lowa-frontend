@@ -727,3 +727,17 @@ ul.project-list {
     padding: 30px 15px 30px;
   }
 }
+
+/*** Translate ***/
+.translate {
+  select {
+    background-color: transparent !important;
+    border: none;
+    padding: 0.375rem 2rem 0.375rem 0.75rem;
+    outline: none;
+  }
+
+  select.form-select:focus {
+    box-shadow: none !important;
+  }
+}
