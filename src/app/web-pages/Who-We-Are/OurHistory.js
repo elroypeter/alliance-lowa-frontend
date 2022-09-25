@@ -8,7 +8,7 @@ export default function OurHistory() {
         controls: true,
         responsive: true,
         fill: true,
-        poster: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg",
+        poster: "/assets/images/development/allowa4.jpg",
         sources: [
             {
                 src: "https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4",

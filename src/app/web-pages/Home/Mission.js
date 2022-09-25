@@ -1,6 +1,8 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Mission() {
+    const { t } = useTranslation();
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container about px-lg-0">
@@ -25,7 +27,7 @@ export default function Mission() {
                         <div className="p-lg-5 pe-lg-0">
                             <div className="section-title text-start">
                                 <h1 className="display-5 mb-4">
-                                    Vision & Mission
+                                    {t("vision_and_mission")}
                                 </h1>
                             </div>
                             <p className="mb-4 pb-2">

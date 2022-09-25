@@ -71,7 +71,7 @@ export class App extends React.Component {
     getImageSlides = () => {
         getImageSlider()
             .then((res) => {
-                this.setState({ imageSlides: res.data });
+                this.setState({ imageSlides: res.data || [] });
             })
             .catch(console.error);
     };
