@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faMapMarkerAlt,
-    faPhone,
-    faLanguage,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMapMarkerAlt, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faClock } from "@fortawesome/free-regular-svg-icons";
 import { useTranslation } from "react-i18next";
 
 export default function Banner() {
     const { i18n } = useTranslation();
-    const [currentLang, setState] = useState("fr");
+    const [currentLang, setState] = useState("en");
     const lngs = {
         en: { nativeSymbol: "EN" },
         fr: { nativeSymbol: "FR" },
@@ -53,10 +49,10 @@ export default function Banner() {
                         <small>+243 8184 83709</small>
                     </div>
                     <div className="h-100 d-inline-flex align-items-center translate">
-                        <span className="me-1">
-                            <FontAwesomeIcon
-                                icon={faLanguage}
-                                className="text-primary"
+                        <span style={{ marginRight: "-5px" }}>
+                            <img
+                                width="25"
+                                src="/assets/images/defaults/translate.png"
                             />
                         </span>
                         <select
