@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 export default function Banner() {
     const { i18n } = useTranslation();
-    const [currentLang, setState] = useState("fr");
+    const [currentLang, setState] = useState("en");
     const lngs = {
         en: { nativeSymbol: "EN" },
         fr: { nativeSymbol: "FR" },
