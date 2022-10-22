@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import ProjectItem from "./ProjectItem";
+import React, { useEffect } from 'react';
+import ProjectItem from './ProjectItem';
 
 export default function ProjectList(props) {
     useEffect(() => {
         if (props.projects.length > 0) {
-            window?.loadDataTable("projectsTable");
+            window?.loadDataTable('projectsTable');
         }
     });
 
@@ -13,11 +13,7 @@ export default function ProjectList(props) {
             <div className="col-sm-12">
                 <div className="card mb-3">
                     <div className="card-body">
-                        <table
-                            id="projectsTable"
-                            className="table table-hover"
-                            style={{ width: "100%" }}
-                        >
+                        <table id="projectsTable" className="table table-hover" style={{ width: '100%' }}>
                             <thead>
                                 <tr>
                                     <th>#</th>

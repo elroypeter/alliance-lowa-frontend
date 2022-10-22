@@ -1,71 +1,46 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faMapMarkerAlt,
-    faPhone,
-    faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-    faTwitter,
-    faFacebookF,
-    faYoutube,
-    faLinkedinIn,
-} from "@fortawesome/free-brands-svg-icons";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faTwitter, faFacebookF, faYoutube, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 export default function Address() {
     const socialLinks = [
         {
             icon: faTwitter,
-            link: "",
+            link: '',
         },
         {
             icon: faFacebookF,
-            link: "",
+            link: '',
         },
         {
             icon: faYoutube,
-            link: "",
+            link: '',
         },
         {
             icon: faLinkedinIn,
-            link: "",
+            link: '',
         },
     ];
     return (
         <div className="col-lg-4 col-md-6">
             <h4 className="text-light mb-4">Address</h4>
             <p className="mb-2">
-                <FontAwesomeIcon
-                    icon={faMapMarkerAlt}
-                    className="me-3"
-                ></FontAwesomeIcon>
-                {"Logu (ABM camp), Bisie - Walikale road, DRC"}
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="me-3"></FontAwesomeIcon>
+                {'Logu (ABM camp), Bisie - Walikale road, DRC'}
             </p>
             <p className="mb-2">
-                <FontAwesomeIcon
-                    icon={faPhone}
-                    className="fa fa-phone-alt me-3"
-                ></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faPhone} className="fa fa-phone-alt me-3"></FontAwesomeIcon>
                 +243 8184 83709
             </p>
             <p className="mb-2">
-                <FontAwesomeIcon
-                    icon={faEnvelope}
-                    className="fa fa-envelope me-3"
-                ></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faEnvelope} className="fa fa-envelope me-3"></FontAwesomeIcon>
                 info@alliancelowa.org
             </p>
             <div className="d-flex pt-2">
                 {socialLinks.map((link, index) => (
-                    <a
-                        key={index}
-                        className="btn btn-outline-light btn-social"
-                        href=""
-                    >
-                        <FontAwesomeIcon
-                            icon={link.icon}
-                            className="fab fa-twitter"
-                        ></FontAwesomeIcon>
+                    <a key={index} className="btn btn-outline-light btn-social" href="">
+                        <FontAwesomeIcon icon={link.icon} className="fab fa-twitter"></FontAwesomeIcon>
                     </a>
                 ))}
             </div>

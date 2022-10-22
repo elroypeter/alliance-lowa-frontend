@@ -1,17 +1,12 @@
-import React from "react";
-import ProjectForm from "../ProjectList/ProjectForm";
-import ProjectTitle from "./ProjectTitle";
-import ProjectImages from "./ProjectImages";
-import ProjectDescription from "./ProjectDescription";
-import ProjectNewImage from "./ProjectNewImage";
+import React from 'react';
+import ProjectForm from '../ProjectList/ProjectForm';
+import ProjectTitle from './ProjectTitle';
+import ProjectImages from './ProjectImages';
+import ProjectDescription from './ProjectDescription';
+import ProjectNewImage from './ProjectNewImage';
 
-import { useParams } from "react-router-dom";
-import {
-    getProjectDetailsApi,
-    updateProjectApi,
-    addProjectImageApi,
-    removeProjectImageApi,
-} from "../Project.service";
+import { useParams } from 'react-router-dom';
+import { getProjectDetailsApi, updateProjectApi, addProjectImageApi, removeProjectImageApi } from '../Project.service';
 
 function withParams(Component) {
     // eslint-disable-next-line react/display-name
@@ -25,23 +20,23 @@ class ProjectDetails extends React.Component {
         editModal: false,
         form: {
             fields: {
-                id: "",
-                title: "",
-                description: "",
+                id: '',
+                title: '',
+                description: '',
             },
             errors: {},
         },
         newImage: {
             fields: {
-                image: "",
+                image: '',
             },
             errors: {},
         },
     };
 
     componentDidMount() {
-        this.modalBtn = document.getElementById("newProjectModalBtn");
-        this.imageModalBtn = document.getElementById("newProjectImageModalBtn");
+        this.modalBtn = document.getElementById('newProjectModalBtn');
+        this.imageModalBtn = document.getElementById('newProjectImageModalBtn');
         this.getDetails(parseInt(this.props.params.id));
     }
 
@@ -77,16 +72,16 @@ class ProjectDetails extends React.Component {
         if (form) {
             return {
                 fields: {
-                    id: "",
-                    title: "",
-                    description: "",
+                    id: '',
+                    title: '',
+                    description: '',
                 },
                 errors: {},
             };
         } else {
             return {
                 fields: {
-                    image: "",
+                    image: '',
                 },
                 errors: {},
             };
@@ -113,7 +108,7 @@ class ProjectDetails extends React.Component {
             .then(() => {
                 this.getDetails(parseInt(this.props.params.id));
                 this.closeModal();
-                document.getElementById("closeProjectModal").click();
+                document.getElementById('closeProjectModal').click();
             })
             .catch(console.error);
     };
@@ -123,7 +118,7 @@ class ProjectDetails extends React.Component {
             .then(() => {
                 this.getDetails(parseInt(this.props.params.id));
                 this.closeModal();
-                document.getElementById("closeImageModal").click();
+                document.getElementById('closeImageModal').click();
             })
             .catch(console.error);
     };
@@ -148,18 +143,9 @@ class ProjectDetails extends React.Component {
     render() {
         return (
             <div className="container-xxl">
-                <ProjectTitle
-                    title={this.state.details.title}
-                    editProject={this.editProject}
-                    openAddImage={this.openAddImage}
-                />
-                <ProjectImages
-                    images={this.state.details.images}
-                    deleteImage={this.deleteImage}
-                />
-                <ProjectDescription
-                    projectDescription={this.state.details.description}
-                />
+                <ProjectTitle title={this.state.details.title} editProject={this.editProject} openAddImage={this.openAddImage} />
+                <ProjectImages images={this.state.details.images} deleteImage={this.deleteImage} />
+                <ProjectDescription projectDescription={this.state.details.description} />
                 <ProjectForm
                     editModal={this.state.editModal}
                     form={this.state.form}

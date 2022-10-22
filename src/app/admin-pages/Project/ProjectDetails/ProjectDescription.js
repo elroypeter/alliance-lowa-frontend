@@ -1,5 +1,5 @@
-import React from "react";
-import HTMLReactParser from "html-react-parser";
+import React from 'react';
+import HTMLReactParser from 'html-react-parser';
 
 export default function ProjectDescription(props) {
     return (
@@ -11,11 +11,7 @@ export default function ProjectDescription(props) {
                     </div>
                     <div className="card-body">
                         <div className="row">
-                            <div className="col-12">
-                                {HTMLReactParser(
-                                    props.projectDescription || ""
-                                )}
-                            </div>
+                            <div className="col-12">{HTMLReactParser(props.projectDescription || '')}</div>
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { getSubscribersApi, deleteSubscriberApi } from "./Subscriber.service";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import React, { Component } from 'react';
+import { getSubscribersApi, deleteSubscriberApi } from './Subscriber.service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default class Subscriber extends Component {
     state = {
@@ -43,55 +43,32 @@ export default class Subscriber extends Component {
                     <div className="col-sm-12">
                         <div className="card mb-3">
                             <div className="card-body">
-                                <table
-                                    id="projectsTable"
-                                    className="table table-hover"
-                                    style={{ width: "100%" }}
-                                >
+                                <table id="projectsTable" className="table table-hover" style={{ width: '100%' }}>
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Email</th>
-                                            <th className="text-center">
-                                                Action
-                                            </th>
+                                            <th className="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.subscribers.map(
-                                            (subscriber, index) => (
-                                                <tr key={index}>
-                                                    <td>
-                                                        {parseInt(index) + 1}
-                                                    </td>
-                                                    <td>{subscriber.email}</td>
-                                                    <td className="text-center">
-                                                        <div
-                                                            className="btn-group"
-                                                            role="group"
-                                                            aria-label="Basic outlined example"
+                                        {this.state.subscribers.map((subscriber, index) => (
+                                            <tr key={index}>
+                                                <td>{parseInt(index) + 1}</td>
+                                                <td>{subscriber.email}</td>
+                                                <td className="text-center">
+                                                    <div className="btn-group" role="group" aria-label="Basic outlined example">
+                                                        <button
+                                                            onClick={() => this.deleteSubscriber(subscriber.id)}
+                                                            type="button"
+                                                            className="btn btn-outline-light"
                                                         >
-                                                            <button
-                                                                onClick={() =>
-                                                                    this.deleteSubscriber(
-                                                                        subscriber.id
-                                                                    )
-                                                                }
-                                                                type="button"
-                                                                className="btn btn-outline-light"
-                                                            >
-                                                                <FontAwesomeIcon
-                                                                    icon={
-                                                                        faTrash
-                                                                    }
-                                                                    className="text-danger"
-                                                                />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            )
-                                        )}
+                                                            <FontAwesomeIcon icon={faTrash} className="text-danger" />
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                             </div>

@@ -1,12 +1,7 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-    faEdit,
-    faTrash,
-    faEye,
-    faBullhorn,
-} from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash, faEye, faBullhorn } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProjectItem(props) {
     const navigate = useNavigate();
@@ -20,69 +15,31 @@ export default function ProjectItem(props) {
             <td>{parseInt(props.index) + 1}</td>
             <td>{props.project.title}</td>
             <td>
-                <span
-                    className={
-                        "badge " +
-                        (props.project.isPublished ? "bg-success" : "bg-danger")
-                    }
-                >
-                    {props.project.isPublished ? "Published" : "Not Published"}
+                <span className={'badge ' + (props.project.isPublished ? 'bg-success' : 'bg-danger')}>
+                    {props.project.isPublished ? 'Published' : 'Not Published'}
                 </span>
             </td>
             <td className="text-center">
-                <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic outlined example"
-                >
+                <div className="btn-group" role="group" aria-label="Basic outlined example">
                     <button
-                        onClick={() =>
-                            gotoPage(
-                                `/admin/projects/${props.project.id}/${props.project.slug}`
-                            )
-                        }
+                        onClick={() => gotoPage(`/admin/projects/${props.project.id}/${props.project.slug}`)}
                         type="button"
                         className="btn btn-outline-light"
                     >
-                        <FontAwesomeIcon
-                            icon={faEye}
-                            className="text-primary"
-                        />
+                        <FontAwesomeIcon icon={faEye} className="text-primary" />
                     </button>
                     <button
-                        onClick={() =>
-                            props.publishProject(
-                                props.project.id,
-                                !props.project.isPublished
-                            )
-                        }
+                        onClick={() => props.publishProject(props.project.id, !props.project.isPublished)}
                         type="button"
                         className="btn btn-outline-light"
                     >
-                        <FontAwesomeIcon
-                            icon={faBullhorn}
-                            className="text-dark"
-                        />
+                        <FontAwesomeIcon icon={faBullhorn} className="text-dark" />
                     </button>
-                    <button
-                        onClick={() => props.editProject(props.project)}
-                        type="button"
-                        className="btn btn-outline-light"
-                    >
-                        <FontAwesomeIcon
-                            icon={faEdit}
-                            className="text-secondary"
-                        />
+                    <button onClick={() => props.editProject(props.project)} type="button" className="btn btn-outline-light">
+                        <FontAwesomeIcon icon={faEdit} className="text-secondary" />
                     </button>
-                    <button
-                        onClick={() => props.deleteProject(props.project.id)}
-                        type="button"
-                        className="btn btn-outline-light"
-                    >
-                        <FontAwesomeIcon
-                            icon={faTrash}
-                            className="text-danger"
-                        />
+                    <button onClick={() => props.deleteProject(props.project.id)} type="button" className="btn btn-outline-light">
+                        <FontAwesomeIcon icon={faTrash} className="text-danger" />
                     </button>
                 </div>
             </td>

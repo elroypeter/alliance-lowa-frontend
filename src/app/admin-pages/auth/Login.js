@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import Field from "../../components/Form/Field";
-import BsSpinner from "../../components/Spinner/BsSpinner";
-import { ApiService } from "../../services/ApiService";
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import Field from '../../components/Form/Field';
+import BsSpinner from '../../components/Spinner/BsSpinner';
+import { ApiService } from '../../services/ApiService';
 
 export default function Login(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (props.context.hasValidSession()) navigate("/admin/home");
+        if (props.context.hasValidSession()) navigate('/admin/home');
     });
 
     const [loginForm, setState] = useState({
         fields: {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
         },
         fieldErrors: {},
-        backendError: "",
+        backendError: '',
         logging: false,
     });
 
@@ -34,9 +34,7 @@ export default function Login(props) {
     const validate = () => {
         const credentails = loginForm.fields;
         const fieldErrors = loginForm.fieldErrors;
-        const errorMessages = Object.keys(fieldErrors).filter(
-            (e) => fieldErrors[e]
-        );
+        const errorMessages = Object.keys(fieldErrors).filter((e) => fieldErrors[e]);
 
         if (!credentails.email) return true;
         if (!credentails.password) return true;
@@ -51,25 +49,21 @@ export default function Login(props) {
 
         try {
             const api = new ApiService();
-            const response = await api.apiConnect(
-                "/login",
-                "post",
-                loginForm.fields
-            );
+            const response = await api.apiConnect('/login', 'post', loginForm.fields);
 
             if (response) {
                 const { token, ...user } = response.data;
-                sessionStorage.setItem("token", token);
-                sessionStorage.setItem("user", JSON.stringify(user));
-                sessionStorage.setItem("isLoggedIn", true);
+                sessionStorage.setItem('token', token);
+                sessionStorage.setItem('user', JSON.stringify(user));
+                sessionStorage.setItem('isLoggedIn', true);
 
                 props.context.setLoginStatus();
 
                 setState((state) => ({
                     ...state,
                     fields: {
-                        email: "",
-                        password: "",
+                        email: '',
+                        password: '',
                     },
                     logging: false,
                     fieldErrors: {},
@@ -93,10 +87,7 @@ export default function Login(props) {
                             <div className="col-lg-6 d-flex justify-content-center align-items-center border border-secondary auth-h100 bg-secondary py-2 py-md-0">
                                 <div className="d-flex flex-column p-2">
                                     <h1>Account Login</h1>
-                                    <span>
-                                        Welcome back! Log In with your Email,
-                                        Phone number or QR code
-                                    </span>
+                                    <span>Welcome back! Log In with your Email, Phone number or QR code</span>
                                     <div className="mt-4 mb-3">
                                         <div className="card">
                                             <div className="card-body p-4">
@@ -106,18 +97,9 @@ export default function Login(props) {
                                                             name="email"
                                                             type="text"
                                                             label="Email"
-                                                            value={
-                                                                loginForm.fields
-                                                                    .email
-                                                            }
-                                                            onInputChange={
-                                                                onInputChange
-                                                            }
-                                                            validate={(val) =>
-                                                                val
-                                                                    ? false
-                                                                    : "Email is required"
-                                                            }
+                                                            value={loginForm.fields.email}
+                                                            onInputChange={onInputChange}
+                                                            validate={(val) => (val ? false : 'Email is required')}
                                                         />
                                                     </div>
                                                     <div className="mb-3">
@@ -125,18 +107,9 @@ export default function Login(props) {
                                                             name="password"
                                                             type="password"
                                                             label="Password"
-                                                            value={
-                                                                loginForm.fields
-                                                                    .password
-                                                            }
-                                                            onInputChange={
-                                                                onInputChange
-                                                            }
-                                                            validate={(val) =>
-                                                                val
-                                                                    ? false
-                                                                    : "Password is required"
-                                                            }
+                                                            value={loginForm.fields.password}
+                                                            onInputChange={onInputChange}
+                                                            validate={(val) => (val ? false : 'Password is required')}
                                                         />
                                                     </div>
                                                     <button
@@ -144,20 +117,13 @@ export default function Login(props) {
                                                         disabled={validate()}
                                                         onClick={loginSubmit}
                                                     >
-                                                        {loginForm.logging ? (
-                                                            <BsSpinner />
-                                                        ) : (
-                                                            "log in"
-                                                        )}
+                                                        {loginForm.logging ? <BsSpinner /> : 'log in'}
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
-                                    <Link
-                                        to="/auth/forgot"
-                                        className="text-primary text-decoration-underline"
-                                    >
+                                    <Link to="/auth/forgot" className="text-primary text-decoration-underline">
                                         Forgot password?
                                     </Link>
                                 </div>

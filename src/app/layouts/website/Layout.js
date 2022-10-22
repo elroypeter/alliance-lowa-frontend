@@ -1,8 +1,8 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
-import Banner from "./Banner";
-import Footer from "./Footer/Footer";
-import Header from "./Header";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import Banner from './Banner';
+import Footer from './Footer/Footer';
+import Header from './Header';
 
 export function Layout() {
     return (

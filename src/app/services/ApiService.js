@@ -1,7 +1,7 @@
-import * as axios from "axios";
+import * as axios from 'axios';
 
 export const baseUrl = () => {
-    if (window.location.hostname === "localhost") {
+    if (window.location.hostname === 'localhost') {
         return `http://${window.location.hostname}:5000`;
     } else {
         return `https://${window.location.hostname}/api`;
@@ -10,7 +10,7 @@ export const baseUrl = () => {
 
 export class ApiService {
     constructor() {
-        this.token = sessionStorage.getItem("token");
+        this.token = sessionStorage.getItem('token');
         this.baseUrl = baseUrl();
     }
 

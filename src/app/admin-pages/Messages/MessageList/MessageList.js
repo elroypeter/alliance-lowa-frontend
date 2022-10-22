@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import MessageItem from "./MessageItem";
+import React, { useEffect } from 'react';
+import MessageItem from './MessageItem';
 
 export default function MessageList(props) {
     useEffect(() => {
         if (props.messages.length > 0) {
-            window?.loadDataTable("messageTable");
+            window?.loadDataTable('messageTable');
         }
     });
 
@@ -13,11 +13,7 @@ export default function MessageList(props) {
             <div className="col-sm-12">
                 <div className="card mb-3">
                     <div className="card-body">
-                        <table
-                            id="projectsTable"
-                            className="table table-hover"
-                            style={{ width: "100%" }}
-                        >
+                        <table id="projectsTable" className="table table-hover" style={{ width: '100%' }}>
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -29,12 +25,7 @@ export default function MessageList(props) {
                             </thead>
                             <tbody>
                                 {props.messages.map((message, index) => (
-                                    <MessageItem
-                                        key={index}
-                                        index={index}
-                                        message={message}
-                                        deleteProject={props.deleteMessage}
-                                    />
+                                    <MessageItem key={index} index={index} message={message} deleteProject={props.deleteMessage} />
                                 ))}
                             </tbody>
                         </table>

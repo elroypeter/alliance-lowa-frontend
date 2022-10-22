@@ -1,17 +1,11 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-import ImageSlider from "./ImageSlider";
-import ImageSliderForm from "./ImageSliderForm";
+import ImageSlider from './ImageSlider';
+import ImageSliderForm from './ImageSliderForm';
 
-import {
-    getImageSlider,
-    deleteImageSlider,
-    publishImageSlider,
-    saveImageSlider,
-    updateImageSlider,
-} from "./ImageSlider.service";
+import { getImageSlider, deleteImageSlider, publishImageSlider, saveImageSlider, updateImageSlider } from './ImageSlider.service';
 
 export default class ImageSliderList extends Component {
     state = {
@@ -20,10 +14,10 @@ export default class ImageSliderList extends Component {
         editModal: false,
         form: {
             fields: {
-                id: "",
-                image: "",
-                title: "",
-                description: "",
+                id: '',
+                image: '',
+                title: '',
+                description: '',
             },
             errors: {},
             saving: false,
@@ -31,7 +25,7 @@ export default class ImageSliderList extends Component {
     };
 
     componentDidMount() {
-        this.modalBtn = document.getElementById("newSliderModalBtn");
+        this.modalBtn = document.getElementById('newSliderModalBtn');
         setTimeout(() => this.getImages());
     }
 
@@ -52,7 +46,7 @@ export default class ImageSliderList extends Component {
             .then(() => {
                 this.getImages();
                 this.closeModal();
-                document.getElementById("closeSliderModal").click();
+                document.getElementById('closeSliderModal').click();
             })
             .catch(console.error);
     };
@@ -62,7 +56,7 @@ export default class ImageSliderList extends Component {
             .then(() => {
                 this.getImages();
                 this.closeModal();
-                document.getElementById("closeSliderModal").click();
+                document.getElementById('closeSliderModal').click();
             })
             .catch(console.error);
     };
@@ -103,10 +97,10 @@ export default class ImageSliderList extends Component {
     resetForm = () => {
         return {
             fields: {
-                id: "",
-                image: "",
-                title: "",
-                description: "",
+                id: '',
+                image: '',
+                title: '',
+                description: '',
             },
             errors: {},
             saving: false,
@@ -138,16 +132,8 @@ export default class ImageSliderList extends Component {
                         <div className="card-header d-flex justify-content-between align-items-center bg-transparent py-3">
                             <h6 className="m-0 fw-bold">Image Slider</h6>
                             <div className="report ms-3">
-                                <button
-                                    id="newSliderModalBtn"
-                                    className="btn btn-sm btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#newSlider"
-                                >
-                                    <FontAwesomeIcon
-                                        icon={faPlus}
-                                        className="me-2"
-                                    />
+                                <button id="newSliderModalBtn" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#newSlider">
+                                    <FontAwesomeIcon icon={faPlus} className="me-2" />
                                     New Image Slide
                                 </button>
                                 <ImageSliderForm

@@ -1,14 +1,9 @@
-import React from "react";
-import Field from "../../../components/Form/Field";
+import React from 'react';
+import Field from '../../../components/Form/Field';
 
 export default function ProjectNewImage(props) {
     return (
-        <div
-            className="modal fade"
-            id="newProjectImageModal"
-            aria-labelledby="newImageLabel"
-            aria-hidden="true"
-        >
+        <div className="modal fade" id="newProjectImageModal" aria-labelledby="newImageLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -46,19 +41,10 @@ export default function ProjectNewImage(props) {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button
-                            type="button"
-                            className="btn btn-danger"
-                            data-bs-dismiss="modal"
-                            onClick={props.closeModal}
-                        >
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.closeModal}>
                             Close
                         </button>
-                        <button
-                            onClick={props.saveImage}
-                            type="button"
-                            className="btn btn-primary"
-                        >
+                        <button onClick={props.saveImage} type="button" className="btn btn-primary">
                             Save
                         </button>
                     </div>

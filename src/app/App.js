@@ -1,7 +1,7 @@
-import React from "react";
-import Router from "./routes/router";
-import { AuthContext } from "./shared/AuthContext";
-import { getImageSlider } from "./web-pages/website.service";
+import React from 'react';
+import Router from './routes/router';
+import { AuthContext } from './shared/AuthContext';
+import { getImageSlider } from './web-pages/website.service';
 
 export class App extends React.Component {
     constructor(props) {
@@ -9,9 +9,9 @@ export class App extends React.Component {
     }
 
     state = {
-        isLoggedIn: !!sessionStorage.getItem("isLoggedIn"),
-        sessionToken: sessionStorage.getItem("token"),
-        loggedInUser: sessionStorage.getItem("user"),
+        isLoggedIn: !!sessionStorage.getItem('isLoggedIn'),
+        sessionToken: sessionStorage.getItem('token'),
+        loggedInUser: sessionStorage.getItem('user'),
         imageSlides: [],
     };
 
@@ -32,9 +32,9 @@ export class App extends React.Component {
 
     setLoginStatus = () => {
         const stateChanges = Object.assign({}, this.state);
-        stateChanges.isLoggedIn = !!sessionStorage.getItem("isLoggedIn");
-        stateChanges.loggedInUser = JSON.parse(sessionStorage.getItem("user"));
-        stateChanges.sessionToken = sessionStorage.getItem("token");
+        stateChanges.isLoggedIn = !!sessionStorage.getItem('isLoggedIn');
+        stateChanges.loggedInUser = JSON.parse(sessionStorage.getItem('user'));
+        stateChanges.sessionToken = sessionStorage.getItem('token');
         this.setState(stateChanges);
     };
 
@@ -45,12 +45,10 @@ export class App extends React.Component {
     hasValidSession = () => {
         if (!this.state.sessionToken) return false;
 
-        const payload = JSON.parse(
-            atob(this.state.sessionToken?.split(".")[1])
-        );
+        const payload = JSON.parse(atob(this.state.sessionToken?.split('.')[1]));
 
         const dateNow = new Date();
-        return payload["exp"] * 1000 > dateNow.getTime() ? true : false;
+        return payload['exp'] * 1000 > dateNow.getTime() ? true : false;
     };
 
     startSessionTimer = () => {

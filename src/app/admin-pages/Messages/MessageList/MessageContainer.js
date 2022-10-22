@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import MessageList from "./MessageList";
+import React, { Component } from 'react';
+import MessageList from './MessageList';
 
-import { getMessageApi, deleteMessageApi } from "../Message.service";
+import { getMessageApi, deleteMessageApi } from '../Message.service';
 
 export default class ProjectContainer extends Component {
     state = {
@@ -9,7 +9,7 @@ export default class ProjectContainer extends Component {
     };
 
     componentDidMount() {
-        this.modalBtn = document.getElementById("newProjectModalBtn");
+        this.modalBtn = document.getElementById('newProjectModalBtn');
         setTimeout(() => this.getMessages());
     }
 
@@ -39,10 +39,7 @@ export default class ProjectContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <MessageList
-                    deleteProject={this.deleteProject}
-                    messages={this.state.messages}
-                />
+                <MessageList deleteProject={this.deleteProject} messages={this.state.messages} />
             </>
         );
     }

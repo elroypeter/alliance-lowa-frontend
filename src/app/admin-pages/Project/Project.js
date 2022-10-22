@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ProjectContainer from "./ProjectList/ProjectContainer";
+import React, { Component } from 'react';
+import ProjectContainer from './ProjectList/ProjectContainer';
 
 export default class Project extends Component {
     render() {

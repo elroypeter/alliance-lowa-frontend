@@ -1,6 +1,6 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProjectImages(props) {
     return (
@@ -16,18 +16,13 @@ export default function ProjectImages(props) {
                                 <div key={index} className="col">
                                     <div className="screen-card shadow-sm p-2 position-relative">
                                         <button
-                                            onClick={() =>
-                                                props.deleteImage(image.id)
-                                            }
+                                            onClick={() => props.deleteImage(image.id)}
                                             className="btn btn-sm btn-danger rounded-circle position-absolute top-right-corner"
                                         >
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>
                                         <a>
-                                            <img
-                                                className="img-fluid img-thumbnail"
-                                                src={image.imageData}
-                                            />
+                                            <img className="img-fluid img-thumbnail" src={image.imageData} />
                                         </a>
                                     </div>
                                 </div>

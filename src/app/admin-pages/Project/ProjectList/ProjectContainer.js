@@ -1,15 +1,9 @@
-import React, { Component } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import ProjectList from "./ProjectList";
-import ProjectForm from "./ProjectForm";
-import {
-    getProjectsApi,
-    updateProjectApi,
-    saveProjectApi,
-    deleteProjectApi,
-    publishProjectApi,
-} from "../Project.service";
+import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import ProjectList from './ProjectList';
+import ProjectForm from './ProjectForm';
+import { getProjectsApi, updateProjectApi, saveProjectApi, deleteProjectApi, publishProjectApi } from '../Project.service';
 
 export default class ProjectContainer extends Component {
     state = {
@@ -18,16 +12,16 @@ export default class ProjectContainer extends Component {
         editModal: false,
         form: {
             fields: {
-                id: "",
-                title: "",
-                description: "",
+                id: '',
+                title: '',
+                description: '',
             },
             errors: {},
         },
     };
 
     componentDidMount() {
-        this.modalBtn = document.getElementById("newProjectModalBtn");
+        this.modalBtn = document.getElementById('newProjectModalBtn');
         setTimeout(() => this.getProjects());
     }
 
@@ -44,7 +38,7 @@ export default class ProjectContainer extends Component {
             .then(() => {
                 this.getProjects();
                 this.closeModal();
-                document.getElementById("closeProjectModal").click();
+                document.getElementById('closeProjectModal').click();
             })
             .catch(console.error);
     };
@@ -54,7 +48,7 @@ export default class ProjectContainer extends Component {
             .then(() => {
                 this.getProjects();
                 this.closeModal();
-                document.getElementById("closeProjectModal").click();
+                document.getElementById('closeProjectModal').click();
             })
             .catch(console.error);
     };
@@ -95,9 +89,9 @@ export default class ProjectContainer extends Component {
     resetForm = () => {
         return {
             fields: {
-                id: "",
-                title: "",
-                description: "",
+                id: '',
+                title: '',
+                description: '',
             },
             errors: {},
         };
@@ -135,10 +129,7 @@ export default class ProjectContainer extends Component {
                                     data-bs-toggle="modal"
                                     data-bs-target="#addProjectModal"
                                 >
-                                    <FontAwesomeIcon
-                                        icon={faPlus}
-                                        className="me-2"
-                                    />
+                                    <FontAwesomeIcon icon={faPlus} className="me-2" />
                                     Add Project
                                 </button>
                             </div>

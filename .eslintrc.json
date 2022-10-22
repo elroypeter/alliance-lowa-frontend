@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -34,10 +35,6 @@
             "error",
             "unix"
         ],
-        "quotes": [
-            "error",
-            "double"
-        ],
         "no-console": [
             "warn",
             {
@@ -46,6 +43,15 @@
                     "error",
                     "warn"
                 ]
+            }
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": true,
+                "trailingComma": "all",
+                "printWidth": 150,
+                "tabWidth": 4
             }
         ]
     }

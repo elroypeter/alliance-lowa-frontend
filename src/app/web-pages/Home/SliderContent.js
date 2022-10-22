@@ -1,7 +1,7 @@
 export const sliderContent = [
     {
-        imgURL: "assets/images/slider/slider1.png",
-        title: "Who we are",
+        imgURL: 'assets/images/slider/slider1.png',
+        title: 'Who we are',
         description: `
       Alliance Lowa is a non-profit association under Congolese law created in Walikale on November 29,
       2016, between the Company Alphamin
@@ -9,8 +9,8 @@ export const sliderContent = [
       `,
     },
     {
-        imgURL: "assets/images/slider/slider2.png",
-        title: "What we do",
+        imgURL: 'assets/images/slider/slider2.png',
+        title: 'What we do',
         description: `
       Alliance Lowa Asbl is thus the instrument through which the Alphamin Bisie Mining Company fulfills
       its legal obligations as well as its social responsibility, in accordance with the Congolese legislation in
@@ -18,8 +18,8 @@ export const sliderContent = [
       `,
     },
     {
-        imgURL: "assets/images/slider/slider3.jpeg",
-        title: "Our Mission",
+        imgURL: 'assets/images/slider/slider3.jpeg',
+        title: 'Our Mission',
         description: `
       Alliance Lowa Asbl intends to strengthen the visibility of its interventions and develop solid partnerships with
       other organizations in order to capture additional resources that can enable it to
