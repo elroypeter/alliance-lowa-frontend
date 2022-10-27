@@ -18,12 +18,13 @@ import ContactUs from '../web-pages/Contact-Us/ContactUs';
 import WhoWeAre from '../web-pages/Who-We-Are/WhoWeAre';
 import WhatWeDo from '../web-pages/What-We-Do/WhatWeDo';
 import NewsCareer from '../web-pages/News-Careers/NewsCareers';
+import ImageSliderDetails from '../admin-pages/Dashboard/ImageSliderDetails/ImageSliderDetails';
 
 export default function Router(props) {
     return (
         <Routes>
             <Route path="/" element={<WebsiteLayout />}>
-                <Route index element={<Home getImageSlides={props.getImageSlides} imageSlides={props.imageSlides} />} />
+                <Route index element={<Home />} />
                 <Route path="who-we-are" element={<WhoWeAre />} />
                 <Route path="what-we-do" element={<WhatWeDo />} />
                 <Route path="new-and-careers" element={<NewsCareer />} />
@@ -41,13 +42,14 @@ export default function Router(props) {
                     />
                 }
             >
-                <Route path="home" index element={<Dashboard />} />
-
+                <Route path="image-slides">
+                    <Route path="" index element={<Dashboard />} />
+                    <Route path=":id" index element={<ImageSliderDetails />} />
+                </Route>
                 <Route path="projects">
                     <Route path="" index element={<Project />} />
                     <Route path=":id/:title" index element={<ProjectDetails />} />
                 </Route>
-
                 <Route path="news" element={<Project />} />
                 <Route path="careers" element={<Project />} />
                 <Route path="messages">

@@ -41,7 +41,7 @@ export default function Header() {
             <div className="collapse navbar-collapse" id="navbarCollapse">
                 <div className="navbar-nav ms-auto p-4 p-lg-0">
                     {hrefLinks.map((link, index) => (
-                        <NavLink key={index} className="nav-item nav-link" to={link.address}>
+                        <NavLink key={index} className="nav-item nav-link" to={link.address} end>
                             {link.name}
                         </NavLink>
                     ))}

@@ -1,168 +1,113 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from 'react-redux';
 
 import ImageSlider from './ImageSlider';
 import ImageSliderForm from './ImageSliderForm';
+import { saveImageSlides, loadImageSlides, deleteImageSlide, newImageSlider, closeOpenModal } from '../store/ImageSlider.slice';
+import BsSpinner from '../../../components/Spinner/BsSpinner';
 
-import { getImageSlider, deleteImageSlider, publishImageSlider, saveImageSlider, updateImageSlider } from './ImageSlider.service';
-
-export default class ImageSliderList extends Component {
-    state = {
-        images: [],
-        openModal: false,
-        editModal: false,
+export default function ImageSliderList() {
+    const dispatch = useDispatch();
+    const { images, isLoading, isSaving, isModalOpen } = useSelector((store) => store.imageSlider);
+    const [state, setState] = useState({
         form: {
             fields: {
                 id: '',
-                image: '',
+                base64: '',
+                langCode: 'fr',
                 title: '',
                 description: '',
             },
             errors: {},
-            saving: false,
         },
-    };
+    });
 
-    componentDidMount() {
-        this.modalBtn = document.getElementById('newSliderModalBtn');
-        setTimeout(() => this.getImages());
-    }
+    useEffect(() => {
+        dispatch(loadImageSlides());
+    }, []);
 
-    getImages = () => {
-        getImageSlider()
-            .then((res) => {
-                this.setState((state) => ({ ...state, images: res.data }));
-            })
-            .catch(console.error());
-    };
+    useEffect(() => {
+        if (!isModalOpen) closeModal();
+    }, [isModalOpen]);
 
-    saveImage = () => {
-        this.setState((state) => ({
-            ...state,
-            form: { ...state.form, saving: true },
-        }));
-        saveImageSlider(this.state.form.fields)
-            .then(() => {
-                this.getImages();
-                this.closeModal();
-                document.getElementById('closeSliderModal').click();
-            })
-            .catch(console.error);
-    };
-
-    updateImage = (id) => {
-        updateImageSlider(id, this.state.form.fields)
-            .then(() => {
-                this.getImages();
-                this.closeModal();
-                document.getElementById('closeSliderModal').click();
-            })
-            .catch(console.error);
-    };
-
-    deleteImage = (id) => {
-        deleteImageSlider(id)
-            .then(() => {
-                this.getImages();
-            })
-            .catch(console.error);
-    };
-
-    publishImage = (id, status) => {
-        publishImageSlider(id, status)
-            .then(() => {
-                this.getImages();
-            })
-            .catch(console.error);
-    };
-
-    newSliderModal = () => {
-        const currentState = Object.assign({}, this.state);
-        currentState.openModal = true;
-        this.setState(currentState);
-        this.modalBtn.click();
-    };
-
-    onInputChange = ({ name, value, error }) => {
-        const fields = Object.assign({}, this.state.form.fields);
-        const errors = Object.assign({}, this.state.form.errors);
-
+    const onInputChange = ({ name, value, error }) => {
+        const fields = Object.assign({}, state.form.fields);
+        const errors = Object.assign({}, state.form.errors);
         fields[name] = value;
         errors[name] = error;
-
-        this.setState((state) => ({ ...state, form: { fields, errors } }));
+        setState((state) => ({ ...state, form: { fields, errors } }));
     };
 
-    resetForm = () => {
+    const closeModal = () => {
+        const currentState = Object.assign({}, state);
+        currentState.form = resetForm();
+        document.getElementById('closeSliderModal').click();
+        setState(currentState);
+    };
+
+    const resetForm = () => {
         return {
             fields: {
                 id: '',
-                image: '',
+                base64: '',
+                langCode: 'fr',
                 title: '',
                 description: '',
             },
             errors: {},
-            saving: false,
         };
     };
 
-    editSlider = (data) => {
-        const currentState = Object.assign({}, this.state);
-        currentState.openModal = true;
-        currentState.editModal = true;
-        currentState.form.fields = data;
-        this.setState(currentState);
-        this.modalBtn.click();
-    };
-
-    closeModal = () => {
-        const currentState = Object.assign({}, this.state);
-        currentState.openModal = false;
-        currentState.editModal = false;
-        currentState.form = this.resetForm();
-        this.setState(currentState);
-    };
-
-    render() {
-        return (
-            <div className="row mb-3">
-                <div className="col">
-                    <div className="card">
-                        <div className="card-header d-flex justify-content-between align-items-center bg-transparent py-3">
-                            <h6 className="m-0 fw-bold">Image Slider</h6>
-                            <div className="report ms-3">
-                                <button id="newSliderModalBtn" className="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#newSlider">
-                                    <FontAwesomeIcon icon={faPlus} className="me-2" />
-                                    New Image Slide
-                                </button>
-                                <ImageSliderForm
-                                    editModal={this.state.editModal}
-                                    form={this.state.form}
-                                    onInputChange={this.onInputChange}
-                                    saveImage={this.saveImage}
-                                    updateImage={this.updateImage}
-                                    closeModal={this.closeModal}
-                                    savingStatus={this.state.form.saving}
-                                />
-                            </div>
+    return (
+        <div className="row mb-3">
+            <div className="col">
+                <div className="card">
+                    <div className="card-header d-flex justify-content-between align-items-center bg-transparent py-3">
+                        <h6 className="m-0 fw-bold">Image Slide List</h6>
+                        <div className="ms-auto report ms-3 w-80">
+                            <button
+                                onClick={() => {
+                                    dispatch(newImageSlider());
+                                }}
+                                id="newSliderModalBtn"
+                                className="btn btn-sm btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#newSlider"
+                            >
+                                <FontAwesomeIcon icon={faPlus} className="me-2" />
+                                New Image Slide
+                            </button>
+                            <ImageSliderForm
+                                addTranslationModal={state.addTranslationModal}
+                                editModal={state.editModal}
+                                form={state.form}
+                                onInputChange={onInputChange}
+                                saveImage={() => {
+                                    dispatch(saveImageSlides(state.form.fields));
+                                }}
+                                closeModal={() => dispatch(closeOpenModal())}
+                                savingStatus={isSaving}
+                            />
                         </div>
-                        <div className="card-body">
-                            <div className="row">
-                                {this.state.images.map((image, index) => (
-                                    <ImageSlider
-                                        key={index}
-                                        image={image}
-                                        deleteImage={this.deleteImage}
-                                        publishImage={this.publishImage}
-                                        editSlider={this.editSlider}
-                                    />
-                                ))}
-                            </div>
+                    </div>
+                    <div className="card-body">
+                        {isLoading && <BsSpinner />}
+                        <div className="row">
+                            {images.map((image, index) => (
+                                <ImageSlider
+                                    key={index}
+                                    image={image}
+                                    deleteImage={(id) => {
+                                        dispatch(deleteImageSlide(id));
+                                    }}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }

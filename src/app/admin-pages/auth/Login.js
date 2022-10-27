@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Field from '../../components/Form/Field';
 import BsSpinner from '../../components/Spinner/BsSpinner';
-import { ApiService } from '../../services/ApiService';
+import { loginUser } from './auth.service';
 
 export default function Login(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (props.context.hasValidSession()) navigate('/admin/home');
+        if (props.context.hasValidSession()) navigate('/admin/image-slides');
     });
 
     const [loginForm, setState] = useState({
@@ -17,7 +17,7 @@ export default function Login(props) {
             password: '',
         },
         fieldErrors: {},
-        backendError: '',
+        backendError: undefined,
         logging: false,
     });
 
@@ -47,35 +47,30 @@ export default function Login(props) {
         if (validate()) return;
         setState((state) => ({ ...state, logging: true }));
 
-        try {
-            const api = new ApiService();
-            const response = await api.apiConnect('/login', 'post', loginForm.fields);
-
-            if (response) {
-                const { token, ...user } = response.data;
-                sessionStorage.setItem('token', token);
-                sessionStorage.setItem('user', JSON.stringify(user));
-                sessionStorage.setItem('isLoggedIn', true);
-
-                props.context.setLoginStatus();
-
-                setState((state) => ({
-                    ...state,
-                    fields: {
-                        email: '',
-                        password: '',
-                    },
-                    logging: false,
-                    fieldErrors: {},
-                }));
-            }
-        } catch (error) {
+        const { token, user } = await loginUser(loginForm.fields, handleLoginExecption);
+        if (token) {
+            sessionStorage.setItem('token', token);
+            sessionStorage.setItem('user', JSON.stringify(user));
+            sessionStorage.setItem('isLoggedIn', true);
+            props.context.setLoginStatus();
             setState((state) => ({
                 ...state,
-                backendError: error,
+                fields: {
+                    email: '',
+                    password: '',
+                },
                 logging: false,
+                fieldErrors: {},
             }));
         }
+    };
+
+    const handleLoginExecption = (error) => {
+        setState((state) => ({
+            ...state,
+            backendError: error.response.data,
+            logging: false,
+        }));
     };
 
     return (
@@ -119,6 +114,13 @@ export default function Login(props) {
                                                     >
                                                         {loginForm.logging ? <BsSpinner /> : 'log in'}
                                                     </button>
+                                                    {loginForm.backendError ? (
+                                                        <div className="error-log mt-2">
+                                                            <span className="text-danger">{loginForm.backendError}</span>
+                                                        </div>
+                                                    ) : (
+                                                        ''
+                                                    )}
                                                 </form>
                                             </div>
                                         </div>

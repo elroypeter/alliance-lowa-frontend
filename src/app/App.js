@@ -1,7 +1,7 @@
 import React from 'react';
+import { ErrorBoundary } from './components/ComponentErrors/ErrorBoundary';
 import Router from './routes/router';
 import { AuthContext } from './shared/AuthContext';
-import { getImageSlider } from './web-pages/website.service';
 
 export class App extends React.Component {
     constructor(props) {
@@ -11,8 +11,7 @@ export class App extends React.Component {
     state = {
         isLoggedIn: !!sessionStorage.getItem('isLoggedIn'),
         sessionToken: sessionStorage.getItem('token'),
-        loggedInUser: sessionStorage.getItem('user'),
-        imageSlides: [],
+        loggedInUser: JSON.parse(sessionStorage.getItem('user')),
     };
 
     componentDidMount() {
@@ -66,14 +65,6 @@ export class App extends React.Component {
         return this.state.loggedInUser;
     };
 
-    getImageSlides = () => {
-        getImageSlider()
-            .then((res) => {
-                this.setState({ imageSlides: res.data || [] });
-            })
-            .catch(console.error);
-    };
-
     render() {
         return (
             <AuthContext.Provider
@@ -83,13 +74,9 @@ export class App extends React.Component {
                     hasValidSession: this.hasValidSession,
                 }}
             >
-                <Router
-                    isLoggedIn={this.state.isLoggedIn}
-                    sessionToken={this.state.sessionToken}
-                    hasValidSession={this.hasValidSession}
-                    imageSlides={this.state.imageSlides}
-                    getImageSlides={this.getImageSlides}
-                />
+                <ErrorBoundary>
+                    <Router isLoggedIn={this.state.isLoggedIn} sessionToken={this.state.sessionToken} hasValidSession={this.hasValidSession} />
+                </ErrorBoundary>
             </AuthContext.Provider>
         );
     }

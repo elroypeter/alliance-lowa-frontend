@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header/Header';
 import Sidebar from './Sidebar/Sidebar';
-import { faHome, faDiagramProject, faNewspaper, faCartFlatbedSuitcase, faMessage, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faDiagramProject, faNewspaper, faCartFlatbedSuitcase, faMessage, faEnvelope, faImages } from '@fortawesome/free-solid-svg-icons';
 
 export function Layout() {
     let location = useLocation();
 
     const menuList = [
         {
-            name: 'Home',
-            link: '/admin/home',
-            icon: faHome,
+            name: 'Image Slides',
+            link: '/admin/image-slides',
+            icon: faImages,
         },
         {
             name: 'Projects',

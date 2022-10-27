@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Mission() {
     const { t } = useTranslation();
+
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container about px-lg-0">

@@ -1,8 +1,9 @@
 import { ApiService } from '../services/ApiService';
 
-const getImageSlider = async () => {
+const getImageSlider = async (params) => {
     const apiService = new ApiService();
-    return await apiService.apiConnect('/website/image-slider', 'get', {});
+    const result = await apiService.apiConnect('/api/public/image-slider', 'get', {}, { ...params });
+    return result || [];
 };
 
 export { getImageSlider };

@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faClock } from '@fortawesome/free-regular-svg-icons';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeLanguage } from './store/language.slice';
 
 export default function Banner() {
+    const dispatch = useDispatch();
     const { i18n } = useTranslation();
-    const [currentLang, setState] = useState('en');
-    const lngs = {
-        en: { nativeSymbol: 'EN' },
-        fr: { nativeSymbol: 'FR' },
-    };
+    const { selectedLanguage, langs } = useSelector((store) => store.language);
+
+    useEffect(() => {
+        i18n.changeLanguage(selectedLanguage);
+    }, [selectedLanguage]);
 
     const onChangeLang = (evt) => {
-        setState(evt.target.value);
-        i18n.changeLanguage(evt.target.value);
+        dispatch(changeLanguage(evt.target.value));
     };
 
     return (
@@ -43,12 +45,12 @@ export default function Banner() {
                             className="form-select"
                             aria-label="Default select example"
                             name="langSwitcher"
-                            value={currentLang}
+                            value={selectedLanguage}
                             onChange={onChangeLang}
                         >
-                            {Object.keys(lngs).map((lang, index) => (
+                            {Object.keys(langs).map((lang, index) => (
                                 <option key={index} value={lang}>
-                                    {lngs[lang].nativeSymbol}
+                                    {langs[lang].nativeSymbol}
                                 </option>
                             ))}
                         </select>

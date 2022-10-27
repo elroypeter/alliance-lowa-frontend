@@ -1,26 +1,26 @@
 import React, { useEffect } from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { baseUrl } from '../../services/ApiService';
+import { getImageName } from '../../utils/externals.util';
 
-export default function Slider(props) {
+import { loadSliders } from './store/Home.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Carousel } from 'react-responsive-carousel';
+
+export default function Slider() {
+    const dispatch = useDispatch();
+    const { sliders } = useSelector((store) => store.homeSlider);
+    const { selectedLanguage } = useSelector((store) => store.language);
+
     useEffect(() => {
-        if (props.slides.length) {
-            window?.headerCarousel(
-                [faChevronLeft, faChevronRight].map((arrow, index) =>
-                    renderToStaticMarkup(<FontAwesomeIcon key={index} icon={arrow}></FontAwesomeIcon>),
-                ),
-            );
-        }
-    });
+        dispatch(loadSliders({ langCode: selectedLanguage, isPublished: true }));
+    }, [selectedLanguage]);
 
     return (
         <div className="container-fluid p-0 mb-5">
-            <div className="owl-carousel header-carousel position-relative">
-                {props.slides.map((slide, index) => (
+            <Carousel showArrows={true} infiniteLoop={true} showThumbs={false} transitionTime={1500}>
+                {sliders.map((slide, index) => (
                     <div key={index} className="owl-carousel-item position-relative">
-                        <img className="img-fluid" src={baseUrl() + '/images/' + slide.image} alt="" />
+                        <img className="img-fluid" src={baseUrl() + '/images' + getImageName(slide.filePath)} alt="" />
                         <div
                             className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
                             style={{
@@ -42,7 +42,7 @@ export default function Slider(props) {
                         </div>
                     </div>
                 ))}
-            </div>
+            </Carousel>
         </div>
     );
 }

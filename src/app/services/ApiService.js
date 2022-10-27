@@ -4,7 +4,7 @@ export const baseUrl = () => {
     if (window.location.hostname === 'localhost') {
         return `http://${window.location.hostname}:5000`;
     } else {
-        return `https://${window.location.hostname}/api`;
+        return `https://${window.location.hostname}/aws`;
     }
 };
 
@@ -14,7 +14,7 @@ export class ApiService {
         this.baseUrl = baseUrl();
     }
 
-    async apiConnect(url, method, data) {
+    async apiConnect(url, method, data, params, getError) {
         try {
             const response = await axios({
                 url: this.baseUrl + url,
@@ -23,10 +23,12 @@ export class ApiService {
                 headers: {
                     token: this.token,
                 },
+                params,
             });
-            return response;
+            return response.data;
         } catch (error) {
-            return error;
+            if (getError) getError(error);
+            return null;
         }
     }
 }

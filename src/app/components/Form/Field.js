@@ -4,6 +4,11 @@ import ImageCropperInput from './ImageCropperInput';
 import Editor from './Editor';
 
 export default class Field extends Component {
+    languages = [
+        { code: 'fr', name: 'French' },
+        { code: 'en', name: 'English' },
+    ];
+
     state = {
         value: this.props.value,
         errors: false,
@@ -163,6 +168,30 @@ export default class Field extends Component {
         );
     };
 
+    langCode = (exlang) => {
+        if (exlang) this.languages = this.languages.filter((lang) => !exlang.includes(lang.code));
+        return (
+            <>
+                {this.props.label && <label className="form-label fs-6">{this.props.label}</label>}
+                <select
+                    disabled={this.props.disabled}
+                    name={this.props.name}
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    className="form-select"
+                >
+                    <option value={null}></option>
+                    {this.languages.map((lang, index) => (
+                        <option key={index} value={lang.code}>
+                            {lang.name}
+                        </option>
+                    ))}
+                </select>
+                {this.state.errors && <small className="text-danger">{this.state.errors}</small>}
+            </>
+        );
+    };
+
     render() {
         switch (this.props.formType) {
             case 'input':
@@ -175,6 +204,8 @@ export default class Field extends Component {
                 return this.textArea();
             case 'editor':
                 return this.editor(this.props.config);
+            case 'langCode':
+                return this.langCode(this.props.exlang);
             default:
                 return this.input();
         }
