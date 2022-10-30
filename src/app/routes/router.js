@@ -19,6 +19,10 @@ import WhoWeAre from '../web-pages/Who-We-Are/WhoWeAre';
 import WhatWeDo from '../web-pages/What-We-Do/WhatWeDo';
 import NewsCareer from '../web-pages/News-Careers/NewsCareers';
 import ImageSliderDetails from '../admin-pages/Dashboard/ImageSliderDetails/ImageSliderDetails';
+import News from '../admin-pages/News/News';
+import NewsDetails from '../admin-pages/News/NewsDetails/NewsDetails';
+import Career from '../admin-pages/Careers/Career';
+import CareerDetails from '../admin-pages/Careers/CareerDetails/CareerDetails';
 
 export default function Router(props) {
     return (
@@ -50,8 +54,14 @@ export default function Router(props) {
                     <Route path="" index element={<Project />} />
                     <Route path=":id/:title" index element={<ProjectDetails />} />
                 </Route>
-                <Route path="news" element={<Project />} />
-                <Route path="careers" element={<Project />} />
+                <Route path="news">
+                    <Route path="" index element={<News />} />
+                    <Route path=":id/:title" index element={<NewsDetails />} />
+                </Route>
+                <Route path="careers">
+                    <Route path="" index element={<Career />} />
+                    <Route path=":id/:title" index element={<CareerDetails />} />
+                </Route>
                 <Route path="messages">
                     <Route path="" index element={<Message />} />
                 </Route>

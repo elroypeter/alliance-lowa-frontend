@@ -3,18 +3,18 @@ import Field from '../../../components/Form/Field';
 import BsSpinner from '../../../components/Spinner/BsSpinner';
 import { useSelector } from 'react-redux';
 
-export default function ProjectForm(props) {
-    const { isSaving } = useSelector((state) => state.project);
+export default function CareerForm(props) {
+    const { isSaving } = useSelector((state) => state.career);
     return (
-        <div className="modal fade" id="addProjectModal" aria-labelledby="addProjectModalLabel" aria-hidden="true">
+        <div className="modal fade" id="addCareerModal" aria-labelledby="addCareerModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="addProjectModalLabel">
-                            {props.editModal ? 'Edit Translation' : props.addTranslationModal ? 'Add Translation' : 'New Project'}
+                        <h5 className="modal-title" id="addCareerModalLabel">
+                            {props.editModal ? 'Edit Translation' : 'New Career'}
                         </h5>
                         <button
-                            id="closeProjectModal"
+                            id="closeCareerModal"
                             type="button"
                             className="btn-close"
                             data-bs-dismiss="modal"
@@ -25,18 +25,7 @@ export default function ProjectForm(props) {
                     <div className="modal-body">
                         <form>
                             <div className="row">
-                                <div className="col-6 mb-3">
-                                    <Field
-                                        formType="langCode"
-                                        name="langCode"
-                                        label="Language"
-                                        disabled={props.editModal}
-                                        value={props.form.fields.langCode}
-                                        onInputChange={props.onInputChange}
-                                        exlang={props.currentLangs}
-                                    />
-                                </div>
-                                <div className="col-6 mb-3">
+                                <div className="col-12 mb-3">
                                     <Field name="title" label="Title" value={props.form.fields.title} onInputChange={props.onInputChange} />
                                 </div>
                                 <div className="col-12">
@@ -59,11 +48,11 @@ export default function ProjectForm(props) {
                             Close
                         </button>
                         {props.editModal ? (
-                            <button onClick={() => props.updateProject(props.form.fields.id)} type="button" className="btn btn-primary">
+                            <button onClick={() => props.updateCareer()} type="button" className="btn btn-primary">
                                 {isSaving ? <BsSpinner /> : 'Update'}
                             </button>
                         ) : (
-                            <button onClick={props.saveProject} type="button" className="btn btn-primary">
+                            <button onClick={props.saveCareer} type="button" className="btn btn-primary">
                                 {isSaving ? <BsSpinner /> : 'Save'}
                             </button>
                         )}

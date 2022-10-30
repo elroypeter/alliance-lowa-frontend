@@ -19,7 +19,7 @@ export function Layout() {
             icon: faDiagramProject,
         },
         {
-            name: 'News',
+            name: 'Blog & News',
             link: '/admin/news',
             icon: faNewspaper,
         },
@@ -43,7 +43,7 @@ export function Layout() {
     const locationChange = (callback) => {
         useEffect(() => {
             callback(location.pathname);
-        });
+        }, [location.pathname]);
     };
 
     return (

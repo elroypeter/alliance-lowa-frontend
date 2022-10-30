@@ -1,48 +1,30 @@
-import React, { Component } from 'react';
-import { getSubscribersApi, deleteSubscriberApi } from './Subscriber.service';
+import React, { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadSubcribers, deleteSubcribers } from './store/Subscriber.slice';
+import BsSpinner from '../../components/Spinner/BsSpinner';
 
-export default class Subscriber extends Component {
-    state = {
-        subscribers: [],
-    };
+export default function Subscriber() {
+    const dispatch = useDispatch();
+    const { isLoading, subscribers } = useSelector((state) => state.subscriber);
 
-    componentDidMount() {
-        setTimeout(() => this.getSubscribers());
-    }
+    useEffect(() => {
+        dispatch(loadSubcribers());
+    }, []);
 
-    getSubscribers = () => {
-        getSubscribersApi()
-            .then((res) => {
-                this.setState((state) => ({ ...state, subscribers: res.data }));
-            })
-            .catch(console.error());
-    };
-
-    deleteSubscriber = (id) => {
-        deleteSubscriberApi(id)
-            .then(() => {
-                this.getSubscribers();
-            })
-            .catch(console.error);
-    };
-
-    render() {
-        return (
-            <div className="container-xxl">
-                <div className="row align-items-center">
-                    <div className="border-0 mb-4">
-                        <div className="card-header py-3 no-bg bg-transparent d-flex align-items-center px-0 justify-content-between border-bottom flex-wrap">
-                            <h3 className="h4 mb-0">Subscriber List</h3>
+    return (
+        <div className="container-xxl">
+            <div className="row clearfix g-3">
+                <div className="col-sm-12">
+                    <div className="card mb-3">
+                        <div className="card-header d-flex justify-content-between align-items-center bg-transparent py-3">
+                            <h6 className="m-0 fw-bold">Subscriber List</h6>
                         </div>
-                    </div>
-                </div>
-
-                <div className="row clearfix g-3">
-                    <div className="col-sm-12">
-                        <div className="card mb-3">
-                            <div className="card-body">
+                        <div className="card-body">
+                            {isLoading ? (
+                                <BsSpinner />
+                            ) : (
                                 <table id="projectsTable" className="table table-hover" style={{ width: '100%' }}>
                                     <thead>
                                         <tr>
@@ -52,14 +34,14 @@ export default class Subscriber extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {this.state.subscribers.map((subscriber, index) => (
+                                        {subscribers.map((sub, index) => (
                                             <tr key={index}>
                                                 <td>{parseInt(index) + 1}</td>
-                                                <td>{subscriber.email}</td>
+                                                <td>{sub.email}</td>
                                                 <td className="text-center">
                                                     <div className="btn-group" role="group" aria-label="Basic outlined example">
                                                         <button
-                                                            onClick={() => this.deleteSubscriber(subscriber.id)}
+                                                            onClick={() => dispatch(deleteSubcribers(sub.id))}
                                                             type="button"
                                                             className="btn btn-outline-light"
                                                         >
@@ -71,11 +53,11 @@ export default class Subscriber extends Component {
                                         ))}
                                     </tbody>
                                 </table>
-                            </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }

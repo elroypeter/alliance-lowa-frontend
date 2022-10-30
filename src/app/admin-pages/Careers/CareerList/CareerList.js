@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import ProjectForm from './ProjectForm';
-import { loadProjects, closeOpenModal, newProject, saveProject } from '../store/Project.slice';
+import CareerForm from './CareerForm';
+import { loadCareers, closeOpenModal, newCareer, saveCareer } from '../store/Career.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import BsSpinner from '../../../components/Spinner/BsSpinner';
-import ProjectItem from './ProjectItem';
+import CareerItem from './CareerItem';
 
-export default function ProjectList() {
+export default function CareerList() {
     const dispatch = useDispatch();
-    const { projects, isLoading, isModalOpen } = useSelector((state) => state.project);
+    const { careers, isLoading, isModalOpen } = useSelector((state) => state.career);
     const [state, setState] = useState({
         form: {
             fields: {
                 id: '',
                 title: '',
-                langCode: '',
                 description: '',
             },
             errors: {},
@@ -23,7 +22,7 @@ export default function ProjectList() {
     });
 
     useEffect(() => {
-        dispatch(loadProjects());
+        dispatch(loadCareers());
     }, []);
 
     useEffect(() => {
@@ -31,13 +30,13 @@ export default function ProjectList() {
     }, [isModalOpen]);
 
     useEffect(() => {
-        if (projects.length > 0) {
-            window?.loadDataTable('projectsTable');
+        if (careers.length > 0) {
+            window?.loadDataTable('careersTable');
         }
-    }, [projects]);
+    }, [careers]);
 
     useEffect(() => {
-        window?.destroyDataTable('projectsTable');
+        window?.destroyDataTable('careersTable');
     }, []);
 
     const onInputChange = ({ name, value, error }) => {
@@ -53,7 +52,6 @@ export default function ProjectList() {
             fields: {
                 id: '',
                 title: '',
-                langCode: '',
                 description: '',
             },
             errors: {},
@@ -63,7 +61,7 @@ export default function ProjectList() {
     const closeModal = () => {
         const currentState = Object.assign({}, state);
         currentState.form = resetForm();
-        document.getElementById('closeProjectModal').click();
+        document.getElementById('closeCareerModal').click();
         setState(currentState);
     };
 
@@ -73,25 +71,25 @@ export default function ProjectList() {
                 <div className="col">
                     <div className="card">
                         <div className="card-header d-flex justify-content-between align-items-center bg-transparent py-3">
-                            <h6 className="m-0 fw-bold">Project List</h6>
+                            <h6 className="m-0 fw-bold">Careers List</h6>
                             <div className="ms-auto report ms-3 w-80">
                                 <button
-                                    onClick={() => dispatch(newProject())}
+                                    onClick={() => dispatch(newCareer())}
                                     type="button"
-                                    id="newProjectModalBtn"
+                                    id="newCareerModalBtn"
                                     className="btn btn-primary btn-sm w-sm-100"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#addProjectModal"
+                                    data-bs-target="#addCareerModal"
                                 >
                                     <FontAwesomeIcon icon={faPlus} className="me-2" />
-                                    Add Project
+                                    Add Career
                                 </button>
-                                <ProjectForm
+                                <CareerForm
                                     form={state.form}
                                     onInputChange={onInputChange}
-                                    updateProject={() => {}}
-                                    saveProject={() => {
-                                        dispatch(saveProject(state.form.fields));
+                                    updateCareer={() => {}}
+                                    saveCareer={() => {
+                                        dispatch(saveCareer(state.form.fields));
                                     }}
                                     closeModal={() => {
                                         dispatch(closeOpenModal());
@@ -103,25 +101,18 @@ export default function ProjectList() {
                             {isLoading ? (
                                 <BsSpinner />
                             ) : (
-                                <table id="projectsTable" className="table table-hover" style={{ width: '100%' }}>
+                                <table id="careersTable" className="table table-hover" style={{ width: '100%' }}>
                                     <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Title</th>
-                                            <th>Languages</th>
                                             <th>Status</th>
                                             <th className="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {projects.map((project, index) => (
-                                            <ProjectItem
-                                                key={index}
-                                                index={index}
-                                                project={project}
-                                                editProject={() => {}}
-                                                deleteProject={() => {}}
-                                            />
+                                        {careers.map((career, index) => (
+                                            <CareerItem key={index} index={index} career={career} editCareer={() => {}} deleteCareer={() => {}} />
                                         ))}
                                     </tbody>
                                 </table>

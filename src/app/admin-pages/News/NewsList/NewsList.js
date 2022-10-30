@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import ProjectForm from './ProjectForm';
-import { loadProjects, closeOpenModal, newProject, saveProject } from '../store/Project.slice';
+import NewsForm from './NewsForm';
+import { loadNews, closeOpenModal, newNews, saveNews } from '../store/News.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import BsSpinner from '../../../components/Spinner/BsSpinner';
-import ProjectItem from './ProjectItem';
+import NewsItem from './NewsItem';
 
-export default function ProjectList() {
+export default function NewsList() {
     const dispatch = useDispatch();
-    const { projects, isLoading, isModalOpen } = useSelector((state) => state.project);
+    const { news, isLoading, isModalOpen } = useSelector((state) => state.news);
     const [state, setState] = useState({
         form: {
             fields: {
                 id: '',
+                base64: '',
                 title: '',
                 langCode: '',
                 description: '',
@@ -23,7 +24,7 @@ export default function ProjectList() {
     });
 
     useEffect(() => {
-        dispatch(loadProjects());
+        dispatch(loadNews());
     }, []);
 
     useEffect(() => {
@@ -31,13 +32,13 @@ export default function ProjectList() {
     }, [isModalOpen]);
 
     useEffect(() => {
-        if (projects.length > 0) {
-            window?.loadDataTable('projectsTable');
+        if (news.length > 0) {
+            window?.loadDataTable('newsTable');
         }
-    }, [projects]);
+    }, [news]);
 
     useEffect(() => {
-        window?.destroyDataTable('projectsTable');
+        window?.destroyDataTable('newsTable');
     }, []);
 
     const onInputChange = ({ name, value, error }) => {
@@ -52,6 +53,7 @@ export default function ProjectList() {
         return {
             fields: {
                 id: '',
+                base64: '',
                 title: '',
                 langCode: '',
                 description: '',
@@ -63,7 +65,7 @@ export default function ProjectList() {
     const closeModal = () => {
         const currentState = Object.assign({}, state);
         currentState.form = resetForm();
-        document.getElementById('closeProjectModal').click();
+        document.getElementById('closeNewsModal').click();
         setState(currentState);
     };
 
@@ -73,25 +75,25 @@ export default function ProjectList() {
                 <div className="col">
                     <div className="card">
                         <div className="card-header d-flex justify-content-between align-items-center bg-transparent py-3">
-                            <h6 className="m-0 fw-bold">Project List</h6>
+                            <h6 className="m-0 fw-bold">Blog News List</h6>
                             <div className="ms-auto report ms-3 w-80">
                                 <button
-                                    onClick={() => dispatch(newProject())}
+                                    onClick={() => dispatch(newNews())}
                                     type="button"
-                                    id="newProjectModalBtn"
+                                    id="newNewsModalBtn"
                                     className="btn btn-primary btn-sm w-sm-100"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#addProjectModal"
+                                    data-bs-target="#addNewsModal"
                                 >
                                     <FontAwesomeIcon icon={faPlus} className="me-2" />
-                                    Add Project
+                                    Add News
                                 </button>
-                                <ProjectForm
+                                <NewsForm
                                     form={state.form}
                                     onInputChange={onInputChange}
-                                    updateProject={() => {}}
-                                    saveProject={() => {
-                                        dispatch(saveProject(state.form.fields));
+                                    updateNews={() => {}}
+                                    saveNews={() => {
+                                        dispatch(saveNews(state.form.fields));
                                     }}
                                     closeModal={() => {
                                         dispatch(closeOpenModal());
@@ -103,7 +105,7 @@ export default function ProjectList() {
                             {isLoading ? (
                                 <BsSpinner />
                             ) : (
-                                <table id="projectsTable" className="table table-hover" style={{ width: '100%' }}>
+                                <table id="newsTable" className="table table-hover" style={{ width: '100%' }}>
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -114,14 +116,8 @@ export default function ProjectList() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {projects.map((project, index) => (
-                                            <ProjectItem
-                                                key={index}
-                                                index={index}
-                                                project={project}
-                                                editProject={() => {}}
-                                                deleteProject={() => {}}
-                                            />
+                                        {news.map((news, index) => (
+                                            <NewsItem key={index} index={index} news={news} editNews={() => {}} deleteNews={() => {}} />
                                         ))}
                                     </tbody>
                                 </table>

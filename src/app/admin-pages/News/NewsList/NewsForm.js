@@ -3,18 +3,18 @@ import Field from '../../../components/Form/Field';
 import BsSpinner from '../../../components/Spinner/BsSpinner';
 import { useSelector } from 'react-redux';
 
-export default function ProjectForm(props) {
-    const { isSaving } = useSelector((state) => state.project);
+export default function NewsForm(props) {
+    const { isSaving } = useSelector((state) => state.news);
     return (
-        <div className="modal fade" id="addProjectModal" aria-labelledby="addProjectModalLabel" aria-hidden="true">
+        <div className="modal fade" id="addNewsModal" aria-labelledby="addNewsModalLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="addProjectModalLabel">
-                            {props.editModal ? 'Edit Translation' : props.addTranslationModal ? 'Add Translation' : 'New Project'}
+                        <h5 className="modal-title" id="addNewsModalLabel">
+                            {props.editModal ? 'Edit Translation' : props.addTranslationModal ? 'Add Translation' : 'New Blog News'}
                         </h5>
                         <button
-                            id="closeProjectModal"
+                            id="closeNewsModal"
                             type="button"
                             className="btn-close"
                             data-bs-dismiss="modal"
@@ -25,6 +25,23 @@ export default function ProjectForm(props) {
                     <div className="modal-body">
                         <form>
                             <div className="row">
+                                {props.editModal || props.addTranslationModal || (
+                                    <div className="col-12 mb-3">
+                                        <Field
+                                            name="base64"
+                                            formType="file"
+                                            label="Image"
+                                            value={props.form.fields.base64}
+                                            onInputChange={props.onInputChange}
+                                            config={{
+                                                viewport: {
+                                                    width: 350,
+                                                    height: 250,
+                                                },
+                                            }}
+                                        />
+                                    </div>
+                                )}
                                 <div className="col-6 mb-3">
                                     <Field
                                         formType="langCode"
@@ -59,11 +76,11 @@ export default function ProjectForm(props) {
                             Close
                         </button>
                         {props.editModal ? (
-                            <button onClick={() => props.updateProject(props.form.fields.id)} type="button" className="btn btn-primary">
+                            <button onClick={() => props.updateNews(props.form.fields.id)} type="button" className="btn btn-primary">
                                 {isSaving ? <BsSpinner /> : 'Update'}
                             </button>
                         ) : (
-                            <button onClick={props.saveProject} type="button" className="btn btn-primary">
+                            <button onClick={props.saveNews} type="button" className="btn btn-primary">
                                 {isSaving ? <BsSpinner /> : 'Save'}
                             </button>
                         )}

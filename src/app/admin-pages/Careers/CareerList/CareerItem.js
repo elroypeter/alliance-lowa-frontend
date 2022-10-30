@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEye, faBullhorn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { publicProject, deleteProject } from '../store/Project.slice';
+import { publishCareer, deleteCareer } from '../store/Career.slice';
 
-export default function ProjectItem(props) {
+export default function CareerItem(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -16,23 +16,16 @@ export default function ProjectItem(props) {
     return (
         <tr>
             <td>{parseInt(props.index) + 1}</td>
-            <td>{props.project.translations[0].title}</td>
+            <td>{props.career.title}</td>
             <td>
-                <span className="badge rounded-pill bg-warning" style={{ right: '0px' }}>
-                    {props.project.translations.map((trans, index) => {
-                        return `${trans.langCode} ${index + 1 !== props.project.translations.length ? ' | ' : ''}`;
-                    })}
-                </span>
-            </td>
-            <td>
-                <span className={'badge ' + (props.project.isPublished.status ? 'bg-success' : 'bg-danger')}>
-                    {props.project.isPublished.status ? 'Published' : 'Not Published'}
+                <span className={'badge ' + (props.career.isPublished.status ? 'bg-success' : 'bg-danger')}>
+                    {props.career.isPublished.status ? 'Published' : 'Not Published'}
                 </span>
             </td>
             <td className="text-center">
                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                     <button
-                        onClick={() => gotoPage(`/admin/projects/${props.project.id}/${props.project.translations[0].slug}`)}
+                        onClick={() => gotoPage(`/admin/careers/${props.career.id}/${props.career.slug}`)}
                         type="button"
                         className="btn btn-outline-light"
                     >
@@ -41,9 +34,9 @@ export default function ProjectItem(props) {
                     <button
                         onClick={() => {
                             dispatch(
-                                publicProject({
-                                    id: props.project.id,
-                                    status: !props.project.isPublished.status,
+                                publishCareer({
+                                    id: props.career.id,
+                                    status: !props.career.isPublished.status,
                                 }),
                             );
                         }}
@@ -52,7 +45,7 @@ export default function ProjectItem(props) {
                     >
                         <FontAwesomeIcon icon={faBullhorn} className="text-dark" />
                     </button>
-                    <button onClick={() => dispatch(deleteProject(props.project.id))} type="button" className="btn btn-outline-light">
+                    <button onClick={() => dispatch(deleteCareer(props.career.id))} type="button" className="btn btn-outline-light">
                         <FontAwesomeIcon icon={faTrash} className="text-danger" />
                     </button>
                 </div>

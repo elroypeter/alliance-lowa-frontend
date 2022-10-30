@@ -3,6 +3,15 @@ import imageSliderReducer from './app/admin-pages/Dashboard/store/ImageSlider.sl
 import languageReducer from './app/layouts/website/store/language.slice';
 import homeSlideReducer from './app/web-pages/Home/store/Home.slice';
 import imageSliderDetailsReducer from './app/admin-pages/Dashboard/store/ImageSliderDetails.slice';
+import projectReducer from './app/admin-pages/Project/store/Project.slice';
+import projectDetailsReducer from './app/admin-pages/Project/store/ProjectDetails.slice';
+import subscriberReducer from './app/admin-pages/Subscribers/store/Subscriber.slice';
+import messageReducer from './app/admin-pages/Messages/store/Message.slice';
+import messageDetailReducer from './app/admin-pages/Messages/store/MessageDetails.slice';
+import newsReducer from './app/admin-pages/News/store/News.slice';
+import newsDetailsReducer from './app/admin-pages/News/store/NewsDetails.slice';
+import careerReducer from './app/admin-pages/Careers/store/Career.slice';
+import careerDetailsReducer from './app/admin-pages/Careers/store/CareerDetails.slice';
 
 export const store = configureStore({
     reducer: {
@@ -10,5 +19,14 @@ export const store = configureStore({
         language: languageReducer,
         homeSlider: homeSlideReducer,
         imageSliderDetails: imageSliderDetailsReducer,
+        project: projectReducer,
+        projectDetails: projectDetailsReducer,
+        subscriber: subscriberReducer,
+        message: messageReducer,
+        messageDetails: messageDetailReducer,
+        news: newsReducer,
+        newsDetails: newsDetailsReducer,
+        career: careerReducer,
+        careerDetails: careerDetailsReducer,
     },
 });

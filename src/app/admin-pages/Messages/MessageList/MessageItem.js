@@ -2,9 +2,12 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteMessage } from '../store/Message.slice';
 
 export default function MessageItem(props) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const gotoPage = (path) => {
         navigate(path);
@@ -21,7 +24,7 @@ export default function MessageItem(props) {
                     <button onClick={() => gotoPage(`/admin/messages/${props.message.id}`)} type="button" className="btn btn-outline-light">
                         <FontAwesomeIcon icon={faEye} className="text-primary" />
                     </button>
-                    <button onClick={() => props.deleteProject(props.message.id)} type="button" className="btn btn-outline-light">
+                    <button onClick={() => dispatch(deleteMessage(props.message.id))} type="button" className="btn btn-outline-light">
                         <FontAwesomeIcon icon={faTrash} className="text-danger" />
                     </button>
                 </div>

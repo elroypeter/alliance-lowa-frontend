@@ -76,7 +76,7 @@
 
     // dataTables
     window.loadDataTable = (tableId) => {
-        $(`#${tableId}`).DataTable();
+        return $(`#${tableId}`).DataTable();
     };
 
     window.destroyDataTable = (tableId) => {
