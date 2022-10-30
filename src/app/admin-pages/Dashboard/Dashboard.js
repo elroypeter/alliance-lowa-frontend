@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import ImageSliderList from "./ImageSlider/ImageSliderList";
+import React, { Component } from 'react';
+import ImageSliderList from './ImageSlider/ImageSliderList';
 
 export default class Dashboard extends Component {
     render() {

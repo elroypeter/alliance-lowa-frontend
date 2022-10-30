@@ -1,12 +1,10 @@
-import React, { Component } from "react";
-import ProjectContainer from "./ProjectList/ProjectContainer";
+import React from 'react';
+import ProjectList from './ProjectList/ProjectList';
 
-export default class Project extends Component {
-    render() {
-        return (
-            <div className="container-xxl">
-                <ProjectContainer />
-            </div>
-        );
-    }
+export default function Project() {
+    return (
+        <div className="container-xxl">
+            <ProjectList />
+        </div>
+    );
 }

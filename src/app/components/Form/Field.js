@@ -1,9 +1,14 @@
 /* eslint-disable indent */
-import React, { Component } from "react";
-import ImageCropperInput from "./ImageCropperInput";
-import Editor from "./Editor";
+import React, { Component } from 'react';
+import ImageCropperInput from './ImageCropperInput';
+import Editor from './Editor';
 
 export default class Field extends Component {
+    languages = [
+        { code: 'fr', name: 'French' },
+        { code: 'en', name: 'English' },
+    ];
+
     state = {
         value: this.props.value,
         errors: false,
@@ -23,9 +28,7 @@ export default class Field extends Component {
     };
 
     checkForFileType = (type) => {
-        return ["jpg", "png", "webp", "jpeg"].find((val) => val === type)
-            ? true
-            : false;
+        return ['jpg', 'png', 'webp', 'jpeg'].find((val) => val === type) ? true : false;
     };
 
     input = () => {
@@ -49,12 +52,7 @@ export default class Field extends Component {
         return (
             <>
                 <label className="form-label fs-6">{this.props.label}</label>
-                <textarea
-                    name={this.props.name}
-                    value={this.state.value}
-                    className="form-control"
-                    onChange={this.onChange}
-                ></textarea>
+                <textarea name={this.props.name} value={this.state.value} className="form-control" onChange={this.onChange}></textarea>
                 <small className="text-danger">{this.state.errors}</small>
             </>
         );
@@ -89,10 +87,10 @@ export default class Field extends Component {
             const name = this.props.name;
             let value = evt.target.files[0];
             let errors = false;
-            const originalType = value.type.split("/")[1];
+            const originalType = value.type.split('/')[1];
 
             if (!this.checkForFileType(originalType)) {
-                errors = "Invalid file format";
+                errors = 'Invalid file format';
                 this.setState((state) => ({
                     ...state,
                     errors,
@@ -107,7 +105,7 @@ export default class Field extends Component {
                 }));
                 this.props.onInputChange({ name, value: result, errors });
             } catch (error) {
-                errors = "Invalid file format";
+                errors = 'Invalid file format';
                 this.setState((state) => ({
                     ...state,
                     errors: error,
@@ -120,13 +118,7 @@ export default class Field extends Component {
                 <label htmlFor="formFile" className="form-label fs-6">
                     {this.props.label}
                 </label>
-                <input
-                    name={this.props.name}
-                    className="form-control"
-                    onChange={onSelectFile}
-                    type="file"
-                    id="formFile"
-                />
+                <input name={this.props.name} className="form-control" onChange={onSelectFile} type="file" id="formFile" />
                 <small className="text-danger">{this.state.errors}</small>
             </>
         );
@@ -137,10 +129,10 @@ export default class Field extends Component {
             const name = this.props.name;
             let value = evt.target.files[0];
             let errors = false;
-            const originalType = value.type.split("/")[1];
+            const originalType = value.type.split('/')[1];
 
             if (!this.checkForFileType(originalType)) {
-                errors = "Invalid file format";
+                errors = 'Invalid file format';
                 this.setState((state) => ({
                     ...state,
                     errors,
@@ -150,17 +142,15 @@ export default class Field extends Component {
             const preview = URL.createObjectURL(value);
             croppie.bind({ url: preview });
 
-            target.addEventListener("update", () => {
-                croppie
-                    .result({ type: "base64", format: originalType })
-                    .then((base64) => {
-                        value = base64;
-                        this.setState((state) => ({
-                            ...state,
-                            value,
-                        }));
-                        this.props.onInputChange({ name, value, errors });
-                    });
+            target.addEventListener('update', () => {
+                croppie.result({ type: 'base64', format: originalType }).then((base64) => {
+                    value = base64;
+                    this.setState((state) => ({
+                        ...state,
+                        value,
+                    }));
+                    this.props.onInputChange({ name, value, errors });
+                });
             });
         };
 
@@ -178,18 +168,44 @@ export default class Field extends Component {
         );
     };
 
+    langCode = (exlang) => {
+        if (exlang) this.languages = this.languages.filter((lang) => !exlang.includes(lang.code));
+        return (
+            <>
+                {this.props.label && <label className="form-label fs-6">{this.props.label}</label>}
+                <select
+                    disabled={this.props.disabled}
+                    name={this.props.name}
+                    value={this.state.value}
+                    onChange={this.onChange}
+                    className="form-select"
+                >
+                    <option value={null}></option>
+                    {this.languages.map((lang, index) => (
+                        <option key={index} value={lang.code}>
+                            {lang.name}
+                        </option>
+                    ))}
+                </select>
+                {this.state.errors && <small className="text-danger">{this.state.errors}</small>}
+            </>
+        );
+    };
+
     render() {
         switch (this.props.formType) {
-            case "input":
+            case 'input':
                 return this.input();
-            case "image":
+            case 'image':
                 return this.image(this.props.config);
-            case "file":
+            case 'file':
                 return this.fileInput();
-            case "textArea":
+            case 'textArea':
                 return this.textArea();
-            case "editor":
+            case 'editor':
                 return this.editor(this.props.config);
+            case 'langCode':
+                return this.langCode(this.props.exlang);
             default:
                 return this.input();
         }

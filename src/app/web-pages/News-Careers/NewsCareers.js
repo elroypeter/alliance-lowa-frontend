@@ -1,5 +1,5 @@
-import React from "react";
-import WebBreadCrumb from "../../components/WebBreadCrumb/WebBreadCrumb";
+import React from 'react';
+import WebBreadCrumb from '../../components/WebBreadCrumb/WebBreadCrumb';
 
 export default function NewsCareer() {
     return (

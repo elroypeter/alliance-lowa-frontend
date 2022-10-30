@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
-import videojs from "video.js";
-import "video.js/dist/video-js.min.css"
+import React, { useEffect, useRef } from 'react';
+import videojs from 'video.js';
+import 'video.js/dist/video-js.min.css';
 
 export default function VideoPlayer(props) {
     const videoRef = useRef(null);
@@ -13,14 +13,10 @@ export default function VideoPlayer(props) {
 
             if (!videoElement) return;
 
-            const player = (playerRef.current = videojs(
-                videoElement,
-                options,
-                () => {
-                    videojs.log("player is ready");
-                    onReady && onReady(player);
-                }
-            ));
+            const player = (playerRef.current = videojs(videoElement, options, () => {
+                videojs.log('player is ready');
+                onReady && onReady(player);
+            }));
         }
     }, [options, videoRef]);
 
@@ -35,10 +31,7 @@ export default function VideoPlayer(props) {
     }, [playerRef]);
     return (
         <div data-vjs-player>
-            <video
-                ref={videoRef}
-                className="video-js vjs-big-play-centered"
-            ></video>
+            <video ref={videoRef} className="video-js vjs-big-play-centered"></video>
         </div>
     );
 }
