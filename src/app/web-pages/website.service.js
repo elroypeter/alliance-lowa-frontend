@@ -6,4 +6,10 @@ const getImageSlider = async (params) => {
     return result || [];
 };
 
-export { getImageSlider };
+const getProjects = async (params) => {
+    const apiService = new ApiService();
+    const result = await apiService.apiConnect('/api/public/project', 'get', {}, { ...params });
+    return result || [];
+};
+
+export { getImageSlider, getProjects };

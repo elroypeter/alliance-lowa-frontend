@@ -14,6 +14,7 @@ import { AuthContext } from '../shared/AuthContext';
 import ProjectDetails from '../admin-pages/Project/ProjectDetails/ProjectDetails';
 import Subscriber from '../admin-pages/Subscribers/Subscriber';
 import Message from '../admin-pages/Messages/Message';
+import MessageDetails from '../admin-pages/Messages/MessageDetails/MessageDetails';
 import ContactUs from '../web-pages/Contact-Us/ContactUs';
 import WhoWeAre from '../web-pages/Who-We-Are/WhoWeAre';
 import WhatWeDo from '../web-pages/What-We-Do/WhatWeDo';
@@ -30,7 +31,10 @@ export default function Router(props) {
             <Route path="/" element={<WebsiteLayout />}>
                 <Route index element={<Home />} />
                 <Route path="who-we-are" element={<WhoWeAre />} />
-                <Route path="what-we-do" element={<WhatWeDo />} />
+                <Route path="what-we-do">
+                    <Route path="" index element={<WhatWeDo />} />
+                    <Route path=":id/:title" element={<WhatWeDo />} />
+                </Route>
                 <Route path="new-and-careers" element={<NewsCareer />} />
                 <Route path="contact-us" element={<ContactUs />} />
             </Route>
@@ -48,22 +52,23 @@ export default function Router(props) {
             >
                 <Route path="image-slides">
                     <Route path="" index element={<Dashboard />} />
-                    <Route path=":id" index element={<ImageSliderDetails />} />
+                    <Route path=":id" element={<ImageSliderDetails />} />
                 </Route>
                 <Route path="projects">
                     <Route path="" index element={<Project />} />
-                    <Route path=":id/:title" index element={<ProjectDetails />} />
+                    <Route path=":id/:title" element={<ProjectDetails />} />
                 </Route>
                 <Route path="news">
                     <Route path="" index element={<News />} />
-                    <Route path=":id/:title" index element={<NewsDetails />} />
+                    <Route path=":id/:title" element={<NewsDetails />} />
                 </Route>
                 <Route path="careers">
                     <Route path="" index element={<Career />} />
-                    <Route path=":id/:title" index element={<CareerDetails />} />
+                    <Route path=":id/:title" element={<CareerDetails />} />
                 </Route>
                 <Route path="messages">
                     <Route path="" index element={<Message />} />
+                    <Route path=":id" element={<MessageDetails />} />
                 </Route>
                 <Route path="subscribers" element={<Subscriber />} />
             </Route>
