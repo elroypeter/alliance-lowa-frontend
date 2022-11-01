@@ -22,12 +22,15 @@ export default function NewsLetter() {
         try {
             setState((state) => ({ ...state, saving: true }));
             const api = new ApiService();
-            const res = await api.apiConnect('/subscriber', 'post', {
+            const res = await api.apiConnect('/api/subscriber', 'post', {
                 email: form.email,
             });
 
             if (res) {
-                setState({ email: '', saving: false });
+                setState(() => ({
+                    email: '',
+                    saving: false,
+                }));
             }
         } catch (error) {
             console.error(error);
@@ -39,7 +42,13 @@ export default function NewsLetter() {
             <h4 className="text-light mb-4">Newsletter</h4>
             <p>Stay in touch with us and get all updates seamlessly</p>
             <div className="position-relative mx-auto" style={{ maxWidth: '400px' }}>
-                <input className="form-control border-0 w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email" onChange={onFormChange} />
+                <input
+                    value={form.email}
+                    className="form-control border-0 w-100 py-3 ps-4 pe-5"
+                    type="text"
+                    placeholder="Your email"
+                    onChange={onFormChange}
+                />
                 <button
                     disabled={!validate()}
                     type="button"

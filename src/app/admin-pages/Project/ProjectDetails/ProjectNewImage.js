@@ -31,7 +31,7 @@ export default function ProjectNewImage(props) {
                                 <div className="col-12 mb-3">
                                     <Field
                                         name="base64"
-                                        formType="image"
+                                        formType="file"
                                         label="Image"
                                         value={props.form.fields.base64}
                                         onInputChange={props.onInputChange}

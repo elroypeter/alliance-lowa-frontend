@@ -20,7 +20,7 @@ const MessageDetailSlice = createSlice({
         },
         [loadMessagesDetails.fulfilled]: (state, action) => {
             state.isLoading = false;
-            state.messages = action.payload;
+            state.details = action.payload;
         },
         [loadMessagesDetails.rejected]: (state) => {
             state.isLoading = false;

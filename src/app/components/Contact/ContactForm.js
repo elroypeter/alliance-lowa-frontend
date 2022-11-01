@@ -49,7 +49,7 @@ export class ContactForm extends React.Component {
 
         try {
             const apiService = new ApiService();
-            const res = apiService.apiConnect('/contact-message', 'post', this.state.fields);
+            const res = apiService.apiConnect('/api/contact-message', 'post', this.state.fields);
 
             if (res) {
                 this.setState({

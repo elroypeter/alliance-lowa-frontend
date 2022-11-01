@@ -5,7 +5,7 @@ const initialState = {
         en: { nativeSymbol: 'EN', name: 'English' },
         fr: { nativeSymbol: 'FR', name: 'French' },
     },
-    selectedLanguage: 'en',
+    selectedLanguage: 'fr',
 };
 
 const languageSlice = createSlice({

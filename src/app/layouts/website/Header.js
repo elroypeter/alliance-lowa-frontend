@@ -31,7 +31,7 @@ export default function Header() {
             <div className="navbar-brand d-flex align-items-center px-4 px-lg-5">
                 <h2 className="m-0 text-primary">
                     <Link to="/">
-                        <img src="assets/images/logo/normal.webp" alt="" />
+                        <img src="/assets/images/logo/normal.webp" alt="" />
                     </Link>
                 </h2>
             </div>
