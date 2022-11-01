@@ -1,18 +1,26 @@
-import React from "react";
-import "../public/assets/scss/app.scss";
+import React from 'react';
+import '../public/assets/scss/app.scss';
+
+// carousel
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 // bootstrap
-import "bootstrap";
-import "@popperjs/core";
+import 'bootstrap';
+import '@popperjs/core';
 
 // React router
-import { BrowserRouter } from "react-router-dom";
-import { createRoot } from "react-dom/client";
-import { App } from "./app/App";
+import { BrowserRouter } from 'react-router-dom';
+import { createRoot } from 'react-dom/client';
+import { App } from './app/App';
 
-import "./app/i18next/i18n";
+// i18n setup
+import './app/i18next/i18n';
 
-const rootMount = document.getElementById("root");
+// redux store setup
+import { store } from './store';
+import { Provider } from 'react-redux';
+
+const rootMount = document.getElementById('root');
 
 // mount application
 if (rootMount) {
@@ -20,8 +28,10 @@ if (rootMount) {
     createRoot(rootMount).render(
         <React.Suspense>
             <BrowserRouter>
-                <App />
+                <Provider store={store}>
+                    <App />
+                </Provider>
             </BrowserRouter>
-        </React.Suspense>
+        </React.Suspense>,
     );
 }

@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 
 export default function Partners() {
     const partnerList = [
         {
-            name: "Gerald Group",
-            logo: "assets/images/partners/gerald-group.jpeg",
+            name: 'Gerald Group',
+            logo: 'assets/images/partners/gerald-group.jpeg',
         },
         {
-            name: "Alphamin Bisie Mining SA",
-            logo: "assets/images/partners/alphamin.png",
+            name: 'Alphamin Bisie Mining SA',
+            logo: 'assets/images/partners/alphamin.png',
         },
         {
-            name: "Congo Power Project",
-            logo: "assets/images/partners/gerald-group.jpeg",
+            name: 'Congo Power Project',
+            logo: 'assets/images/partners/gerald-group.jpeg',
         },
         {
-            name: "Congolese Government",
-            logo: "assets/images/partners/congo.png",
+            name: 'Congolese Government',
+            logo: 'assets/images/partners/congo.png',
         },
     ];
     return (
@@ -24,23 +24,12 @@ export default function Partners() {
             <div className="container">
                 <div className="section-title text-center">
                     <h1 className="display-5 mb-5">Partners</h1>
-                    <p>
-                        To achieve its objectives, Alliance Lowa is financially
-                        supported by the following partners
-                    </p>
+                    <p>To achieve its objectives, Alliance Lowa is financially supported by the following partners</p>
                 </div>
                 <div className="row g-5">
                     {partnerList.map((partner, index) => (
-                        <div
-                            key={index}
-                            className="col-md-6 col-lg-3 wow fadeIn text-center"
-                            data-wow-delay="0.1s"
-                        >
-                            <img
-                                className="img-fluid bg-light p-2 mx-auto mb-3"
-                                src={partner.logo}
-                                style={{ width: "120px" }}
-                            />
+                        <div key={index} className="col-md-6 col-lg-3 wow fadeIn text-center" data-wow-delay="0.1s">
+                            <img className="img-fluid bg-light p-2 mx-auto mb-3" src={partner.logo} style={{ width: '120px' }} />
                             <h5>{partner.name}</h5>
                         </div>
                     ))}

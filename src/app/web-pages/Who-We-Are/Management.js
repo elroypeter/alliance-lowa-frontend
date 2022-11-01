@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Management() {
     return (
@@ -19,9 +19,7 @@ export default function Management() {
                                         </div>
                                         <div className="manager-content">
                                             <div className="manager-info">
-                                                <h5 className="text-primary">
-                                                    Emily Mcculloch
-                                                </h5>
+                                                <h5 className="text-primary">Emily Mcculloch</h5>
                                                 <span>Co-Founder</span>
                                             </div>
                                         </div>
@@ -34,9 +32,7 @@ export default function Management() {
                                         </div>
                                         <div className="manager-content">
                                             <div className="manager-info">
-                                                <h5 className="text-primary">
-                                                    Emily Mcculloch
-                                                </h5>
+                                                <h5 className="text-primary">Emily Mcculloch</h5>
                                                 <span>Co-Founder</span>
                                             </div>
                                         </div>
@@ -49,9 +45,7 @@ export default function Management() {
                                         </div>
                                         <div className="manager-content">
                                             <div className="manager-info">
-                                                <h5 className="text-primary">
-                                                    Emily Mcculloch
-                                                </h5>
+                                                <h5 className="text-primary">Emily Mcculloch</h5>
                                                 <span>Co-Founder</span>
                                             </div>
                                         </div>

@@ -1,23 +1,21 @@
 /* eslint-disable no-undef */
-const path = require("path");
+const path = require('path');
 
 module.exports = (env) => {
     return {
-        mode: "development",
-        entry: "./src/index.js",
+        mode: 'development',
+        entry: './src/index.js',
         output: {
-            filename: "main.js",
-            path: env.prod
-                ? path.resolve(__dirname, "public")
-                : path.resolve(__dirname, "dist"),
+            filename: 'main.js',
+            path: env.prod ? path.resolve(__dirname, 'public') : path.resolve(__dirname, 'dist'),
         },
         devServer: {
             static: [
                 {
-                    directory: path.join(__dirname, "public"),
+                    directory: path.join(__dirname, 'public'),
                 },
                 {
-                    directory: path.join(__dirname, "dist"),
+                    directory: path.join(__dirname, 'dist'),
                 },
             ],
             port: env.port || 8080,
@@ -30,49 +28,46 @@ module.exports = (env) => {
                     test: /\.js$/,
                     exclude: /(node_modules)/,
                     use: {
-                        loader: "babel-loader",
+                        loader: 'babel-loader',
                         options: {
-                            presets: [
-                                "@babel/preset-env",
-                                "@babel/preset-react",
-                            ],
+                            presets: ['@babel/preset-env', '@babel/preset-react'],
                         },
                     },
                 },
                 {
                     test: /\.s[ac]ss$/i,
                     use: [
-                        { loader: "style-loader" },
-                        { loader: "css-loader" },
+                        { loader: 'style-loader' },
+                        { loader: 'css-loader' },
                         {
-                            loader: "postcss-loader",
+                            loader: 'postcss-loader',
                             options: {
                                 postcssOptions: {
                                     plugins: function () {
-                                        return [require("autoprefixer")];
+                                        return [require('autoprefixer')];
                                     },
                                 },
                             },
                         },
-                        { loader: "sass-loader" },
+                        { loader: 'sass-loader' },
                     ],
                 },
                 {
                     test: /\.css$/i,
-                    use: ["style-loader", "css-loader"],
+                    use: ['style-loader', 'css-loader'],
                 },
                 {
                     test: /\.(png|jpeg|jpg|svg)$/,
-                    type: "asset/resource",
+                    type: 'asset/resource',
                 },
                 {
                     test: /\.(woff(2)?|eot|ttf|otf)$/,
                     use: [
                         {
-                            loader: "file-loader",
+                            loader: 'file-loader',
                             options: {
-                                name: "[name].[ext]",
-                                outputPath: "fonts/",
+                                name: '[name].[ext]',
+                                outputPath: 'fonts/',
                             },
                         },
                     ],

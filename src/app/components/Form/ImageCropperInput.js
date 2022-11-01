@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import * as Croppie from "croppie";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import React, { Component } from 'react';
+import * as Croppie from 'croppie';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 
 export default class ImageCropperInput extends Component {
     state = {
@@ -12,7 +12,7 @@ export default class ImageCropperInput extends Component {
             enableResize: true,
             enableOrientation: true,
             enableZoom: true,
-            mouseWheelZoom: "ctrl",
+            mouseWheelZoom: 'ctrl',
             ...this.props.config,
         },
     };
@@ -23,10 +23,7 @@ export default class ImageCropperInput extends Component {
 
     setUpCroppie = () => {
         this.croppieTarget = document.getElementById(this.props.id);
-        this.croppieInstance = new Croppie(
-            this.croppieTarget,
-            this.state.config
-        );
+        this.croppieInstance = new Croppie(this.croppieTarget, this.state.config);
 
         this.initCroppieData(this.croppieInstance);
     };
@@ -34,8 +31,8 @@ export default class ImageCropperInput extends Component {
     initCroppieData = (croppie) => {
         if (this.props.value) {
             const base64Data = this.props.value;
-            const contentType = base64Data.split(";")[0].split(":")[1];
-            const base64 = base64Data.split(";")[1].split(",")[1];
+            const contentType = base64Data.split(';')[0].split(':')[1];
+            const base64 = base64Data.split(';')[1].split(',')[1];
 
             const blob = this.b64toBlob(base64, contentType);
             const preview = URL.createObjectURL(blob);
@@ -47,11 +44,7 @@ export default class ImageCropperInput extends Component {
         const byteCharacters = atob(b64Data);
         const byteArrays = [];
 
-        for (
-            let offset = 0;
-            offset < byteCharacters.length;
-            offset += sliceSize
-        ) {
+        for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
             const slice = byteCharacters.slice(offset, offset + sliceSize);
             const byteNumbers = new Array(slice.length);
             for (let i = 0; i < slice.length; i++) {
@@ -78,11 +71,7 @@ export default class ImageCropperInput extends Component {
                         </span>
                         <input
                             onChange={(evt) => {
-                                this.props.onChange(
-                                    evt,
-                                    this.croppieInstance,
-                                    this.croppieTarget
-                                );
+                                this.props.onChange(evt, this.croppieInstance, this.croppieTarget);
                             }}
                             type="file"
                             name="myfile"

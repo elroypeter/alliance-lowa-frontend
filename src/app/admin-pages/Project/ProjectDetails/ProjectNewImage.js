@@ -1,14 +1,15 @@
-import React from "react";
-import Field from "../../../components/Form/Field";
+import React from 'react';
+import Field from '../../../components/Form/Field';
+import BsSpinner from '../../../components/Spinner/BsSpinner';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeOpenModal } from '../store/ProjectDetails.slice';
 
 export default function ProjectNewImage(props) {
+    const dispatch = useDispatch();
+    const { isSaving } = useSelector((state) => state.projectDetails);
+
     return (
-        <div
-            className="modal fade"
-            id="newProjectImageModal"
-            aria-labelledby="newImageLabel"
-            aria-hidden="true"
-        >
+        <div className="modal fade" id="addAttachmentModal" aria-labelledby="newImageLabel" aria-hidden="true">
             <div className="modal-dialog modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -16,12 +17,12 @@ export default function ProjectNewImage(props) {
                             Add Image
                         </h5>
                         <button
-                            id="closeImageModal"
+                            id="closeAttachmentModal"
                             type="button"
                             className="btn-close"
                             data-bs-dismiss="modal"
                             aria-label="Close"
-                            onClick={props.closeModal}
+                            onClick={() => dispatch(closeOpenModal())}
                         ></button>
                     </div>
                     <div className="modal-body">
@@ -29,10 +30,10 @@ export default function ProjectNewImage(props) {
                             <div className="row">
                                 <div className="col-12 mb-3">
                                     <Field
-                                        name="image"
-                                        formType="image"
+                                        name="base64"
+                                        formType="file"
                                         label="Image"
-                                        value={props.form.fields.image}
+                                        value={props.form.fields.base64}
                                         onInputChange={props.onInputChange}
                                         config={{
                                             viewport: {
@@ -46,20 +47,11 @@ export default function ProjectNewImage(props) {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button
-                            type="button"
-                            className="btn btn-danger"
-                            data-bs-dismiss="modal"
-                            onClick={props.closeModal}
-                        >
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => dispatch(closeOpenModal())}>
                             Close
                         </button>
-                        <button
-                            onClick={props.saveImage}
-                            type="button"
-                            className="btn btn-primary"
-                        >
-                            Save
+                        <button onClick={props.saveImage} type="button" className="btn btn-primary">
+                            {isSaving ? <BsSpinner /> : 'Save'}
                         </button>
                     </div>
                 </div>

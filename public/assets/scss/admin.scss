@@ -175,3 +175,47 @@
         }
     }
 }
+
+.website-layout {
+    .other-projects-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 25px;
+    }
+    .other-projects-list .project-item {
+        margin-bottom: 1.5rem;
+        .project-thumb {
+            width: 100px;
+            height: 65px;
+            margin: 0 13px 0 0;
+        }
+        .project-thumb img {
+            width: 100px;
+        }
+
+        .project-header {
+            flex: 1;
+            h2 {
+                font-size: 14px;
+            }
+            a:hover {
+                color: $primary;
+            }
+        }
+
+        .project-time {
+            display: flex;
+            font-size: 12px;
+            color: #97979d;
+            font-weight: 300;
+            margin: 4px 0 0;
+        }
+    }
+
+    .current-project-thumb {
+        img {
+            width: 700px;
+            height: 400px;
+        }
+    }
+}

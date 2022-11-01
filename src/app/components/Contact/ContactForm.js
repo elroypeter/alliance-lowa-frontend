@@ -1,14 +1,14 @@
-import React from "react";
-import { ApiService } from "../../services/ApiService";
-import BsSpinner from "../Spinner/BsSpinner";
+import React from 'react';
+import { ApiService } from '../../services/ApiService';
+import BsSpinner from '../Spinner/BsSpinner';
 
 export class ContactForm extends React.Component {
     state = {
         fields: {
-            name: "",
-            email: "",
-            mobile: "",
-            message: "",
+            name: '',
+            email: '',
+            mobile: '',
+            message: '',
         },
         errors: {},
         saving: false,
@@ -17,9 +17,7 @@ export class ContactForm extends React.Component {
     validate = () => {
         const formFields = this.state.fields;
         const fieldErrors = this.state.errors;
-        const errorMessages = Object.keys(fieldErrors).filter(
-            (e) => fieldErrors[e]
-        );
+        const errorMessages = Object.keys(fieldErrors).filter((e) => fieldErrors[e]);
 
         if (!formFields.email) return true;
         if (!formFields.name) return true;
@@ -51,19 +49,15 @@ export class ContactForm extends React.Component {
 
         try {
             const apiService = new ApiService();
-            const res = apiService.apiConnect(
-                "/contact-message",
-                "post",
-                this.state.fields
-            );
+            const res = apiService.apiConnect('/api/contact-message', 'post', this.state.fields);
 
             if (res) {
                 this.setState({
                     fields: {
-                        name: "",
-                        email: "",
-                        mobile: "",
-                        message: "",
+                        name: '',
+                        email: '',
+                        mobile: '',
+                        message: '',
                     },
                     errors: {},
                     saving: false,
@@ -87,11 +81,9 @@ export class ContactForm extends React.Component {
                             type="text"
                             className="form-control border-0"
                             placeholder="Your Name"
-                            style={{ height: "55px" }}
+                            style={{ height: '55px' }}
                             value={this.state.fields.name}
-                            onChange={(evt) =>
-                                this.onChange(evt, "name", this.validateField)
-                            }
+                            onChange={(evt) => this.onChange(evt, 'name', this.validateField)}
                         />
                     </div>
                     <div className="col-12 col-sm-6">
@@ -99,11 +91,9 @@ export class ContactForm extends React.Component {
                             type="email"
                             className="form-control border-0"
                             placeholder="Your Email"
-                            style={{ height: "55px" }}
+                            style={{ height: '55px' }}
                             value={this.state.fields.email}
-                            onChange={(evt) =>
-                                this.onChange(evt, "email", this.validateField)
-                            }
+                            onChange={(evt) => this.onChange(evt, 'email', this.validateField)}
                         />
                     </div>
                     <div className="col-12 col-sm-12">
@@ -111,9 +101,9 @@ export class ContactForm extends React.Component {
                             type="text"
                             className="form-control border-0"
                             placeholder="Your Mobile"
-                            style={{ height: "55px" }}
+                            style={{ height: '55px' }}
                             value={this.state.fields.mobile}
-                            onChange={(evt) => this.onChange(evt, "mobile")}
+                            onChange={(evt) => this.onChange(evt, 'mobile')}
                         />
                     </div>
                     <div className="col-12">
@@ -122,23 +112,12 @@ export class ContactForm extends React.Component {
                             placeholder="Message"
                             rows={5}
                             value={this.state.fields.message}
-                            onChange={(evt) =>
-                                this.onChange(
-                                    evt,
-                                    "message",
-                                    this.validateField
-                                )
-                            }
+                            onChange={(evt) => this.onChange(evt, 'message', this.validateField)}
                         ></textarea>
                     </div>
                     <div className="col-12">
-                        <button
-                            disabled={this.validate()}
-                            onClick={this.submitMessage}
-                            className="btn btn-primary w-100 py-3"
-                            type="button"
-                        >
-                            {this.state.saving ? <BsSpinner /> : "Submit"}
+                        <button disabled={this.validate()} onClick={this.submitMessage} className="btn btn-primary w-100 py-3" type="button">
+                            {this.state.saving ? <BsSpinner /> : 'Submit'}
                         </button>
                     </div>
                 </div>
