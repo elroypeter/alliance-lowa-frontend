@@ -11,7 +11,7 @@ export default function ContactUs() {
         <>
             <WebBreadCrumb page={t('header_contact_us')} />
             <ContactMap />
-            <ContactForm />
+            <ContactForm t={t} />
         </>
     );
 }
