@@ -1,8 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function ContactMap() {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid bg-light overflow-hidden mb-5 px-lg-0">
             <div className="container about px-lg-0">
@@ -28,11 +31,12 @@ export default function ContactMap() {
                     >
                         <div className="p-lg-5 pe-lg-0">
                             <div className="section-title text-start">
-                                <h1 className="display-5 mb-4">Where to find us</h1>
+                                <h1 className="display-5 mb-4">{t('contact_where')}</h1>
                             </div>
                             <p className="mb-4 pb-2">
-                                To contact us, write to us at the following address;
-                                <a href="mailto:info@alliancelowa.org">info@alliancelowa.org</a> Or come and visit us at the addresses below:
+                                {t('contact_sub_title_1')}
+                                <a href="mailto:info@alliancelowa.org">info@alliancelowa.org</a>
+                                {t('contact_sub_title_2')}
                             </p>
                             <div className="row g-4 mb-4 pb-2">
                                 <div
@@ -56,7 +60,7 @@ export default function ContactMap() {
                                         </div>
                                         <div className="ms-3">
                                             <h2 className="text-primary mb-1" data-toggle="counter-up">
-                                                Address 1
+                                                {t('footer_address')} 1
                                             </h2>
                                             <p className="fw-medium mb-0">
                                                 Sis Avenue Bamwisho, Quartier Kisima, Commune of Walikale in Walikale center, Territory of Walikale,
@@ -86,7 +90,7 @@ export default function ContactMap() {
                                         </div>
                                         <div className="ms-3">
                                             <h2 className="text-primary mb-1" data-toggle="counter-up">
-                                                Address 2
+                                                {t('footer_address')} 2
                                             </h2>
                                             <p className="fw-medium mb-0">
                                                 At Logu (ABM camp) Sis Crossing of the National N° 3 and the road leading to Bisie/ Walikale/ Congo

@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Management() {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container about px-lg-0">
@@ -8,7 +11,7 @@ export default function Management() {
                     <div className="col-lg-12 wow fadeIn" data-wow-delay="0.5s">
                         <div className="team container">
                             <div className="section-title text-center">
-                                <h1 className="display-5 my-4">Management</h1>
+                                <h1 className="display-5 my-4">{t('about_managment')}</h1>
                             </div>
 
                             <div className="row mt-3 justify-content-center">

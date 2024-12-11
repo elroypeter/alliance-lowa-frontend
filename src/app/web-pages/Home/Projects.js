@@ -1,8 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function Projects() {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container about px-lg-0">
@@ -20,28 +23,28 @@ export default function Projects() {
                     <div className="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.5s">
                         <div className="p-lg-5 pe-lg-0">
                             <div className="section-title text-start">
-                                <h1 className="display-5 mb-4">Our Programs</h1>
+                                <h1 className="display-5 mb-4">{t('Our Programs')}</h1>
                             </div>
-                            <p className="mb-4 pb-2">Alliance Lowa Asbl works on the following 4 programmatic areas:</p>
+                            <p className="mb-4 pb-2">{t('prog_description')}</p>
                             <ul className="project-list mb-4">
                                 <li className="project">
                                     <FontAwesomeIcon icon={faCheck} className="me-2 text-primary" />
-                                    <div>Local Economic Development</div>
+                                    <div>{t('prog_list_local')}</div>
                                 </li>
                                 <li className="project">
                                     <FontAwesomeIcon icon={faCheck} className="me-2 text-primary" />
-                                    <div>Program Wash, Health and Environment</div>
+                                    <div>{t('prog_list_wash')}</div>
                                 </li>
                                 <li className="project">
                                     <FontAwesomeIcon icon={faCheck} className="me-2 text-primary" />
-                                    <div>Program Socio-Community Cohesion</div>
+                                    <div>{t('prog_list_socio')}</div>
                                 </li>
                                 <li className="project">
                                     <FontAwesomeIcon icon={faCheck} className="me-2 text-primary" />
-                                    <div>Program Education Program</div>
+                                    <div>{t('prog_list_educ')}</div>
                                 </li>
                             </ul>
-                            <a className="btn btn-primary py-3 px-5">Explore More</a>
+                            <a className="btn btn-primary py-3 px-5">{t('expore_more')}</a>
                         </div>
                     </div>
                 </div>

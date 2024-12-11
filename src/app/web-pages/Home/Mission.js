@@ -23,17 +23,8 @@ export default function Mission() {
                             <div className="section-title text-start">
                                 <h1 className="display-5 mb-4">{t('vision_and_mission')}</h1>
                             </div>
-                            <p className="mb-4 pb-2">
-                                Alliance Lowa {"Asbl's"} vision is to become a reference organization for the promotion of community development in
-                                the territory of Walikale
-                            </p>
-                            <p>
-                                The mission of the association is to promote and support the development of local communities around the spaces and
-                                activities of mining in
-                                {"M'pama"} Bisie in particular and in the Walikale Territory in general. Since its establishment, the association has
-                                carried out several projects in favor of the communities in the sectors of agriculture, education; economic growth and
-                                social cohesion.
-                            </p>
+                            <p className="mb-4 pb-2">{t('vision_sub_1')}</p>
+                            <p>{t('vision_sub_2')}</p>
                         </div>
                     </div>
                 </div>

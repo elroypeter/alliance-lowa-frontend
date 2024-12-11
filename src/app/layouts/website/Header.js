@@ -2,27 +2,30 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
+    const { t } = useTranslation();
+
     const hrefLinks = [
         {
-            name: 'Home',
+            name: t('header_home'),
             address: '/',
         },
         {
-            name: 'Who we are',
+            name: t('header_who_we_are'),
             address: '/who-we-are',
         },
         {
-            name: 'What we do',
+            name: t('header_what_we_do'),
             address: '/what-we-do',
         },
         {
-            name: 'News & Careers',
+            name: t('header_news_careers'),
             address: '/new-and-careers',
         },
         {
-            name: 'Contact Us',
+            name: t('header_contact_us'),
             address: '/contact-us',
         },
     ];
@@ -47,7 +50,7 @@ export default function Header() {
                     ))}
                 </div>
                 <Link to="/" className="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
-                    Make Donation
+                    {t('header_make_donation')}
                     <FontAwesomeIcon icon={faArrowRight} className="ms-3" />
                 </Link>
             </div>
