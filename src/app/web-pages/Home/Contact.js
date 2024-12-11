@@ -18,7 +18,7 @@ export default function Contact() {
                                 {t('contact_sub_title_1')}
                                 <a href="mailto:info@alliancelowa.org"> info@alliancelowa.org</a>, {t('contact_sub_title_2')}
                             </p>
-                            <ContactForm></ContactForm>
+                            <ContactForm t={t} />
                         </div>
                     </div>
                     <div className="col-lg-6 ps-lg-0" style={{ minHeight: '400px' }}>
