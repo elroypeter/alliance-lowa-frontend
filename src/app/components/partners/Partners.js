@@ -1,6 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Partners() {
+    const { t } = useTranslation();
+
     const partnerList = [
         {
             name: 'Gerald Group',
@@ -23,8 +26,8 @@ export default function Partners() {
         <div className="container-xxl py-5">
             <div className="container">
                 <div className="section-title text-center">
-                    <h1 className="display-5 mb-5">Partners</h1>
-                    <p>To achieve its objectives, Alliance Lowa is financially supported by the following partners</p>
+                    <h1 className="display-5 mb-5">{t('partner_title')}</h1>
+                    <p>{t('partner_description')}</p>
                 </div>
                 <div className="row g-5">
                     {partnerList.map((partner, index) => (

@@ -6,8 +6,11 @@ import { baseUrl } from '../../services/ApiService';
 import { getImageName } from '../../utils/externals.util';
 import moment from 'moment';
 import HTMLReactParser from 'html-react-parser';
+import { useTranslation } from 'react-i18next';
 
 export default function ProjectDetails() {
+    const { t } = useTranslation();
+
     let current = [];
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -61,16 +64,14 @@ export default function ProjectDetails() {
                                 </div>
                             ))
                         ) : (
-                            <p className="p-lg-5 pe-lg-0 pt-lg-0">
-                                There are no projects posted yet or Selected Project has not translation in the current language
-                            </p>
+                            <p className="p-lg-5 pe-lg-0 pt-lg-0">{t('projects_no_value')}</p>
                         )}
                     </div>
                     <div className="col-lg-4 pe-lg-5 py-5 wow fadeIn" data-wow-delay="0.5s">
                         <div className="section-title text-start">
                             <strong>
                                 <h5 className="mb-2" style={{ fontWeight: '400' }}>
-                                    Other Projects
+                                    {t('project_others')}
                                 </h5>
                             </strong>
                         </div>
@@ -107,7 +108,7 @@ export default function ProjectDetails() {
                         <div className="section-title text-start">
                             <strong>
                                 <h5 className="mb-2" style={{ fontWeight: '400' }}>
-                                    News & Events
+                                    {t('project_events')}
                                 </h5>
                             </strong>
                         </div>

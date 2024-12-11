@@ -1,8 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faUserCheck, faDraftingCompass, faHeadphones } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function Governance() {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container feature px-lg-0">
@@ -10,14 +13,10 @@ export default function Governance() {
                     <div className="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.5s">
                         <div className="p-lg-5 ps-lg-0">
                             <div className="section-title text-start">
-                                <h1 className="display-5 mb-4">Our Governance</h1>
+                                <h1 className="display-5 mb-4">{t('gov_header')}</h1>
                             </div>
-                            <p className="mb-4 pb-2">
-                                The organization is managed on a daily basis by General Management. This implements the decisions of the Board of
-                                Directors and provides appropriate guidance for the smooth running of the organization. For more information, please
-                                contact the General Management Secretariat.
-                            </p>
-                            <p>Alliance Lowa has the following governance bodies:</p>
+                            <p className="mb-4 pb-2">{t('gov_description')}</p>
+                            <p>{t('gov_bodies')}</p>
                             <div className="row g-4">
                                 <div className="col-6">
                                     <div className="d-flex align-items-center">
@@ -31,7 +30,7 @@ export default function Governance() {
                                             <FontAwesomeIcon icon={faCheck} className="fa-2x text-primary"></FontAwesomeIcon>
                                         </div>
                                         <div className="ms-4">
-                                            <h5 className="mb-0">The College of Founders</h5>
+                                            <h5 className="mb-0">{t('gov_founder')}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +46,7 @@ export default function Governance() {
                                             <FontAwesomeIcon icon={faUserCheck} className="fa-2x text-primary"></FontAwesomeIcon>
                                         </div>
                                         <div className="ms-4">
-                                            <h5 className="mb-0">The General Assembly</h5>
+                                            <h5 className="mb-0">{t('gov_general')}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +62,7 @@ export default function Governance() {
                                             <FontAwesomeIcon icon={faDraftingCompass} className="fa-2x text-primary"></FontAwesomeIcon>
                                         </div>
                                         <div className="ms-4">
-                                            <h5 className="mb-0">The Board of Directors</h5>
+                                            <h5 className="mb-0">{t('gov_board')}</h5>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +78,7 @@ export default function Governance() {
                                             <FontAwesomeIcon icon={faHeadphones} className="fa-2x text-primary"></FontAwesomeIcon>
                                         </div>
                                         <div className="ms-4">
-                                            <h5 className="mb-0">The General Management</h5>
+                                            <h5 className="mb-0">{t('gov_manage')}</h5>
                                         </div>
                                     </div>
                                 </div>

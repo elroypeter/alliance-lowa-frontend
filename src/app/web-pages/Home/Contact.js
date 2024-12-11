@@ -1,7 +1,10 @@
 import React from 'react';
 import { ContactForm } from '../../components/Contact/ContactForm';
+import { useTranslation } from 'react-i18next';
 
 export default function Contact() {
+    const { t } = useTranslation();
+
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container quote px-lg-0">
@@ -9,11 +12,11 @@ export default function Contact() {
                     <div className="col-lg-6 quote-text py-5 wow fadeIn" data-wow-delay="0.5s">
                         <div className="p-lg-5 pe-lg-0">
                             <div className="section-title text-start">
-                                <h1 className="display-5 mb-4">Contact Us</h1>
+                                <h1 className="display-5 mb-4">{t('header_contact_us')}</h1>
                             </div>
                             <p className="mb-4 pb-2">
-                                To contact us, write to us at the following address
-                                <a href="mailto:info@alliancelowa.org"> info@alliancelowa.org</a>, or leave us a message below:
+                                {t('contact_sub_title_1')}
+                                <a href="mailto:info@alliancelowa.org"> info@alliancelowa.org</a>, {t('contact_sub_title_2')}
                             </p>
                             <ContactForm></ContactForm>
                         </div>

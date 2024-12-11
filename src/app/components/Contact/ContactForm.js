@@ -3,6 +3,10 @@ import { ApiService } from '../../services/ApiService';
 import BsSpinner from '../Spinner/BsSpinner';
 
 export class ContactForm extends React.Component {
+    constructor(props) {
+        super(props);
+        this.t = props.t;
+    }
     state = {
         fields: {
             name: '',
@@ -80,7 +84,7 @@ export class ContactForm extends React.Component {
                         <input
                             type="text"
                             className="form-control border-0"
-                            placeholder="Your Name"
+                            placeholder={this.t('placeholder_name')}
                             style={{ height: '55px' }}
                             value={this.state.fields.name}
                             onChange={(evt) => this.onChange(evt, 'name', this.validateField)}
@@ -90,7 +94,7 @@ export class ContactForm extends React.Component {
                         <input
                             type="email"
                             className="form-control border-0"
-                            placeholder="Your Email"
+                            placeholder={this.t('placeholder_email')}
                             style={{ height: '55px' }}
                             value={this.state.fields.email}
                             onChange={(evt) => this.onChange(evt, 'email', this.validateField)}
@@ -100,7 +104,7 @@ export class ContactForm extends React.Component {
                         <input
                             type="text"
                             className="form-control border-0"
-                            placeholder="Your Mobile"
+                            placeholder={this.t('placeholder_mobile')}
                             style={{ height: '55px' }}
                             value={this.state.fields.mobile}
                             onChange={(evt) => this.onChange(evt, 'mobile')}
@@ -109,7 +113,7 @@ export class ContactForm extends React.Component {
                     <div className="col-12">
                         <textarea
                             className="form-control border-0"
-                            placeholder="Message"
+                            placeholder={this.t('placeholder_message')}
                             rows={5}
                             value={this.state.fields.message}
                             onChange={(evt) => this.onChange(evt, 'message', this.validateField)}
@@ -117,7 +121,7 @@ export class ContactForm extends React.Component {
                     </div>
                     <div className="col-12">
                         <button disabled={this.validate()} onClick={this.submitMessage} className="btn btn-primary w-100 py-3" type="button">
-                            {this.state.saving ? <BsSpinner /> : 'Submit'}
+                            {this.state.saving ? <BsSpinner /> : this.t('form_submit_btn')}
                         </button>
                     </div>
                 </div>

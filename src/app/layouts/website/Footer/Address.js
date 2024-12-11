@@ -2,8 +2,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPhone, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { faTwitter, faFacebookF, faYoutube, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 export default function Address() {
+    const { t } = useTranslation();
+
     const socialLinks = [
         {
             icon: faTwitter,
@@ -24,7 +27,7 @@ export default function Address() {
     ];
     return (
         <div className="col-lg-4 col-md-6">
-            <h4 className="text-light mb-4">Address</h4>
+            <h4 className="text-light mb-4"> {t('footer_address')}</h4>
             <p className="mb-2">
                 <FontAwesomeIcon icon={faMapMarkerAlt} className="me-3"></FontAwesomeIcon>
                 {'Logu (ABM camp), Bisie - Walikale road, DRC'}
@@ -35,7 +38,7 @@ export default function Address() {
             </p>
             <p className="mb-2">
                 <FontAwesomeIcon icon={faEnvelope} className="fa fa-envelope me-3"></FontAwesomeIcon>
-                info@alliancelowa.org
+                <a href="mailto:info@alliancelowa.org">info@alliancelowa.org</a>
             </p>
             <div className="d-flex pt-2">
                 {socialLinks.map((link, index) => (
