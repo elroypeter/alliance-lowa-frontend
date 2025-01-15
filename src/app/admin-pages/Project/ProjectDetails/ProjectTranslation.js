@@ -173,18 +173,17 @@ export default function ProjectTranslation() {
                                                                     <FontAwesomeIcon icon={faEdit} className="me-3" />
                                                                     Edit
                                                                 </a>
-                                                                {index !== 0 && (
-                                                                    <a
-                                                                        onClick={() => {
-                                                                            dispatch(deleteProjectTranslation(trans.id));
-                                                                            handleTabChange(0);
-                                                                        }}
-                                                                        className="list-group-item list-group-item-action border-0 "
-                                                                    >
-                                                                        <FontAwesomeIcon icon={faTrash} className="me-3" />
-                                                                        Delete
-                                                                    </a>
-                                                                )}
+
+                                                                <a
+                                                                    onClick={() => {
+                                                                        dispatch(deleteProjectTranslation(trans.id));
+                                                                        handleTabChange(0);
+                                                                    }}
+                                                                    className="list-group-item list-group-item-action border-0 "
+                                                                >
+                                                                    <FontAwesomeIcon icon={faTrash} className="me-3" />
+                                                                    Delete
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>

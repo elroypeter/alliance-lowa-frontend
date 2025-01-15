@@ -5,6 +5,8 @@ import { getImageName } from '../../utils/externals.util';
 import { loadSliders } from './store/Home.slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 export default function Slider() {
     const dispatch = useDispatch();
@@ -16,20 +18,64 @@ export default function Slider() {
     }, [selectedLanguage]);
 
     return (
-        <div className="container-fluid p-0 mb-5">
-            <Carousel showArrows={true} infiniteLoop={true} showThumbs={false} transitionTime={1500}>
+        <div className="container-fluid p-0 mb-5" style={{ position: 'relative' }}>
+            <Carousel
+                renderArrowPrev={(clickHandler, hasPrev) => (
+                    <a
+                        onClick={clickHandler}
+                        style={{
+                            opacity: hasPrev ? 1 : 0.5,
+                            position: 'absolute',
+                            left: 30,
+                            top: 500,
+                            zIndex: 1000,
+                            background: '#2b282852',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: 20,
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faChevronLeft} fontSize={50} color="#ffffff" />
+                    </a>
+                )}
+                renderArrowNext={(clickHandler, hasNext) => (
+                    <a
+                        onClick={clickHandler}
+                        style={{
+                            opacity: hasNext ? 1 : 0.5,
+                            position: 'absolute',
+                            right: 30,
+                            top: 500,
+                            zIndex: 1000,
+                            background: '#2b282852',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: 20,
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faChevronRight} fontSize={50} color="#ffffff" />
+                    </a>
+                )}
+                showArrows={true}
+                infiniteLoop={true}
+                showThumbs={false}
+                transitionTime={1500}
+            >
                 {sliders.map((slide, index) => (
                     <div key={index} className="owl-carousel-item position-relative">
                         <img className="img-fluid" src={baseUrl() + '/images' + getImageName(slide.filePath)} alt="" />
-                        <div
-                            className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center"
-                            style={{
-                                background: 'rgb(53 53 53 / 22%)',
-                            }}
-                        >
+                        <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
                             <div className="container">
                                 <div className="row justify-content-center">
-                                    <div className="col-12 col-lg-8 text-center">
+                                    <div
+                                        className="col-12 col-lg-8 text-center"
+                                        style={{
+                                            background: '#2b282852',
+                                            padding: 30,
+                                        }}
+                                    >
                                         <h5 className="text-white text-uppercase mb-3 animated slideInDown">
                                             Welcome To <span className="text-secondary">Alliance</span>
                                             <span className="text-primary">Lowa</span>

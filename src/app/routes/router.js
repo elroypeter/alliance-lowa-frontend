@@ -35,7 +35,10 @@ export default function Router(props) {
                     <Route path="" index element={<WhatWeDo />} />
                     <Route path=":id/:title" element={<WhatWeDo />} />
                 </Route>
-                <Route path="new-and-careers" element={<NewsCareer />} />
+                <Route path="new-and-careers">
+                    <Route path="" index element={<NewsCareer />} />
+                    <Route path=":id/:title" element={<NewsCareer />} />
+                </Route>
                 <Route path="contact-us" element={<ContactUs />} />
             </Route>
 

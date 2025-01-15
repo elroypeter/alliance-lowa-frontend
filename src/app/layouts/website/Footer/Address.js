@@ -18,7 +18,7 @@ export default function Address() {
         },
         {
             icon: faYoutube,
-            link: '',
+            link: 'https://www.youtube.com/channel/UC3szZ4axXFFaZzcVDu_DvHg',
         },
         {
             icon: faLinkedinIn,
@@ -42,7 +42,7 @@ export default function Address() {
             </p>
             <div className="d-flex pt-2">
                 {socialLinks.map((link, index) => (
-                    <a key={index} className="btn btn-outline-light btn-social" href="">
+                    <a key={index} className="btn btn-outline-light btn-social" href={link.link}>
                         <FontAwesomeIcon icon={link.icon} className="fab fa-twitter"></FontAwesomeIcon>
                     </a>
                 ))}

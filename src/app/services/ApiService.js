@@ -2,7 +2,7 @@ import * as axios from 'axios';
 
 export const baseUrl = () => {
     if (window.location.hostname === 'localhost') {
-        return `http://${window.location.hostname}:5000`;
+        return `http://${window.location.hostname}:4000`;
     } else {
         return `https://${window.location.hostname}/aws`;
     }

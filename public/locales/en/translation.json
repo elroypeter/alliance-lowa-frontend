@@ -47,5 +47,7 @@
     "placeholder_email": "Your Email",
     "placeholder_mobile": "Your Mobile",
     "placeholder_message": "Message",
-    "form_submit_btn": "Submit"
+    "form_submit_btn": "Submit",
+    "project_news_blogs": "Other News Blogs",
+    "project_careers": "Other Career Posts"
 }

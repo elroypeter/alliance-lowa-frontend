@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getProjects } from '../../website.service';
 const initialState = {
     projects: [],
+    activeProject: null,
 };
 
 export const loadProjects = createAsyncThunk('webProject/loadProjects', async (params) => {
@@ -11,7 +12,11 @@ export const loadProjects = createAsyncThunk('webProject/loadProjects', async (p
 const webProject = createSlice({
     name: 'webProject',
     initialState,
-    reducers: {},
+    reducers: {
+        setActiveProject: (state, action) => {
+            state.activeProject = action.payload;
+        },
+    },
     extraReducers: {
         [loadProjects.fulfilled]: (state, action) => {
             state.projects = action.payload;
