@@ -18,8 +18,9 @@ export default function Footer() {
                 <div className="container">
                     <div className="copyright">
                         <div className="row">
-                            <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">&copy;Alliance Lowa, All Right Reserved.</div>
-                            <div className="col-md-6 text-center text-md-end">2022</div>
+                            <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                &copy;Alliance Lowa, All Right Reserved. {new Date().getFullYear()}
+                            </div>
                         </div>
                     </div>
                 </div>

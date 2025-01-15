@@ -56,6 +56,7 @@ const projectDetailSlice = createSlice({
         newTranslation: (state) => {
             state.isModalOpen = true;
             state.isTranslation = true;
+            state.isModalEdit = false;
         },
         editTranslation: (state) => {
             state.isModalOpen = true;

@@ -8,6 +8,9 @@ import moment from 'moment';
 import HTMLReactParser from 'html-react-parser';
 import { useTranslation } from 'react-i18next';
 
+import { Slide } from 'react-slideshow-image';
+import 'react-slideshow-image/dist/styles.css';
+
 export default function ProjectDetails() {
     const { t } = useTranslation();
 
@@ -33,6 +36,14 @@ export default function ProjectDetails() {
         current = selected ? current.concat(selected) : [];
     }
 
+    const divStyle = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundSize: 'cover',
+        height: '400px',
+    };
+
     return (
         <div className="container-fluid bg-light overflow-hidden my-5 px-lg-0">
             <div className="container about px-lg-0">
@@ -42,15 +53,18 @@ export default function ProjectDetails() {
                             current.map((project) => (
                                 <div key={project.id}>
                                     <article className="p-lg-5 pe-lg-0 pt-lg-0">
-                                        <div className="current-project-thumb mb-4">
-                                            <img
-                                                src={
-                                                    project.attachments.length
-                                                        ? baseUrl() + '/images' + getImageName(project.attachments[0].filePath)
-                                                        : '/assets/images/defaults/placeholder.png'
-                                                }
-                                            />
-                                        </div>
+                                        <Slide>
+                                            {project.attachments.map((attachment, index) => (
+                                                <div key={index} className="current-project-thumb mb-4">
+                                                    <div
+                                                        style={{
+                                                            ...divStyle,
+                                                            backgroundImage: `url(${baseUrl() + '/images' + getImageName(attachment.filePath)})`,
+                                                        }}
+                                                    ></div>
+                                                </div>
+                                            ))}
+                                        </Slide>
 
                                         <div className="section-title text-start">
                                             <strong>
@@ -104,14 +118,6 @@ export default function ProjectDetails() {
                                 </div>
                             </div>
                         ))}
-
-                        <div className="section-title text-start">
-                            <strong>
-                                <h5 className="mb-2" style={{ fontWeight: '400' }}>
-                                    {t('project_events')}
-                                </h5>
-                            </strong>
-                        </div>
                     </div>
                 </div>
             </div>

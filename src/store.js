@@ -3,6 +3,7 @@ import imageSliderReducer from './app/admin-pages/Dashboard/store/ImageSlider.sl
 import languageReducer from './app/layouts/website/store/language.slice';
 import homeSlideReducer from './app/web-pages/Home/store/Home.slice';
 import webProjectReducer from './app/web-pages/What-We-Do/store/webProject.slice';
+import webCareersReducer from './app/web-pages/News-Careers/store/newsCareers.slice';
 import imageSliderDetailsReducer from './app/admin-pages/Dashboard/store/ImageSliderDetails.slice';
 import projectReducer from './app/admin-pages/Project/store/Project.slice';
 import projectDetailsReducer from './app/admin-pages/Project/store/ProjectDetails.slice';
@@ -20,6 +21,7 @@ export const store = configureStore({
         language: languageReducer,
         homeSlider: homeSlideReducer,
         webProject: webProjectReducer,
+        webCareers: webCareersReducer,
         imageSliderDetails: imageSliderDetailsReducer,
         project: projectReducer,
         projectDetails: projectDetailsReducer,
