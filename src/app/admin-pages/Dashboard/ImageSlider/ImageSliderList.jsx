@@ -12,6 +12,7 @@ export default function ImageSliderList() {
     const dispatch = useDispatch();
     const { images, isLoading, isSaving, isModalOpen } = useSelector((store) => store.imageSlider);
     const [open, setOpen] = useState(false);
+    const [prevIsSaving, setPrevIsSaving] = useState(false);
     const [state, setState] = useState({
         form: {
             fields: {
@@ -33,6 +34,18 @@ export default function ImageSliderList() {
     useEffect(() => {
         setOpen(isModalOpen);
     }, [isModalOpen]);
+
+    // Reset form on successful submission
+    useEffect(() => {
+        // If saving completed (was true, now false) and modal is closed, reset form
+        if (prevIsSaving && !isSaving && !isModalOpen) {
+            setState((state) => ({
+                ...state,
+                form: resetForm(),
+            }));
+        }
+        setPrevIsSaving(isSaving);
+    }, [isSaving, isModalOpen, prevIsSaving]);
 
     const onInputChange = ({ name, value, error }) => {
         const fields = Object.assign({}, state.form.fields);
@@ -80,7 +93,7 @@ export default function ImageSliderList() {
                 }
             />
             <Card sx={{ width: '100%' }}>
-                <CardContent sx={{ width: '100%', pt: 3 }}>
+                <CardContent sx={{ width: '100%', pt: 3, px: { xs: 2, sm: 3 } }}>
                     {isLoading ? (
                         <Box display="flex" justifyContent="center" p={3}>
                             <CircularProgress />
@@ -120,18 +133,20 @@ export default function ImageSliderList() {
                             </Button>
                         </Box>
                     ) : (
-                        <Grid container spacing={2}>
-                            {images.map((image, index) => (
-                                <Grid item xs={12} sm={6} md={4} key={index}>
-                                    <ImageSlider
-                                        image={image}
-                                        deleteImage={(id) => {
-                                            dispatch(deleteImageSlide(id));
-                                        }}
-                                    />
-                                </Grid>
-                            ))}
-                        </Grid>
+                        <Box sx={{ width: '100%' }}>
+                            <Grid container spacing={2} sx={{ width: '100%' }}>
+                                {images.map((image, index) => (
+                                    <Grid item key={index} size={4}>
+                                        <ImageSlider
+                                            image={image}
+                                            deleteImage={(id) => {
+                                                dispatch(deleteImageSlide(id));
+                                            }}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Box>
                     )}
                 </CardContent>
             </Card>

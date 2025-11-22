@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getProjectsApi, saveProjectApi, publishProjectApi, deleteProjectApi } from '../service/Project.service';
 
 const initialState = {
@@ -12,19 +13,37 @@ export const loadProjects = createAsyncThunk('project/loadProjects', async () =>
     return await getProjectsApi();
 });
 
-export const saveProject = createAsyncThunk('project/saveProject', async (data) => {
-    await saveProjectApi(data);
-    return await getProjectsApi();
+export const saveProject = createAsyncThunk('project/saveProject', async (data, { rejectWithValue }) => {
+    try {
+        await saveProjectApi(data);
+        toast.success('Project saved successfully!');
+        return await getProjectsApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to save project');
+        return rejectWithValue(error);
+    }
 });
 
 export const publicProject = createAsyncThunk('project/publicProject', async ({ id, status }) => {
-    await publishProjectApi(id, status);
-    return await getProjectsApi();
+    try {
+        await publishProjectApi(id, status);
+        toast.success(`Project ${status ? 'published' : 'unpublished'} successfully!`);
+        return await getProjectsApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update publish status');
+        throw error;
+    }
 });
 
 export const deleteProject = createAsyncThunk('project/deleteProject', async (id) => {
-    await deleteProjectApi(id);
-    return await getProjectsApi();
+    try {
+        await deleteProjectApi(id);
+        toast.success('Project deleted successfully!');
+        return await getProjectsApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete project');
+        throw error;
+    }
 });
 
 const projectSlice = createSlice({

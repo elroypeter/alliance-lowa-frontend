@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getSingleImageSlider, addImageTranslation, deleteTranslation, updateImageTranslation } from '../service/ImageSlider.service';
 
 const initialState = {
@@ -14,19 +15,37 @@ export const loadImageSlideDetails = createAsyncThunk('imageSliderDetails/loadIm
     return await getSingleImageSlider(id);
 });
 
-export const saveImageTranslation = createAsyncThunk('imageSliderDetails/saveImageTranslation', async ({ id, data }) => {
-    await addImageTranslation(id, data);
-    return await getSingleImageSlider(id);
+export const saveImageTranslation = createAsyncThunk('imageSliderDetails/saveImageTranslation', async ({ id, data }, { rejectWithValue }) => {
+    try {
+        await addImageTranslation(id, data);
+        toast.success('Translation added successfully!');
+        return await getSingleImageSlider(id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to add translation');
+        return rejectWithValue(error);
+    }
 });
 
 export const updateTranslation = createAsyncThunk('imageSliderDetails/updateTranslation', async ({ id, data }, thunkAPI) => {
-    await updateImageTranslation(id, data);
-    return await getSingleImageSlider(thunkAPI.getState().imageSliderDetails.imageSliderDetails.id);
+    try {
+        await updateImageTranslation(id, data);
+        toast.success('Translation updated successfully!');
+        return await getSingleImageSlider(thunkAPI.getState().imageSliderDetails.imageSliderDetails.id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update translation');
+        throw error;
+    }
 });
 
 export const deleteImageTranslation = createAsyncThunk('imageSliderDetails/deleteImageTranslation', async (id, thunkAPI) => {
-    await deleteTranslation(id);
-    return await getSingleImageSlider(thunkAPI.getState().imageSliderDetails.imageSliderDetails.id);
+    try {
+        await deleteTranslation(id);
+        toast.success('Translation deleted successfully!');
+        return await getSingleImageSlider(thunkAPI.getState().imageSliderDetails.imageSliderDetails.id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete translation');
+        throw error;
+    }
 });
 
 const imageSliderDetailSlice = createSlice({

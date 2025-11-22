@@ -4,6 +4,7 @@ import { faTrash, faEye, faBullhorn } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { publicProject, deleteProject } from '../store/Project.slice';
+import { Box } from '@mui/material';
 
 export default function ProjectItem(props) {
     const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function ProjectItem(props) {
                 </span>
             </td>
             <td className="text-center">
-                <div className="btn-group" role="group" aria-label="Basic outlined example">
+                <Box sx={{ backgroundColor: 'red' }}>
                     <button
                         onClick={() => gotoPage(`/admin/projects/${props.project.id}/${props.project.translations[0].slug}`)}
                         type="button"
@@ -55,7 +56,7 @@ export default function ProjectItem(props) {
                     <button onClick={() => dispatch(deleteProject(props.project.id))} type="button" className="btn btn-outline-light">
                         <FontAwesomeIcon icon={faTrash} className="text-danger" />
                     </button>
-                </div>
+                </Box>
             </td>
         </tr>
     );

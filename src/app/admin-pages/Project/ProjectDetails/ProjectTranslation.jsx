@@ -28,11 +28,12 @@ import {
 export default function ProjectTranslation() {
     const dispatch = useDispatch();
     const { langs } = useSelector((state) => state.language);
-    const { details, isLoading, isTranslationModalOpen, isModalEdit, isTranslation } = useSelector((state) => state.projectDetails);
+    const { details, isLoading, isTranslationModalOpen, isModalEdit, isTranslation, isSaving } = useSelector((state) => state.projectDetails);
     const [open, setOpen] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedTranslation, setSelectedTranslation] = useState(null);
+    const [prevIsSaving, setPrevIsSaving] = useState(false);
     const [state, setState] = useState({
         form: {
             fields: {
@@ -49,6 +50,18 @@ export default function ProjectTranslation() {
     useEffect(() => {
         setOpen(isTranslationModalOpen);
     }, [isTranslationModalOpen]);
+
+    // Reset form on successful submission
+    useEffect(() => {
+        // If saving completed (was true, now false) and modal is closed, reset form
+        if (prevIsSaving && !isSaving && !isTranslationModalOpen) {
+            setState((state) => ({
+                ...state,
+                form: resetForm(),
+            }));
+        }
+        setPrevIsSaving(isSaving);
+    }, [isSaving, isTranslationModalOpen, prevIsSaving]);
 
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);

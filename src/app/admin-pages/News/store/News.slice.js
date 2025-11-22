@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getNewsApi, saveNewsApi, publishNewsApi, deleteNewsApi } from '../service/News.service';
 
 const initialState = {
@@ -12,19 +13,37 @@ export const loadNews = createAsyncThunk('news/loadNews', async () => {
     return await getNewsApi();
 });
 
-export const saveNews = createAsyncThunk('news/saveNews', async (data) => {
-    await saveNewsApi(data);
-    return await getNewsApi();
+export const saveNews = createAsyncThunk('news/saveNews', async (data, { rejectWithValue }) => {
+    try {
+        await saveNewsApi(data);
+        toast.success('News article saved successfully!');
+        return await getNewsApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to save news article');
+        return rejectWithValue(error);
+    }
 });
 
 export const publicNews = createAsyncThunk('news/publicNews', async ({ id, status }) => {
-    await publishNewsApi(id, status);
-    return await getNewsApi();
+    try {
+        await publishNewsApi(id, status);
+        toast.success(`News article ${status ? 'published' : 'unpublished'} successfully!`);
+        return await getNewsApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update publish status');
+        throw error;
+    }
 });
 
 export const deleteNews = createAsyncThunk('news/deleteNews', async (id) => {
-    await deleteNewsApi(id);
-    return await getNewsApi();
+    try {
+        await deleteNewsApi(id);
+        toast.success('News article deleted successfully!');
+        return await getNewsApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete news article');
+        throw error;
+    }
 });
 
 const newsSlice = createSlice({

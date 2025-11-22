@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import {
     getProjectDetailsApi,
     addProjectAttachmentApi,
@@ -22,29 +23,59 @@ export const loadProjectDetails = createAsyncThunk('projectDetails/loadProjectDe
     return await getProjectDetailsApi(id);
 });
 
-export const saveProjectAttachment = createAsyncThunk('projectDetails/saveProjectAttachment', async ({ id, data }) => {
-    await addProjectAttachmentApi(id, data);
-    return await getProjectDetailsApi(id);
+export const saveProjectAttachment = createAsyncThunk('projectDetails/saveProjectAttachment', async ({ id, data }, { rejectWithValue }) => {
+    try {
+        await addProjectAttachmentApi(id, data);
+        toast.success('Attachment added successfully!');
+        return await getProjectDetailsApi(id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to add attachment');
+        return rejectWithValue(error);
+    }
 });
 
 export const deleteProjectAttachment = createAsyncThunk('projectDetails/deleteProjectAttachment', async (id, thunkAPI) => {
-    await removeProjectAttachmentApi(id);
-    return await getProjectDetailsApi(thunkAPI.getState().projectDetails.details.id);
+    try {
+        await removeProjectAttachmentApi(id);
+        toast.success('Attachment deleted successfully!');
+        return await getProjectDetailsApi(thunkAPI.getState().projectDetails.details.id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete attachment');
+        throw error;
+    }
 });
 
-export const saveProjectTranslation = createAsyncThunk('projectDetails/saveProjectTranslation', async ({ id, data }) => {
-    await addProjectTranslationApi(id, data);
-    return await getProjectDetailsApi(id);
+export const saveProjectTranslation = createAsyncThunk('projectDetails/saveProjectTranslation', async ({ id, data }, { rejectWithValue }) => {
+    try {
+        await addProjectTranslationApi(id, data);
+        toast.success('Translation added successfully!');
+        return await getProjectDetailsApi(id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to add translation');
+        return rejectWithValue(error);
+    }
 });
 
 export const deleteProjectTranslation = createAsyncThunk('projectDetails/deleteProjectTranslation', async (id, thunkAPI) => {
-    await deleteProjectTranslationApi(id);
-    return await getProjectDetailsApi(thunkAPI.getState().projectDetails.details.id);
+    try {
+        await deleteProjectTranslationApi(id);
+        toast.success('Translation deleted successfully!');
+        return await getProjectDetailsApi(thunkAPI.getState().projectDetails.details.id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete translation');
+        throw error;
+    }
 });
 
 export const updateProjectTranslation = createAsyncThunk('projectDetails/updateProjectTranslation', async ({ id, data }, thunkAPI) => {
-    await updateProjectTranslationApi(id, data);
-    return await getProjectDetailsApi(thunkAPI.getState().projectDetails.details.id);
+    try {
+        await updateProjectTranslationApi(id, data);
+        toast.success('Translation updated successfully!');
+        return await getProjectDetailsApi(thunkAPI.getState().projectDetails.details.id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update translation');
+        throw error;
+    }
 });
 
 const projectDetailSlice = createSlice({
