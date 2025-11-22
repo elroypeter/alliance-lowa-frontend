@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
+import { Toaster } from 'react-hot-toast';
 import {
     Image as ImageIcon,
     Work as WorkIcon,
@@ -58,6 +59,30 @@ export function Layout() {
     return (
         <div className="admin-layout">
             <AdminThemeProvider>
+                <Toaster
+                    position="top-right"
+                    toastOptions={{
+                        duration: 4000,
+                        style: {
+                            background: '#363636',
+                            color: '#fff',
+                        },
+                        success: {
+                            duration: 3000,
+                            iconTheme: {
+                                primary: '#048049',
+                                secondary: '#fff',
+                            },
+                        },
+                        error: {
+                            duration: 4000,
+                            iconTheme: {
+                                primary: '#d32f2f',
+                                secondary: '#fff',
+                            },
+                        },
+                    }}
+                />
                 <Box sx={{ display: 'flex', backgroundColor: '#f9fbfd', minHeight: '100vh', width: '100%' }}>
                     <Sidebar menuList={menuList} />
                     <Box

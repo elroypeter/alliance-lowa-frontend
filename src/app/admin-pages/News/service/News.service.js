@@ -53,6 +53,11 @@ const deleteNewsTranslationApi = async (id) => {
     return await apiService.apiConnect(`/api/translation/blog-news/${id}`, 'delete', {});
 };
 
+const updateNewsCoverApi = async (id, data) => {
+    const apiService = new ApiService();
+    return await apiService.apiConnect(`/api/blog-news/cover/${id}`, 'put', data);
+};
+
 export {
     getNewsApi,
     saveNewsApi,
@@ -64,4 +69,5 @@ export {
     getNewsDetailsApi,
     addNewsTranslationApi,
     deleteNewsTranslationApi,
+    updateNewsCoverApi,
 };

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getSubscribersApi, deleteSubscriberApi } from '../service/Subscriber.service';
 
 const initialState = {
@@ -11,8 +12,14 @@ export const loadSubcribers = createAsyncThunk('subscriber/loadSubcribers', asyn
 });
 
 export const deleteSubcribers = createAsyncThunk('subscriber/deleteSubcribers', async (id) => {
-    await deleteSubscriberApi(id);
-    return await getSubscribersApi();
+    try {
+        await deleteSubscriberApi(id);
+        toast.success('Subscriber deleted successfully!');
+        return await getSubscribersApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete subscriber');
+        throw error;
+    }
 });
 
 const SubscriberSlice = createSlice({

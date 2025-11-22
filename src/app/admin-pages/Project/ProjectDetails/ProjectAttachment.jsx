@@ -9,8 +9,9 @@ import { baseUrl } from '../../../services/ApiService';
 
 export default function ProjectAttachment() {
     const dispatch = useDispatch();
-    const { details, isLoading, isAttachmentModalOpen } = useSelector((state) => state.projectDetails);
+    const { details, isLoading, isAttachmentModalOpen, isSaving } = useSelector((state) => state.projectDetails);
     const [open, setOpen] = useState(false);
+    const [prevIsSaving, setPrevIsSaving] = useState(false);
     const [state, setState] = useState({
         newImage: {
             fields: {
@@ -25,6 +26,18 @@ export default function ProjectAttachment() {
     useEffect(() => {
         setOpen(isAttachmentModalOpen);
     }, [isAttachmentModalOpen]);
+
+    // Reset form on successful submission
+    useEffect(() => {
+        // If saving completed (was true, now false) and modal is closed, reset form
+        if (prevIsSaving && !isSaving && !isAttachmentModalOpen) {
+            setState((state) => ({
+                ...state,
+                newImage: resetForm(),
+            }));
+        }
+        setPrevIsSaving(isSaving);
+    }, [isSaving, isAttachmentModalOpen, prevIsSaving]);
 
     const onInputChange = ({ name, value, error }) => {
         const fields = Object.assign({}, state.newImage.fields);
@@ -80,54 +93,56 @@ export default function ProjectAttachment() {
                             <CircularProgress />
                         </Box>
                     ) : (
-                        <Grid container spacing={2}>
-                            {details.attachments?.map((image, index) => (
-                                <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
-                                    <Box
-                                        sx={{
-                                            position: 'relative',
-                                            borderRadius: 2,
-                                            overflow: 'hidden',
-                                            boxShadow: 2,
-                                            '&:hover': {
-                                                boxShadow: 4,
-                                            },
-                                        }}
-                                    >
-                                        <IconButton
-                                            onClick={() => {
-                                                dispatch(deleteProjectAttachment(image.id));
-                                            }}
+                        <Box sx={{ width: '100%' }}>
+                            <Grid container spacing={2} sx={{ width: '100%' }}>
+                                {details.attachments?.map((image, index) => (
+                                    <Grid item size={4} key={index}>
+                                        <Box
                                             sx={{
-                                                position: 'absolute',
-                                                top: 8,
-                                                right: 8,
-                                                backgroundColor: 'error.main',
-                                                color: 'white',
-                                                zIndex: 1,
+                                                position: 'relative',
+                                                borderRadius: 2,
+                                                overflow: 'hidden',
+                                                boxShadow: 2,
                                                 '&:hover': {
-                                                    backgroundColor: 'error.dark',
+                                                    boxShadow: 4,
                                                 },
                                             }}
-                                            size="small"
                                         >
-                                            <DeleteIcon fontSize="small" />
-                                        </IconButton>
-                                        <Box
-                                            component="img"
-                                            src={baseUrl() + '/images' + getImageName(image.filePath)}
-                                            alt={`Attachment ${index + 1}`}
-                                            sx={{
-                                                width: '100%',
-                                                height: 'auto',
-                                                display: 'block',
-                                                objectFit: 'cover',
-                                            }}
-                                        />
-                                    </Box>
-                                </Grid>
-                            ))}
-                        </Grid>
+                                            <IconButton
+                                                onClick={() => {
+                                                    dispatch(deleteProjectAttachment(image.id));
+                                                }}
+                                                sx={{
+                                                    position: 'absolute',
+                                                    top: 8,
+                                                    right: 8,
+                                                    backgroundColor: 'error.main',
+                                                    color: 'white',
+                                                    zIndex: 1,
+                                                    '&:hover': {
+                                                        backgroundColor: 'error.dark',
+                                                    },
+                                                }}
+                                                size="small"
+                                            >
+                                                <DeleteIcon fontSize="small" />
+                                            </IconButton>
+                                            <Box
+                                                component="img"
+                                                src={baseUrl() + '/images' + getImageName(image.filePath)}
+                                                alt={`Attachment ${index + 1}`}
+                                                sx={{
+                                                    width: '100%',
+                                                    height: 'auto',
+                                                    display: 'block',
+                                                    objectFit: 'cover',
+                                                }}
+                                            />
+                                        </Box>
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        </Box>
                     )}
                 </CardContent>
             </Card>

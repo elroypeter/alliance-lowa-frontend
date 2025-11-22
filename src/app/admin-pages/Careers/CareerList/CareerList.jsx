@@ -107,7 +107,7 @@ export default function CareerList() {
             renderCell: (params) => {
                 const isPublished = params.row.isPublished?.status;
                 return (
-                    <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+                    <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center', justifyContent: 'center', width: '100%', marginTop: '10px' }}>
                         <Tooltip title="View">
                             <IconButton size="small" onClick={() => navigate(`/admin/careers/${params.row.id}/${params.row.slug}`)} color="primary">
                                 <VisibilityIcon fontSize="small" />

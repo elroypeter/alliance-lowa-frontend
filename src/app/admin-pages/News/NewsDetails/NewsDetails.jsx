@@ -5,6 +5,7 @@ import { Box, Button } from '@mui/material';
 import { ArrowBack as ArrowBackIcon, Add as AddIcon } from '@mui/icons-material';
 import { loadNewsDetails, newTranslation } from '../store/NewsDetails.slice';
 import NewsTranslation from './NewsTranslation';
+import NewsCover from './NewsCover';
 import PageHeader from '../../../layouts/admin/PageHeader/PageHeader';
 
 export default function NewsDetails() {
@@ -57,6 +58,7 @@ export default function NewsDetails() {
                     </Box>
                 }
             />
+            <NewsCover />
             <NewsTranslation />
         </Box>
     );

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getCareerApi, saveCareerApi, publishCareerApi, deleteCareerApi } from '../service/Career.service';
 
 const initialState = {
@@ -12,19 +13,37 @@ export const loadCareers = createAsyncThunk('career/loadCareers', async () => {
     return await getCareerApi();
 });
 
-export const saveCareer = createAsyncThunk('career/saveCareer', async (data) => {
-    await saveCareerApi(data);
-    return await getCareerApi();
+export const saveCareer = createAsyncThunk('career/saveCareer', async (data, { rejectWithValue }) => {
+    try {
+        await saveCareerApi(data);
+        toast.success('Career saved successfully!');
+        return await getCareerApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to save career');
+        return rejectWithValue(error);
+    }
 });
 
 export const publishCareer = createAsyncThunk('career/publishCareer', async ({ id, status }) => {
-    await publishCareerApi(id, status);
-    return await getCareerApi();
+    try {
+        await publishCareerApi(id, status);
+        toast.success(`Career ${status ? 'published' : 'unpublished'} successfully!`);
+        return await getCareerApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update publish status');
+        throw error;
+    }
 });
 
 export const deleteCareer = createAsyncThunk('career/deleteCareer', async (id) => {
-    await deleteCareerApi(id);
-    return await getCareerApi();
+    try {
+        await deleteCareerApi(id);
+        toast.success('Career deleted successfully!');
+        return await getCareerApi();
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete career');
+        throw error;
+    }
 });
 
 const careerSlice = createSlice({

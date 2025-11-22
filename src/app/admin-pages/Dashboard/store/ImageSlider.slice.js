@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getImageSlider, saveImageSlider, publishImageSlider, deleteImageSlider } from '../service/ImageSlider.service';
 
 const initialState = {
@@ -13,18 +14,37 @@ export const loadImageSlides = createAsyncThunk('imageSlider/loadImageSlides', a
     return await getImageSlider();
 });
 
-export const saveImageSlides = createAsyncThunk('imageSlider/saveImageSlides', async (data) => {
-    return await saveImageSlider(data);
+export const saveImageSlides = createAsyncThunk('imageSlider/saveImageSlides', async (data, { rejectWithValue }) => {
+    try {
+        const result = await saveImageSlider(data);
+        toast.success('Image slide saved successfully!');
+        return result;
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to save image slide');
+        return rejectWithValue(error);
+    }
 });
 
 export const publicImageSlide = createAsyncThunk('imageSlider/publicImageSlide', async ({ id, status }, thunkAPI) => {
-    await publishImageSlider(id, status);
-    return await getImageSlider(thunkAPI.getState().imageSlider.selectedLanguage);
+    try {
+        await publishImageSlider(id, status);
+        toast.success(`Image slide ${status ? 'published' : 'unpublished'} successfully!`);
+        return await getImageSlider(thunkAPI.getState().imageSlider.selectedLanguage);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update publish status');
+        throw error;
+    }
 });
 
 export const deleteImageSlide = createAsyncThunk('imageSlider/deleteImageSlide', async (id, thunkAPI) => {
-    await deleteImageSlider(id);
-    return await getImageSlider(thunkAPI.getState().imageSlider.selectedLanguage);
+    try {
+        await deleteImageSlider(id);
+        toast.success('Image slide deleted successfully!');
+        return await getImageSlider(thunkAPI.getState().imageSlider.selectedLanguage);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to delete image slide');
+        throw error;
+    }
 });
 
 const imageSliderSlice = createSlice({

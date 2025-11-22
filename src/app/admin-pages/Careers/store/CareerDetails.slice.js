@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 import { getCareerDetailsApi, updateCareerApi } from '../service/Career.service';
 
 const initialState = {
@@ -14,8 +15,14 @@ export const loadCareerDetails = createAsyncThunk('careerDetails/loadCareerDetai
 });
 
 export const updateCareerDetails = createAsyncThunk('careerDetails/updateCareerDetails', async ({ id, data }, thunkAPI) => {
-    await updateCareerApi(id, data);
-    return await getCareerDetailsApi(thunkAPI.getState().careerDetails.details.id);
+    try {
+        await updateCareerApi(id, data);
+        toast.success('Career updated successfully!');
+        return await getCareerDetailsApi(thunkAPI.getState().careerDetails.details.id);
+    } catch (error) {
+        toast.error(error?.response?.data?.message || 'Failed to update career');
+        throw error;
+    }
 });
 
 const careerDetailSlice = createSlice({

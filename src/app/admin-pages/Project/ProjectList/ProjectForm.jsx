@@ -27,7 +27,8 @@ export default function ProjectForm(props) {
 
     const handleLanguageChange = (event, newValue) => {
         const value = newValue ? newValue.code : '';
-        props.onInputChange({ name: 'langCode', value, error: '' });
+        const error = value ? '' : 'Language is required';
+        props.onInputChange({ name: 'langCode', value, error });
     };
 
     const handleTitleChange = (event) => {
@@ -38,7 +39,8 @@ export default function ProjectForm(props) {
 
     const handleDescriptionChange = (event) => {
         const value = event.target.value;
-        props.onInputChange({ name: 'description', value, error: '' });
+        const error = value ? '' : 'Description is required';
+        props.onInputChange({ name: 'description', value, error });
     };
 
     const selectedLanguage = languages.find((lang) => lang.code === props.form.fields.langCode) || null;
@@ -67,7 +69,16 @@ export default function ProjectForm(props) {
                         onChange={handleLanguageChange}
                         disabled={props.editModal}
                         fullWidth
-                        renderInput={(params) => <TextField {...params} label="Language" fullWidth />}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Language"
+                                required
+                                error={!!props.form.errors.langCode}
+                                helperText={props.form.errors.langCode}
+                                fullWidth
+                            />
+                        )}
                     />
                     <TextField
                         name="title"
@@ -76,11 +87,12 @@ export default function ProjectForm(props) {
                         onChange={handleTitleChange}
                         error={!!props.form.errors.title}
                         helperText={props.form.errors.title}
+                        required
                         fullWidth
                     />
                     <Box sx={{ width: '100%' }}>
                         <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
-                            Description
+                            Description <span style={{ color: 'red' }}>*</span>
                         </Typography>
                         <Editor
                             name="description"
@@ -116,7 +128,7 @@ export default function ProjectForm(props) {
                     <Button
                         onClick={props.saveProject}
                         variant="contained"
-                        disabled={isSaving}
+                        disabled={isSaving || !props.form.fields.langCode || !props.form.fields.title || !props.form.fields.description}
                         sx={{ backgroundColor: '#048049', '&:hover': { backgroundColor: '#036a3d' } }}
                     >
                         {isSaving ? <CircularProgress size={20} /> : 'Save'}

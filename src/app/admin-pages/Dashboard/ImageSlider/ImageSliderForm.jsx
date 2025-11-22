@@ -28,7 +28,8 @@ export default function ImageSliderForm(props) {
 
     const handleLanguageChange = (event, newValue) => {
         const value = newValue ? newValue.code : '';
-        props.onInputChange({ name: 'langCode', value, error: '' });
+        const error = value ? '' : 'Language is required';
+        props.onInputChange({ name: 'langCode', value, error });
     };
 
     const handleTitleChange = (event) => {
@@ -39,7 +40,8 @@ export default function ImageSliderForm(props) {
 
     const handleDescriptionChange = (event) => {
         const value = event.target.value;
-        props.onInputChange({ name: 'description', value, error: '' });
+        const error = value ? '' : 'Description is required';
+        props.onInputChange({ name: 'description', value, error });
     };
 
     const handleImageChange = (evt, croppie, target) => {
@@ -118,6 +120,9 @@ export default function ImageSliderForm(props) {
                             <TextField
                                 {...params}
                                 label="Language"
+                                required
+                                error={!!props.form.errors.langCode}
+                                helperText={props.form.errors.langCode}
                                 fullWidth
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
@@ -136,6 +141,7 @@ export default function ImageSliderForm(props) {
                         onChange={handleTitleChange}
                         error={!!props.form.errors.title}
                         helperText={props.form.errors.title}
+                        required
                         fullWidth
                         sx={{
                             '& .MuiOutlinedInput-root': {
@@ -150,6 +156,9 @@ export default function ImageSliderForm(props) {
                         label="Description"
                         value={props.form.fields.description}
                         onChange={handleDescriptionChange}
+                        error={!!props.form.errors.description}
+                        helperText={props.form.errors.description}
+                        required
                         multiline
                         rows={4}
                         fullWidth
@@ -180,7 +189,7 @@ export default function ImageSliderForm(props) {
                     <Button
                         onClick={props.saveImage}
                         variant="contained"
-                        disabled={props.savingStatus}
+                        disabled={props.savingStatus || !props.form.fields.langCode || !props.form.fields.title || !props.form.fields.description}
                         sx={{ backgroundColor: '#048049', '&:hover': { backgroundColor: '#036a3d' } }}
                     >
                         {props.savingStatus ? <CircularProgress size={20} /> : 'Save'}

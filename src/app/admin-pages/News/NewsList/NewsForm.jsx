@@ -31,7 +31,8 @@ export default function NewsForm(props) {
 
     const handleLanguageChange = (event, newValue) => {
         const value = newValue ? newValue.code : '';
-        props.onInputChange({ name: 'langCode', value, error: '' });
+        const error = value ? '' : 'Language is required';
+        props.onInputChange({ name: 'langCode', value, error });
     };
 
     const handleTitleChange = (event) => {
@@ -42,7 +43,10 @@ export default function NewsForm(props) {
 
     const handleDescriptionChange = (event) => {
         const value = event.target.value;
-        props.onInputChange({ name: 'description', value, error: '' });
+        // Strip HTML tags and check if there's actual content
+        const textContent = value ? value.replace(/<[^>]*>/g, '').trim() : '';
+        const error = textContent ? '' : 'Description is required';
+        props.onInputChange({ name: 'description', value, error });
     };
 
     const handleImageChange = (evt, croppie, target) => {
@@ -132,7 +136,16 @@ export default function NewsForm(props) {
                         onChange={handleLanguageChange}
                         disabled={props.editModal}
                         fullWidth
-                        renderInput={(params) => <TextField {...params} label="Language" fullWidth />}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                label="Language"
+                                required
+                                error={!!props.form.errors.langCode}
+                                helperText={props.form.errors.langCode}
+                                fullWidth
+                            />
+                        )}
                     />
                     <TextField
                         name="title"
@@ -141,11 +154,12 @@ export default function NewsForm(props) {
                         onChange={handleTitleChange}
                         error={!!props.form.errors.title}
                         helperText={props.form.errors.title}
+                        required
                         fullWidth
                     />
                     <Box sx={{ width: '100%' }}>
                         <Typography variant="body2" sx={{ mb: 1, fontWeight: 500 }}>
-                            Description
+                            Description <span style={{ color: 'red' }}>*</span>
                         </Typography>
                         <Editor
                             name="description"
@@ -172,7 +186,12 @@ export default function NewsForm(props) {
                     <Button
                         onClick={() => props.updateNews(props.form.fields.id)}
                         variant="contained"
-                        disabled={isSaving}
+                        disabled={
+                            isSaving ||
+                            !props.form.fields.title ||
+                            !props.form.fields.description ||
+                            !props.form.fields.description.replace(/<[^>]*>/g, '').trim()
+                        }
                         sx={{ backgroundColor: '#048049', '&:hover': { backgroundColor: '#036a3d' } }}
                     >
                         {isSaving ? <CircularProgress size={20} /> : 'Update'}
@@ -181,7 +200,13 @@ export default function NewsForm(props) {
                     <Button
                         onClick={props.saveNews}
                         variant="contained"
-                        disabled={isSaving}
+                        disabled={
+                            isSaving ||
+                            !props.form.fields.langCode ||
+                            !props.form.fields.title ||
+                            !props.form.fields.description ||
+                            !props.form.fields.description.replace(/<[^>]*>/g, '').trim()
+                        }
                         sx={{ backgroundColor: '#048049', '&:hover': { backgroundColor: '#036a3d' } }}
                     >
                         {isSaving ? <CircularProgress size={20} /> : 'Save'}
