@@ -12,7 +12,8 @@ const initialState = {
     details: {},
     isSaving: false,
     isLoading: false,
-    isModalOpen: false,
+    isTranslationModalOpen: false,
+    isAttachmentModalOpen: false,
     isModalEdit: false,
     isTranslation: false,
 };
@@ -51,75 +52,88 @@ const projectDetailSlice = createSlice({
     initialState,
     reducers: {
         newAttachmentModal: (state) => {
-            state.isModalOpen = true;
+            state.isAttachmentModalOpen = true;
+            state.isTranslationModalOpen = false; // Close translation modal if open
         },
         newTranslation: (state) => {
-            state.isModalOpen = true;
+            state.isTranslationModalOpen = true;
+            state.isAttachmentModalOpen = false; // Close attachment modal if open
             state.isTranslation = true;
             state.isModalEdit = false;
         },
         editTranslation: (state) => {
-            state.isModalOpen = true;
+            state.isTranslationModalOpen = true;
+            state.isAttachmentModalOpen = false; // Close attachment modal if open
             state.isModalEdit = true;
         },
         closeOpenModal: (state) => {
-            state.isModalOpen = false;
+            state.isTranslationModalOpen = false;
+            state.isAttachmentModalOpen = false;
+            state.isModalEdit = false;
+            state.isTranslation = false;
+        },
+        closeAttachmentModal: (state) => {
+            state.isAttachmentModalOpen = false;
+        },
+        closeTranslationModal: (state) => {
+            state.isTranslationModalOpen = false;
             state.isModalEdit = false;
             state.isTranslation = false;
         },
     },
-    extraReducers: {
-        [loadProjectDetails.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadProjectDetails.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.details = action.payload;
-        },
-        [loadProjectDetails.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveProjectAttachment.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveProjectAttachment.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.details = action.payload;
-        },
-        [saveProjectAttachment.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [deleteProjectAttachment.fulfilled]: (state, action) => {
-            state.details = action.payload;
-        },
-        [saveProjectTranslation.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveProjectTranslation.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.details = action.payload;
-        },
-        [saveProjectTranslation.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [deleteProjectTranslation.fulfilled]: (state, action) => {
-            state.details = action.payload;
-        },
-        [updateProjectTranslation.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [updateProjectTranslation.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.details = action.payload;
-        },
-        [updateProjectTranslation.rejected]: (state) => {
-            state.isSaving = false;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadProjectDetails.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadProjectDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.details = action.payload;
+            })
+            .addCase(loadProjectDetails.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveProjectAttachment.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveProjectAttachment.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isAttachmentModalOpen = false;
+                state.details = action.payload;
+            })
+            .addCase(saveProjectAttachment.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(deleteProjectAttachment.fulfilled, (state, action) => {
+                state.details = action.payload;
+            })
+            .addCase(saveProjectTranslation.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveProjectTranslation.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isTranslationModalOpen = false;
+                state.details = action.payload;
+            })
+            .addCase(saveProjectTranslation.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(deleteProjectTranslation.fulfilled, (state, action) => {
+                state.details = action.payload;
+            })
+            .addCase(updateProjectTranslation.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(updateProjectTranslation.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isTranslationModalOpen = false;
+                state.details = action.payload;
+            })
+            .addCase(updateProjectTranslation.rejected, (state) => {
+                state.isSaving = false;
+            });
     },
 });
 
-export const { closeOpenModal, newAttachmentModal, newTranslation, editTranslation } = projectDetailSlice.actions;
+export const { closeOpenModal, closeAttachmentModal, closeTranslationModal, newAttachmentModal, newTranslation, editTranslation } = projectDetailSlice.actions;
 export default projectDetailSlice.reducer;

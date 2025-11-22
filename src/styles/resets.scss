@@ -1,0 +1,276 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&display=swap");
+@import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-sans-serif;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  outline: none !important;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus,
+.button:focus {
+  outline: none !important;
+}
+
+.bg-secondary {
+  background: $bg-secondary !important;
+}
+
+.border-secondary {
+  border-color: $bg-secondary !important;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+div.website-layout {
+  background: url("../images/defaults/body-bg.png");
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden; // Prevent horizontal scroll but allow vertical
+  
+  // Ensure navbar can stick properly - target navbar anywhere within layout
+  .navbar.sticky-top,
+  .navbar-light.sticky-top,
+  nav.navbar.sticky-top,
+  nav.navbar-light.sticky-top {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1020 !important;
+    width: 100% !important;
+  }
+}
+
+// Smooth scrolling
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+// Section spacing with horizontal padding, rounded corners, and spacing
+section {
+  padding: 5rem $page-padding-x;
+  border-radius: $border-radius-md;
+  margin-bottom: 2rem;
+  
+  @media (min-width: 768px) {
+    padding: 5rem $page-padding-x-md;
+    margin-bottom: 3rem;
+  }
+  
+  @media (min-width: 992px) {
+    padding: 5rem $page-padding-x-lg;
+    margin-bottom: 4rem;
+  }
+  
+  @media (min-width: 1200px) {
+    padding: 5rem $page-padding-x-xl;
+    margin-bottom: 4rem;
+  }
+  
+  @media (max-width: 767px) {
+    padding: 3rem $page-padding-x;
+    margin-bottom: 2rem;
+  }
+}
+
+// Global container padding - add to Bootstrap's default
+.container {
+  padding-left: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x});
+  padding-right: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x});
+  
+  @media (min-width: 768px) {
+    padding-left: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x-md});
+    padding-right: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x-md});
+  }
+  
+  @media (min-width: 992px) {
+    padding-left: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x-lg});
+    padding-right: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x-lg});
+  }
+  
+  @media (min-width: 1200px) {
+    padding-left: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x-xl});
+    padding-right: calc(var(--bs-gutter-x, 0.75rem) + #{$page-padding-x-xl});
+  }
+}
+
+.container-fluid {
+  padding-left: $page-padding-x;
+  padding-right: $page-padding-x;
+  
+  @media (min-width: 768px) {
+    padding-left: $page-padding-x-md;
+    padding-right: $page-padding-x-md;
+  }
+  
+  @media (min-width: 992px) {
+    padding-left: $page-padding-x-lg;
+    padding-right: $page-padding-x-lg;
+  }
+  
+  @media (min-width: 1200px) {
+    padding-left: $page-padding-x-xl;
+    padding-right: $page-padding-x-xl;
+  }
+}
+
+// Main content wrapper padding for page sections (excluding navbar, footer, and containers)
+.website-layout > *:not(.navbar):not(.footer):not(.container):not(.container-fluid):not(header):not(nav) {
+  padding-left: $page-padding-x;
+  padding-right: $page-padding-x;
+  
+  @media (min-width: 768px) {
+    padding-left: $page-padding-x-md;
+    padding-right: $page-padding-x-md;
+  }
+  
+  @media (min-width: 992px) {
+    padding-left: $page-padding-x-lg;
+    padding-right: $page-padding-x-lg;
+  }
+  
+  @media (min-width: 1200px) {
+    padding-left: $page-padding-x-xl;
+    padding-right: $page-padding-x-xl;
+  }
+}
+
+// Ensure main content area has horizontal padding
+.website-layout {
+  // Add padding to direct children that are content sections
+  > div:not(.navbar):not(.footer) {
+    padding-left: $page-padding-x;
+    padding-right: $page-padding-x;
+    
+    @media (min-width: 768px) {
+      padding-left: $page-padding-x-md;
+      padding-right: $page-padding-x-md;
+    }
+    
+    @media (min-width: 992px) {
+      padding-left: $page-padding-x-lg;
+      padding-right: $page-padding-x-lg;
+    }
+    
+    @media (min-width: 1200px) {
+      padding-left: $page-padding-x-xl;
+      padding-right: $page-padding-x-xl;
+    }
+  }
+}
+
+// Main page content wrapper - applies to all page content
+.main-page-content {
+  padding-left: $page-padding-x !important;
+  padding-right: $page-padding-x !important;
+  width: 100%;
+  box-sizing: border-box;
+  
+  @media (min-width: 768px) {
+    padding-left: $page-padding-x-md !important;
+    padding-right: $page-padding-x-md !important;
+  }
+  
+  @media (min-width: 992px) {
+    padding-left: $page-padding-x-lg !important;
+    padding-right: $page-padding-x-lg !important;
+  }
+  
+  @media (min-width: 1200px) {
+    padding-left: $page-padding-x-xl !important;
+    padding-right: $page-padding-x-xl !important;
+  }
+  
+  // Exclude full-width sections from padding - they should span the whole screen
+  > .page-header,
+  > .slider-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+  }
+}
+
+// Also target slider-container anywhere within main-page-content
+.main-page-content .slider-container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  position: relative !important;
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw !important;
+  margin-right: -50vw !important;
+  
+  // Ensure carousel and its children are full width
+  .carousel,
+  .carousel-root,
+  .carousel-slider,
+  .slider-wrapper,
+  .slider {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  img {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+main,
+.main-content,
+[class*="page-"],
+[class*="Page"] {
+  padding-left: $page-padding-x;
+  padding-right: $page-padding-x;
+  
+  @media (min-width: 768px) {
+    padding-left: $page-padding-x-md;
+    padding-right: $page-padding-x-md;
+  }
+  
+  @media (min-width: 992px) {
+    padding-left: $page-padding-x-lg;
+    padding-right: $page-padding-x-lg;
+  }
+  
+  @media (min-width: 1200px) {
+    padding-left: $page-padding-x-xl;
+    padding-right: $page-padding-x-xl;
+  }
+}
+

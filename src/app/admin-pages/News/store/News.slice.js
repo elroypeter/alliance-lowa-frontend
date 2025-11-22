@@ -38,34 +38,35 @@ const newsSlice = createSlice({
             state.isModalOpen = false;
         },
     },
-    extraReducers: {
-        [loadNews.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadNews.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.news = action.payload;
-        },
-        [loadNews.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveNews.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveNews.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.news = action.payload;
-        },
-        [saveNews.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [publicNews.fulfilled]: (state, action) => {
-            state.news = action.payload;
-        },
-        [deleteNews.fulfilled]: (state, action) => {
-            state.news = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadNews.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadNews.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.news = action.payload;
+            })
+            .addCase(loadNews.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveNews.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveNews.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.news = action.payload;
+            })
+            .addCase(saveNews.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(publicNews.fulfilled, (state, action) => {
+                state.news = action.payload;
+            })
+            .addCase(deleteNews.fulfilled, (state, action) => {
+                state.news = action.payload;
+            });
     },
 });
 

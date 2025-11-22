@@ -38,34 +38,35 @@ const projectSlice = createSlice({
             state.isModalOpen = false;
         },
     },
-    extraReducers: {
-        [loadProjects.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadProjects.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.projects = action.payload;
-        },
-        [loadProjects.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveProject.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveProject.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.projects = action.payload;
-        },
-        [saveProject.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [publicProject.fulfilled]: (state, action) => {
-            state.projects = action.payload;
-        },
-        [deleteProject.fulfilled]: (state, action) => {
-            state.projects = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadProjects.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadProjects.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.projects = action.payload;
+            })
+            .addCase(loadProjects.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveProject.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveProject.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.projects = action.payload;
+            })
+            .addCase(saveProject.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(publicProject.fulfilled, (state, action) => {
+                state.projects = action.payload;
+            })
+            .addCase(deleteProject.fulfilled, (state, action) => {
+                state.projects = action.payload;
+            });
     },
 });
 

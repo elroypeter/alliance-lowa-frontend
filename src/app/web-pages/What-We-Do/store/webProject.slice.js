@@ -17,13 +17,14 @@ const webProject = createSlice({
             state.activeProject = action.payload;
         },
     },
-    extraReducers: {
-        [loadProjects.fulfilled]: (state, action) => {
-            state.projects = action.payload;
-        },
-        [loadProjects.rejected]: (state) => {
-            state.projects = [];
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadProjects.fulfilled, (state, action) => {
+                state.projects = action.payload;
+            })
+            .addCase(loadProjects.rejected, (state) => {
+                state.projects = [];
+            });
     },
 });
 

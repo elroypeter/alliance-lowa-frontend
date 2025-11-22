@@ -19,20 +19,21 @@ const SubscriberSlice = createSlice({
     name: 'subscriber',
     initialState,
     reducers: {},
-    extraReducers: {
-        [loadSubcribers.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadSubcribers.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.subscribers = action.payload;
-        },
-        [loadSubcribers.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [deleteSubcribers.fulfilled]: (state, action) => {
-            state.subscribers = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadSubcribers.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadSubcribers.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.subscribers = action.payload;
+            })
+            .addCase(loadSubcribers.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(deleteSubcribers.fulfilled, (state, action) => {
+                state.subscribers = action.payload;
+            });
     },
 });
 

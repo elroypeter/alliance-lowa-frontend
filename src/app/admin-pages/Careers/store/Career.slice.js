@@ -38,34 +38,35 @@ const careerSlice = createSlice({
             state.isModalOpen = false;
         },
     },
-    extraReducers: {
-        [loadCareers.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadCareers.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.careers = action.payload;
-        },
-        [loadCareers.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveCareer.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveCareer.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.careers = action.payload;
-        },
-        [saveCareer.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [publishCareer.fulfilled]: (state, action) => {
-            state.careers = action.payload;
-        },
-        [deleteCareer.fulfilled]: (state, action) => {
-            state.careers = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadCareers.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadCareers.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.careers = action.payload;
+            })
+            .addCase(loadCareers.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveCareer.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveCareer.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.careers = action.payload;
+            })
+            .addCase(saveCareer.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(publishCareer.fulfilled, (state, action) => {
+                state.careers = action.payload;
+            })
+            .addCase(deleteCareer.fulfilled, (state, action) => {
+                state.careers = action.payload;
+            });
     },
 });
 

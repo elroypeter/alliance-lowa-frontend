@@ -38,34 +38,35 @@ const imageSliderSlice = createSlice({
             state.isModalOpen = false;
         },
     },
-    extraReducers: {
-        [loadImageSlides.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadImageSlides.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.images = action.payload;
-        },
-        [loadImageSlides.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveImageSlides.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveImageSlides.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.images = action.payload;
-        },
-        [saveImageSlides.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [publicImageSlide.fulfilled]: (state, action) => {
-            state.images = action.payload;
-        },
-        [deleteImageSlide.fulfilled]: (state, action) => {
-            state.images = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadImageSlides.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadImageSlides.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.images = action.payload;
+            })
+            .addCase(loadImageSlides.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveImageSlides.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveImageSlides.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.images = action.payload;
+            })
+            .addCase(saveImageSlides.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(publicImageSlide.fulfilled, (state, action) => {
+                state.images = action.payload;
+            })
+            .addCase(deleteImageSlide.fulfilled, (state, action) => {
+                state.images = action.payload;
+            });
     },
 });
 
