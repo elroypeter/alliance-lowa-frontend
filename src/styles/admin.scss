@@ -1,0 +1,279 @@
+@import "./variables";
+
+.admin-layout {
+    display: flex;
+    flex-direction: row;
+    background-color: #f9fbfd;
+}
+
+.admin-layout {
+    .sidebar {
+        background-color: $dark;
+        border-radius: 8px;
+        transition: ease 0.1s;
+        margin: 25px;
+        height: calc(100vh - 50px);
+        width: 260px;
+        flex-grow: 0;
+        order: 1;
+    }
+
+    .sidebar.open {
+        left: 0px;
+        background-color: $dark;
+        z-index: 999;
+    }
+
+    .sidebar .brand-icon {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-decoration: none;
+
+        .logo-text {
+            font-weight: bold;
+            color: $white;
+            font-size: 18px;
+            display: inline-block;
+            padding-left: 15px;
+        }
+    }
+
+    .sidebar .brand-icon .logo-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            color: $white;
+        }
+    }
+
+    .sidebar .menu-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .sidebar .menu-list {
+        .m-link {
+            display: flex;
+            color: $white;
+            padding: 10px 0;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .m-link svg {
+            color: $white;
+            margin-right: 0.8rem;
+        }
+
+        .m-link.active {
+            color: $primary;
+        }
+
+        [class^="icofont-"] {
+            width: 30px;
+        }
+    }
+
+    .container-xxl {
+        max-width: 1560px;
+    }
+
+    .navbar > .container-xxl {
+        display: flex;
+        flex-wrap: inherit;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .dropdown-toggle::after {
+        display: none;
+    }
+
+    .avatar.lg {
+        width: 56px;
+        min-width: 56px;
+        height: 56px;
+    }
+
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+
+    .h-right .user-profile .dropdown-menu .card.w280 {
+        width: 240px;
+    }
+
+    .header .navbar-toggler {
+        .fa-x {
+            display: none;
+        }
+        &.open {
+            .fa-bars {
+                display: none;
+            }
+
+            .fa-x {
+                display: block;
+            }
+        }
+    }
+
+    .auth-h100 {
+        height: calc(100vh - 192px);
+    }
+
+    .main {
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        height: 100vh;
+        -webkit-box-ordinal-group: 4;
+        order: 3;
+        -webkit-box-flex: 1;
+        flex: 1;
+    }
+
+    .screen-card .top-right-corner {
+        display: none;
+        right: -10px;
+        top: -10px;
+    }
+
+    .screen-card:hover .top-right-corner {
+        display: block;
+    }
+
+    @media only screen and (min-width: 1280px) {
+        .menu-toggle {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 1279px) {
+        .h-right {
+            margin-left: auto;
+            padding-right: 15px;
+        }
+    }
+
+    @media only screen and (min-width: 1279px) {
+        .sidebar {
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+    }
+
+    @media only screen and (max-width: 1279px) {
+        .sidebar {
+            position: fixed;
+            left: -400px;
+            height: 100vh;
+            margin: 0px;
+            border-radius: 0px;
+        }
+    }
+
+    // Prevent Bootstrap and theme styles from affecting MUI components
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    textarea,
+    select {
+        &.MuiInputBase-input,
+        .MuiInputBase-input & {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+        }
+    }
+
+    .MuiTextField-root,
+    .MuiAutocomplete-root {
+        input,
+        textarea {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .MuiOutlinedInput-root {
+        fieldset {
+            border: 1px solid rgba(0, 0, 0, 0.23) !important;
+            border-width: 1px !important;
+        }
+
+        &:hover fieldset {
+            border: 1px solid rgba(0, 0, 0, 0.87) !important;
+            border-width: 1px !important;
+        }
+
+        &.Mui-focused fieldset {
+            border: 2px solid #048049 !important;
+            border-width: 2px !important;
+        }
+
+        input,
+        textarea {
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            padding: 14px 16px !important;
+        }
+    }
+
+    .MuiInputBase-input {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+}
+
+.website-layout {
+    .other-projects-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 25px;
+    }
+    .other-projects-list .project-item {
+        margin-bottom: 1.5rem;
+        .project-thumb {
+            width: 100px;
+            height: 65px;
+            margin: 0 13px 0 0;
+        }
+        .project-thumb img {
+            width: 100px;
+        }
+
+        .project-header {
+            flex: 1;
+            h2 {
+                font-size: 14px;
+            }
+            a:hover {
+                color: $primary;
+            }
+        }
+
+        .project-time {
+            display: flex;
+            font-size: 12px;
+            color: #97979d;
+            font-weight: 300;
+            margin: 4px 0 0;
+        }
+    }
+
+    .current-project-thumb {
+        img {
+            width: 700px;
+            height: 400px;
+        }
+    }
+}

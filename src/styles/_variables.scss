@@ -1,0 +1,30 @@
+$primary: #048049ff;
+$light: #f5f5f5;
+$dark: #353535;
+$secondary: #003d7f;
+$white: #ffffff;
+$bg-secondary: #cea254;
+
+// Updated typography - Blessing style
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$font-family-serif: 'Playfair Display', serif;
+$font-family-base: $font-family-sans-serif;
+
+// Typography scale
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-sm: 0.875rem;
+$line-height-base: 1.7;
+
+// Border radius - Rounded components
+$border-radius-sm: 8px;
+$border-radius: 12px;
+$border-radius-md: 16px;
+$border-radius-lg: 20px;
+$border-radius-xl: 24px;
+
+// Global padding - Increased for better spacing
+$page-padding-x: 2rem;        // 32px on mobile
+$page-padding-x-md: 3rem;     // 48px on tablet
+$page-padding-x-lg: 3rem;     // 48px on desktop
+$page-padding-x-xl: 3rem;     // 48px on large desktop

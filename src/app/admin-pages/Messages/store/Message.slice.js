@@ -19,20 +19,21 @@ const MessageSlice = createSlice({
     name: 'message',
     initialState,
     reducers: {},
-    extraReducers: {
-        [loadMessages.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadMessages.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.messages = action.payload;
-        },
-        [loadMessages.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [deleteMessage.fulfilled]: (state, action) => {
-            state.messages = action.payload;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadMessages.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadMessages.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.messages = action.payload;
+            })
+            .addCase(loadMessages.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(deleteMessage.fulfilled, (state, action) => {
+                state.messages = action.payload;
+            });
     },
 });
 

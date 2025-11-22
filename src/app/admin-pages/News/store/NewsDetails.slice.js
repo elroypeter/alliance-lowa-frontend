@@ -5,7 +5,7 @@ const initialState = {
     details: {},
     isSaving: false,
     isLoading: false,
-    isModalOpen: false,
+    isTranslationModalOpen: false,
     isModalEdit: false,
     isTranslation: false,
 };
@@ -33,61 +33,65 @@ const newsDetailSlice = createSlice({
     name: 'newsDetails',
     initialState,
     reducers: {
-        newAttachmentModal: (state) => {
-            state.isModalOpen = true;
-        },
         newTranslation: (state) => {
-            state.isModalOpen = true;
+            state.isTranslationModalOpen = true;
             state.isTranslation = true;
+            state.isModalEdit = false;
         },
         editTranslation: (state) => {
-            state.isModalOpen = true;
+            state.isTranslationModalOpen = true;
             state.isModalEdit = true;
         },
         closeOpenModal: (state) => {
-            state.isModalOpen = false;
+            state.isTranslationModalOpen = false;
+            state.isModalEdit = false;
+            state.isTranslation = false;
+        },
+        closeTranslationModal: (state) => {
+            state.isTranslationModalOpen = false;
             state.isModalEdit = false;
             state.isTranslation = false;
         },
     },
-    extraReducers: {
-        [loadNewsDetails.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadNewsDetails.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.details = action.payload;
-        },
-        [loadNewsDetails.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveNewsTranslation.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveNewsTranslation.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.details = action.payload;
-        },
-        [saveNewsTranslation.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [deleteNewsTranslation.fulfilled]: (state, action) => {
-            state.details = action.payload;
-        },
-        [updateNewsTranslation.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [updateNewsTranslation.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.details = action.payload;
-        },
-        [updateNewsTranslation.rejected]: (state) => {
-            state.isSaving = false;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadNewsDetails.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadNewsDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.details = action.payload;
+            })
+            .addCase(loadNewsDetails.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveNewsTranslation.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveNewsTranslation.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isTranslationModalOpen = false;
+                state.details = action.payload;
+            })
+            .addCase(saveNewsTranslation.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(deleteNewsTranslation.fulfilled, (state, action) => {
+                state.details = action.payload;
+            })
+            .addCase(updateNewsTranslation.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(updateNewsTranslation.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isTranslationModalOpen = false;
+                state.details = action.payload;
+            })
+            .addCase(updateNewsTranslation.rejected, (state) => {
+                state.isSaving = false;
+            });
     },
 });
 
-export const { closeOpenModal, newAttachmentModal, newTranslation, editTranslation } = newsDetailSlice.actions;
+export const { closeOpenModal, closeTranslationModal, newTranslation, editTranslation } = newsDetailSlice.actions;
 export default newsDetailSlice.reducer;

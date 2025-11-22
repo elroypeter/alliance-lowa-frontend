@@ -12,13 +12,14 @@ const homeSlider = createSlice({
     name: 'homeSlider',
     initialState,
     reducers: {},
-    extraReducers: {
-        [loadSliders.fulfilled]: (state, action) => {
-            state.sliders = action.payload;
-        },
-        [loadSliders.rejected]: (state) => {
-            state.sliders = [];
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadSliders.fulfilled, (state, action) => {
+                state.sliders = action.payload;
+            })
+            .addCase(loadSliders.rejected, (state) => {
+                state.sliders = [];
+            });
     },
 });
 

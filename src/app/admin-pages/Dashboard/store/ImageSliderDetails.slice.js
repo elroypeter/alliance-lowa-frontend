@@ -47,42 +47,43 @@ const imageSliderDetailSlice = createSlice({
             state.isModelEdit = false;
         },
     },
-    extraReducers: {
-        [loadImageSlideDetails.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadImageSlideDetails.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.imageSliderDetails = action.payload;
-        },
-        [loadImageSlideDetails.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [saveImageTranslation.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [saveImageTranslation.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.imageSliderDetails = action.payload;
-        },
-        [saveImageTranslation.rejected]: (state) => {
-            state.isSaving = false;
-        },
-        [deleteImageTranslation.fulfilled]: (state, action) => {
-            state.imageSliderDetails = action.payload;
-        },
-        [updateTranslation.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [updateTranslation.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.imageSliderDetails = action.payload;
-        },
-        [updateTranslation.rejected]: (state) => {
-            state.isSaving = false;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadImageSlideDetails.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadImageSlideDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.imageSliderDetails = action.payload;
+            })
+            .addCase(loadImageSlideDetails.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(saveImageTranslation.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(saveImageTranslation.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.imageSliderDetails = action.payload;
+            })
+            .addCase(saveImageTranslation.rejected, (state) => {
+                state.isSaving = false;
+            })
+            .addCase(deleteImageTranslation.fulfilled, (state, action) => {
+                state.imageSliderDetails = action.payload;
+            })
+            .addCase(updateTranslation.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(updateTranslation.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.imageSliderDetails = action.payload;
+            })
+            .addCase(updateTranslation.rejected, (state) => {
+                state.isSaving = false;
+            });
     },
 });
 

@@ -29,31 +29,31 @@ const careerDetailSlice = createSlice({
         closeOpenModal: (state) => {
             state.isModalOpen = false;
             state.isModalEdit = false;
-            state.isTranslation = false;
         },
     },
-    extraReducers: {
-        [loadCareerDetails.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadCareerDetails.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.details = action.payload;
-        },
-        [loadCareerDetails.rejected]: (state) => {
-            state.isLoading = false;
-        },
-        [updateCareerDetails.pending]: (state) => {
-            state.isSaving = true;
-        },
-        [updateCareerDetails.fulfilled]: (state, action) => {
-            state.isSaving = false;
-            state.isModalOpen = false;
-            state.details = action.payload;
-        },
-        [updateCareerDetails.rejected]: (state) => {
-            state.isSaving = false;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadCareerDetails.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadCareerDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.details = action.payload;
+            })
+            .addCase(loadCareerDetails.rejected, (state) => {
+                state.isLoading = false;
+            })
+            .addCase(updateCareerDetails.pending, (state) => {
+                state.isSaving = true;
+            })
+            .addCase(updateCareerDetails.fulfilled, (state, action) => {
+                state.isSaving = false;
+                state.isModalOpen = false;
+                state.details = action.payload;
+            })
+            .addCase(updateCareerDetails.rejected, (state) => {
+                state.isSaving = false;
+            });
     },
 });
 

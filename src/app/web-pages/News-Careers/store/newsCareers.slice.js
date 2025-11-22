@@ -17,19 +17,20 @@ const webCareers = createSlice({
     name: 'webCareers',
     initialState,
     reducers: {},
-    extraReducers: {
-        [loadCareers.fulfilled]: (state, action) => {
-            state.careers = action.payload;
-        },
-        [loadCareers.rejected]: (state) => {
-            state.careers = [];
-        },
-        [loadNews.fulfilled]: (state, action) => {
-            state.blogNews = action.payload;
-        },
-        [loadNews.rejected]: (state) => {
-            state.blogNews = [];
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadCareers.fulfilled, (state, action) => {
+                state.careers = action.payload;
+            })
+            .addCase(loadCareers.rejected, (state) => {
+                state.careers = [];
+            })
+            .addCase(loadNews.fulfilled, (state, action) => {
+                state.blogNews = action.payload;
+            })
+            .addCase(loadNews.rejected, (state) => {
+                state.blogNews = [];
+            });
     },
 });
 

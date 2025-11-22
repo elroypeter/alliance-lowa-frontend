@@ -1,0 +1,94 @@
+import React, { useEffect } from 'react';
+import { baseUrl } from '../../services/ApiService';
+import { getImageName } from '../../utils/externals.util';
+
+import { loadSliders } from './store/Home.slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { Carousel } from 'react-responsive-carousel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+
+export default function Slider() {
+    const dispatch = useDispatch();
+    const { sliders } = useSelector((store) => store.homeSlider);
+    const { selectedLanguage } = useSelector((store) => store.language);
+
+    useEffect(() => {
+        dispatch(loadSliders({ langCode: selectedLanguage, isPublished: true }));
+    }, [selectedLanguage]);
+
+    return (
+        <div className="slider-container container-fluid p-0 mb-5" style={{ position: 'relative', width: '100vw', maxWidth: '100vw', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)' }}>
+            <Carousel
+                renderArrowPrev={(clickHandler, hasPrev) => (
+                    <a
+                        onClick={clickHandler}
+                        style={{
+                            opacity: hasPrev ? 1 : 0.5,
+                            position: 'absolute',
+                            left: 30,
+                            top: 500,
+                            zIndex: 1000,
+                            background: '#2b282852',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: 20,
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faChevronLeft} fontSize={50} color="#ffffff" />
+                    </a>
+                )}
+                renderArrowNext={(clickHandler, hasNext) => (
+                    <a
+                        onClick={clickHandler}
+                        style={{
+                            opacity: hasNext ? 1 : 0.5,
+                            position: 'absolute',
+                            right: 30,
+                            top: 500,
+                            zIndex: 1000,
+                            background: '#2b282852',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: 20,
+                        }}
+                    >
+                        <FontAwesomeIcon icon={faChevronRight} fontSize={50} color="#ffffff" />
+                    </a>
+                )}
+                showArrows={true}
+                infiniteLoop={true}
+                showThumbs={false}
+                transitionTime={1500}
+            >
+                {sliders.map((slide, index) => (
+                    <div key={index} className="owl-carousel-item position-relative">
+                        <img className="img-fluid" src={baseUrl() + '/images' + getImageName(slide.filePath)} alt="" />
+                        <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center">
+                            <div className="container">
+                                <div className="row justify-content-center">
+                                    <div
+                                        className="col-12 col-lg-8 text-center"
+                                        style={{
+                                            background: '#2b282852',
+                                            padding: 30,
+                                        }}
+                                    >
+                                        <h5 className="text-white text-uppercase mb-3 animated slideInDown">
+                                            Welcome To <span className="text-secondary">Alliance</span>
+                                            <span className="text-primary">Lowa</span>
+                                        </h5>
+                                        <h1 className="display-3 text-white animated slideInDown mb-4">{slide.title}</h1>
+                                        <p className="fs-5 fw-medium text-white mb-4 pb-2">{slide.description}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </Carousel>
+        </div>
+    );
+}

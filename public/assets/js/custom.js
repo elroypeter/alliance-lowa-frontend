@@ -139,16 +139,26 @@ function setCookie(key, value, expiry) {
 }
 
 function googleTranslateElementInit() {
-    setCookie('googtrans', '/en/fr', 1);
-    new google.translate.TranslateElement(
-        {
-            pageLanguage: 'fr/en',
-            includedLanguages: 'fr,en',
-        },
-        'google_translate_element',
-    );
+    try {
+        setCookie('googtrans', '/en/fr', 1);
+        const translateElement = document.getElementById('google_translate_element');
+        if (translateElement && window.google && window.google.translate) {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'fr/en',
+                    includedLanguages: 'fr,en',
+                },
+                'google_translate_element',
+            );
+        }
+    } catch (error) {
+        console.error('Error initializing Google Translate:', error);
+    }
 }
 
-window.onload((e) => {
+// Override the stub if it exists
+window.googleTranslateElementInit = googleTranslateElementInit;
+
+window.addEventListener('load', function(e) {
     googleTranslateElementInit();
 });

@@ -14,17 +14,18 @@ const MessageDetailSlice = createSlice({
     name: 'messageDetails',
     initialState,
     reducers: {},
-    extraReducers: {
-        [loadMessagesDetails.pending]: (state) => {
-            state.isLoading = true;
-        },
-        [loadMessagesDetails.fulfilled]: (state, action) => {
-            state.isLoading = false;
-            state.details = action.payload;
-        },
-        [loadMessagesDetails.rejected]: (state) => {
-            state.isLoading = false;
-        },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loadMessagesDetails.pending, (state) => {
+                state.isLoading = true;
+            })
+            .addCase(loadMessagesDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.details = action.payload;
+            })
+            .addCase(loadMessagesDetails.rejected, (state) => {
+                state.isLoading = false;
+            });
     },
 });
 
